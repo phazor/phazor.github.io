@@ -13,8 +13,11 @@ To do:
 - React Router
 - Redux
 - CSS Modules
+- Travis CI
+- ImmutableJS
+- Standard
 
-Things I want to support
+Behavior I want to support
 
 - Screen Readers
 - Accessibility
