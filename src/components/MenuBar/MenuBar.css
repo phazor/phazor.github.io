@@ -4,6 +4,7 @@
   margin: 0;
   padding: 0;
   background-color: black;
+  font: 1.5em "Open Sans", sans-serif;
 }
 
 /* Menu Bar Component Styling */
@@ -37,7 +38,7 @@
   }
 
   .MenuBar li {
-    flex: 1 1 auto;
-    max-width: 100px;
+    /*flex: 1 1 auto;*/
+    max-width: 200px;
   }
 }

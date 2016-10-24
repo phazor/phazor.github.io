@@ -4,7 +4,7 @@ import { Router, Route } from 'react-router';
 
 import App from './views/App/App';
 import About from './views/About/About';
-import NotFound from './views/NotFound/NotFound';
+import NotFound from './views/NotFound/NotFound';  
 
 const Routes = (props) => (
   <Router {...props}>
