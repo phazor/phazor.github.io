@@ -1,0 +1,56 @@
+/* CSS Resets */
+.MenuBar {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Menu Bar Component Styling */
+.MenuBar li {
+  padding: 0.5rem;
+  background-color: black;
+}
+
+.MenuBar li:hover {
+  filter: grayscale(50%) sepia(50%) opacity(50%);
+}
+
+/* Reset Link Styling */
+.MenuBar a, .MenuBar a:hover, .MenuBar a:visited, .MenuBar a:link, .MenuBar a:active {
+  text-decoration: none;
+  color: white;
+}
+
+@media (min-width: 800px) {
+  /* Using the nice even-spacing menu strategy from here */
+  /* http://stackoverflow.com/questions/5060923/how-to-stretch-a-fixed-number-of-horizontal-navigation-items-evenly-and-fully-ac */
+  .MenuBar {
+    text-align: justify;
+    min-width: 500px;
+  }
+
+  .MenuBar:after {
+    content: '';
+    display: inline-block;
+    width: 100%;
+  }
+
+  .MenuBar li {
+    display: inline-block;
+  }
+}
+
+/*
+#nav {
+    text-align: justify;
+    min-width: 500px;
+}
+#nav:after {
+    content: '';
+    display: inline-block;
+    width: 100%;
+}
+#nav li {
+    display: inline-block;
+}
+*/

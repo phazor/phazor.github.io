@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import MenuBar from './components/MenuBar/MenuBar.js'
 import logo from './logo.svg';
 import './App.css';
 
@@ -7,6 +8,7 @@ class App extends Component {
     return (
       <div className="App">
         <div className="App-header">
+          <MenuBar></MenuBar>
           <img src={logo} className="App-logo" alt="logo" />
           <h2>Welcome to React</h2>
         </div>
