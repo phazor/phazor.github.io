@@ -16,6 +16,7 @@ To do:
 - Travis CI
 - ImmutableJS
 - Standard
+- Docker
 
 Behavior I want to support
 
