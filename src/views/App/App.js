@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import MenuBar from './components/MenuBar/MenuBar.js'
+import MenuBar from '../../components/MenuBar/MenuBar'
 import logo from './logo.svg';
 import './App.css';
 
