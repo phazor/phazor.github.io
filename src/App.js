@@ -7,8 +7,8 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <MenuBar></MenuBar>
         <div className="App-header">
-          <MenuBar></MenuBar>
           <img src={logo} className="App-logo" alt="logo" />
           <h2>Welcome to React</h2>
         </div>

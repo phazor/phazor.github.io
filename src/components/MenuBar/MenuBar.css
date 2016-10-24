@@ -3,54 +3,41 @@
   list-style: none;
   margin: 0;
   padding: 0;
+  background-color: black;
 }
 
 /* Menu Bar Component Styling */
 .MenuBar li {
-  padding: 0.5rem;
-  background-color: black;
+  padding: 1rem;
 }
 
 .MenuBar li:hover {
-  filter: grayscale(50%) sepia(50%) opacity(50%);
+  filter: opacity(50%);
+  cursor: pointer;
+}
+
+.MenuBar a {
+    margin: 1rem;
 }
 
 /* Reset Link Styling */
-.MenuBar a, .MenuBar a:hover, .MenuBar a:visited, .MenuBar a:link, .MenuBar a:active {
+.MenuBar a {
   text-decoration: none;
   color: white;
 }
 
 @media (min-width: 800px) {
-  /* Using the nice even-spacing menu strategy from here */
-  /* http://stackoverflow.com/questions/5060923/how-to-stretch-a-fixed-number-of-horizontal-navigation-items-evenly-and-fully-ac */
+  /* Flexbox requires a polyfill for IE10 and earlier */
   .MenuBar {
-    text-align: justify;
-    min-width: 500px;
+    display: flex;
+    width: 100%;
   }
 
   .MenuBar:after {
-    content: '';
-    display: inline-block;
-    width: 100%;
   }
 
   .MenuBar li {
-    display: inline-block;
+    flex: 1 1 auto;
+    max-width: 100px;
   }
 }
-
-/*
-#nav {
-    text-align: justify;
-    min-width: 500px;
-}
-#nav:after {
-    content: '';
-    display: inline-block;
-    width: 100%;
-}
-#nav li {
-    display: inline-block;
-}
-*/
