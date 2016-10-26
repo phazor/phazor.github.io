@@ -11,20 +11,22 @@ class CloudChamber extends Component {
     return (
       <div className="CloudChamber">
         <h1>Cloud Chamber</h1>
-        <p>On of the coolest things in nature is how there are constantly particles whizzing around and through us, yet they are imperceptible to the human senses.</p>
-        <p>I wanted to show what particles would look like if we could somehow see them. Fortunately there is already a way, in the <a href="https://en.wikipedia.org/wiki/Cloud_chamber">Cloud Chamber</a>, however no good video footage exists. </p>
-        <p>So I set out to create a visualisation of what a Cloud Chamber looks like:</p>
+        <p>On of the coolest things in nature is how particles are constantly whizzing around us and through us, yet they are imperceptible to the human senses.</p>
+        <p>I wanted to show what particles would look like if we could somehow see them. Fortunately there is already a way, in the <a href="https://en.wikipedia.org/wiki/Cloud_chamber">Cloud Chamber</a>, however I could not find clear video footage of one. </p>
+        <p>So I set out to create a visualisation of a Cloud Chamber in action:</p>
         { reactComponent }
         <p>Particles are generated in the center of the page, with a random velocity</p>
         <p>Particles are under the effect of a magnetic field, and are moving through a medium that slows them down.</p>
         <p>Three types of particles exist:
           <ul>
-            <li><i>Alpha</i>, which are heavy and have a positive charge.</li>
-            <li><i>Gamma</i>, which are massless and have a no charge.</li>
+            <li><i>Alpha particles</i>, which are heavy and have a positive charge.</li>
+            <li><i>Gamma particles</i>, which are massless and have a no charge.</li>
             <li><i>electrons</i>: which are light and have negative charge.</li>
           </ul>
         </p>
-        <p>Decay may happen to a particle at any random point - changing it from one type of particle to another and randomising its new direction.</p>
+        <p>Decay may happen to a particle at any point - changing it from one type of particle to another and randomising its new direction.</p>
+        <h3>See Also:</h3>
+        <p><a href="https://en.wikipedia.org/wiki/Bubble_chamber">Bubble Chamber</a>, inspired by beer! 🍻</p>
       </div>
     );
   }
