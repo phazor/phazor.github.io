@@ -1,0 +1,10 @@
+.CloudChamber {
+  margin: 10px;
+}
+
+@media (min-width: 800px) {
+  .CloudChamber {
+    margin-left: 10%;
+    margin-right: 10%;
+  }
+}
