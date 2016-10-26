@@ -20,8 +20,8 @@ class CloudChamber extends Component {
         <p>Three types of particles exist:
           <ul>
             <li><i>Alpha particles</i>, which are heavy and have a positive charge.</li>
+            <li><i>Beta particles</i>: which are light and have negative charge (they are fundamentally electrons).</li>
             <li><i>Gamma particles</i>, which are massless and have a no charge.</li>
-            <li><i>electrons</i>: which are light and have negative charge.</li>
           </ul>
         </p>
         <p>Decay may happen to a particle at any point - changing it from one type of particle to another and randomising its new direction.</p>
