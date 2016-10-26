@@ -6,11 +6,11 @@ So far:
 - create-react-app
 - Webpack
 - Yarn
+- React Router
 
 To do:
 
 - Pure functions
-- React Router
 - Redux
 - CSS Modules
 - Travis CI
