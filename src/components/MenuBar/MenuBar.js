@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router';
 import './MenuBar.css';
 
 class MenuBar extends Component {
@@ -6,10 +7,10 @@ class MenuBar extends Component {
     return (
       <nav className="navigation">
         <ul className="MenuBar">
-          <li><a href="/">Home </a></li>
-          <li><a href="#">Projects </a></li>
-          <li><a href="/about">About Me </a></li>
-          <li><a href="#">Contact </a></li>
+          <li><Link to="/">Home </Link></li>
+          <li><Link to="/ali-is-cool">Projects </Link></li>
+          <li><Link to="/about">About Me </Link></li>
+          <li><Link to="/gosh">Contact </Link></li>
         </ul>
       </nav>
     );

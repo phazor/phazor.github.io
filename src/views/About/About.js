@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import MenuBar from '../../components/MenuBar/MenuBar';
 import './About.css';
 
 class About extends Component {
