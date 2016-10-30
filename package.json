@@ -22,5 +22,5 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-  "homepage": "http://phazor.github.io/myapp"
+  "homepage": "http://phazor.github.io/my-cool-single-page-app"
 }
