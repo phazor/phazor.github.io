@@ -37,7 +37,7 @@ jspm_packages
 .node_repl_history
 
 # Dist directories
-dist
+build
 
 # DS-Store
 .DS_Store
