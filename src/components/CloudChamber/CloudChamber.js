@@ -11,8 +11,8 @@ class CloudChamber extends Component {
     return (
       <div className="CloudChamber">
         <h1>Cloud Chamber</h1>
-        <p>On of the coolest things in nature is how particles are constantly whizzing around us and through us, yet they are imperceptible to the human senses.</p>
-        <p>I wanted to show what particles would look like if we could somehow see them. Fortunately there is already a way, in the <a href="https://en.wikipedia.org/wiki/Cloud_chamber">Cloud Chamber</a>, however I could not find clear video footage of one. </p>
+        <p>One of the coolest things in nature is how particles are constantly whizzing around us and through us, but at the same time they are imperceptible to human senses.</p>
+        <p>I wanted to show what these particles would look like if we could somehow see them, if you don't have your own <a href="https://en.wikipedia.org/wiki/Cloud_chamber">Cloud Chamber</a>. Interestingly, I could not find any video footage of one that I felt did it justice. </p>
         <p>So I set out to create a visualisation of a Cloud Chamber in action:</p>
         { reactComponent }
         <p>Particles are generated in the center of the page, with a random velocity</p>
