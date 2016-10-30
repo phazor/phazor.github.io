@@ -17,13 +17,12 @@ class CloudChamber extends Component {
         { reactComponent }
         <p>Particles are generated in the center of the page, with a random velocity</p>
         <p>Particles are under the effect of a magnetic field, and are moving through a medium that slows them down.</p>
-        <p>Three types of particles exist:
-          <ul>
-            <li><i>Alpha particles</i>, which are heavy and have a positive charge.</li>
-            <li><i>Beta particles</i>: which are light and have negative charge (they are fundamentally electrons).</li>
-            <li><i>Gamma particles</i>, which are massless and have a no charge.</li>
-          </ul>
-        </p>
+        <span>Three types of particles exist:</span>
+        <ul>
+          <li><i>Alpha particles</i>, which are heavy and have a positive charge.</li>
+          <li><i>Beta particles</i>: which are light and have negative charge (they are fundamentally electrons).</li>
+          <li><i>Gamma particles</i>, which are massless and have a no charge.</li>
+        </ul>
         <p>Decay may happen to a particle at any point - changing it from one type of particle to another and randomising its new direction.</p>
         <h3>See Also:</h3>
         <p><a href="https://en.wikipedia.org/wiki/Bubble_chamber">Bubble Chamber</a>, inspired by beer! 🍻</p>

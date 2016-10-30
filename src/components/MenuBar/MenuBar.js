@@ -9,6 +9,7 @@ class MenuBar extends Component {
         <ul className="MenuBar">
           <li><Link to="/">Home </Link></li>
           <li><Link to="/cloud-chamber">CloudChamber </Link></li>
+          <li><Link to="/stateful-thing">StatefulThing </Link></li>
           <li><Link to="/about">About Me </Link></li>
           <li><Link to="/gosh">Contact </Link></li>
         </ul>
