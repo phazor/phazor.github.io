@@ -11,8 +11,17 @@ class Home extends Component {
           <h2>Welcome to React</h2>
         </div>
         <p className="Home-intro">
-          To get started, edit <code>src/Home.js</code> and save to reload.
+          The purpose of this site is for me to learn and then showcase a few technologies.
         </p>
+        <h3>Technologies</h3>
+        <h4>create-react-app</h4>
+        <p>This app was built with the create-react-app build process</p>
+        <p>It features routing, which has been possible without using <code>eject</code>.</p>
+        <h4>Styling: Milligram</h4>
+        <p>This app was styled using Milligram.
+          It is a CSS framework designed to be a minimal starting point.
+          It includes a bunch of css resets as well as default styles for various components.
+          Most importantly, it is only 2kB when gzipped.</p>
       </div>
     )
   }
