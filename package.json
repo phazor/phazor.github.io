@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "html-to-react": "^1.2.1",
+    "milligram": "^1.1.0",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
     "react-redux": "^4.4.5",
