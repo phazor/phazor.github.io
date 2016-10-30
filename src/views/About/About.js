@@ -4,11 +4,9 @@ import './About.css';
 class About extends Component {
   render() {
     return (
-      <div>
-        <div className="About">
+        <section className="About container">
           <h1>About!</h1>
-        </div>
-      </div>
+        </section>
     );
   }
 }

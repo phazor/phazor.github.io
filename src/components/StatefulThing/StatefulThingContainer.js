@@ -18,15 +18,6 @@ class StatefulThingContainer extends Component {
     nextIndex = 2;
   }
 
-  componentDidMount = () => {
-    console.log('suuup');
-    this.someRandomMethod();
-  }
-
-  someRandomMethod = () => {
-    console.log('weee');
-  }
-
   handleClick = (input) => {
     this.setState((prevState) => ({
       users: prevState.users.concat({
