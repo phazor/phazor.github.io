@@ -1,0 +1,31 @@
+.Users {
+  padding: 2rem;
+  margin-top: 2rem;
+  text-align: center;
+  display: flex;
+  flex: auto;
+  flex-direction: column;
+}
+
+/*Override Milligram css full-column-width form field*/
+.InputArea input[type='text'] {
+  width: auto;
+}
+
+.InputArea button {
+  margin-left: 1rem;
+}
+
+.UserList {
+  display: flex;
+  justify-content: center;
+}
+
+.Users ul {
+  width: 20rem;
+}
+
+.Users li {
+  text-align: left;
+  word-wrap: break-word;
+}

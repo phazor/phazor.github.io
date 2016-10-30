@@ -1,15 +1,16 @@
 /* CSS Resets */
 .MenuBar {
   list-style: none;
-  margin: 0;
-  padding: 0;
-  background-color: black;
-  font: 1.5em "Open Sans", sans-serif;
+  /*background-color: black;*/
+  margin-bottom: 0px;
+  border-bottom: 1px solid #d1d1d1;
 }
 
 /* Menu Bar Component Styling */
+
 .MenuBar li {
-  padding: 1rem;
+  padding: 1.6rem;
+  margin-bottom: 0px;
 }
 
 .MenuBar li:hover {
@@ -18,27 +19,21 @@
 }
 
 .MenuBar a {
-    margin: 1rem;
+    margin: 1.6rem;
 }
 
-/* Reset Link Styling */
-.MenuBar a {
-  text-decoration: none;
-  color: white;
-}
-
-@media (min-width: 800px) {
+@media (min-width: 40rem) {
   /* Flexbox requires a polyfill for IE10 and earlier */
   .MenuBar {
     display: flex;
     width: 100%;
   }
+}
 
-  .MenuBar:after {
-  }
+@media (min-width: 80rem) {
 
   .MenuBar li {
-    /*flex: 1 1 auto;*/
-    max-width: 200px;
+    overflow: visible;
+    font-size: 1.6rem;
   }
 }

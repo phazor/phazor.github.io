@@ -4,12 +4,10 @@ import MenuBar from '../../components/MenuBar/MenuBar';
 class App extends Component {
   render() {
     return (
-      <div className="App">
+      <main className="App wrapper">
         <MenuBar></MenuBar>
-        <main>
-          {this.props.children}
-        </main>
-      </div>
+        {this.props.children}
+      </main>
     );
   }
 }
