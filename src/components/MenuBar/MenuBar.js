@@ -15,15 +15,14 @@ class MenuBar extends Component {
     this.setState((prevState) => ({
       menuExpanded: (!prevState.menuExpanded)
     }))
-    console.log(this.state.menuExpanded);
   }
 
   render() {
     return (
       <nav className="navigation">
         <div className="wrapper">
-          <div className="hamburger">
-            <img src={hamburger} onClick={this.toggleMenu} onBlur={this.toggleMenu} alt="Expand Menu"/>
+          <div onClick={this.toggleMenu} onBlur={this.toggleMenu} className="hamburger">
+            <img src={hamburger} alt="Expand Menu"/>
           </div>
           <ul className={"MenuBar " + (this.state.menuExpanded ? "expanded" : "")}>
             <MenuItem toggleMenu={this.toggleMenu} to="/">Home </MenuItem>
