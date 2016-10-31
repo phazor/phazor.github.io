@@ -17,13 +17,18 @@ code {
   vertical-align: text-bottom;
 }
 
-.footer {
-  padding: 2rem;
-  margin-top: 2rem;
-  text-align: center;
-  white-space: nowrap;
+/*   Flexbox Sticky Footer   */
+/*===========================*/
+.App {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
 }
 
-.footer > p {
-  margin-bottom: 0px;
+.App > * {
+  flex: 1;
+}
+
+.Footer, .navigation {
+  flex: 0;
 }
