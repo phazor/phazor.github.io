@@ -1,4 +1,4 @@
-.Users {
+.UserList {
   padding: 2rem;
   margin-top: 2rem;
   text-align: center;
@@ -16,16 +16,16 @@
   margin-left: 1rem;
 }
 
-.UserList {
+.ListContainer {
   display: flex;
   justify-content: center;
 }
 
-.Users ul {
+.UserList ul {
   width: 20rem;
 }
 
-.Users li {
+.UserList li {
   text-align: left;
   word-wrap: break-word;
 }

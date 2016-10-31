@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import './StatefulThing.css';
+import './UserList.css';
 
-class Users extends Component {
+class UserList extends Component {
   render() {
     return (
-      <section className="Users container">
+      <section className="UserList container">
         <div className="InputArea">
           <input type="text" placeholder="e.g. Mary Jane" ref={node => { this.input = node; }}></input>
           <button onClick={() => {
@@ -12,9 +12,9 @@ class Users extends Component {
             this.input.value = '';
           }}>Go!</button>
         </div>
-        <div className="UserList">
+        <div className="ListContainer">
           <ul>
-            { this.props.users.map((user) => <li key={user.index}>{user.name}</li>) }
+            { this.props.UserList.map((user) => <li key={user.index}>{user.name}</li>) }
           </ul>
         </div>
       </section>
@@ -22,4 +22,4 @@ class Users extends Component {
   }
 }
 
-export default Users;
+export default UserList;

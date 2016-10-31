@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import Users from './Users';
+import UserList from './UserList';
 let nextIndex;
 
 class StatefulThingContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      users :
+      UserList :
       [{
         name: 'Tristan',
         index: 0
@@ -20,7 +20,7 @@ class StatefulThingContainer extends Component {
 
   handleClick = (input) => {
     this.setState((prevState) => ({
-      users: prevState.users.concat({
+      UserList: prevState.UserList.concat({
         name: input,
         index: nextIndex++
       })
@@ -29,7 +29,7 @@ class StatefulThingContainer extends Component {
 
   render() {
     return (
-      <Users users={ this.state.users } onClick={ this.handleClick }></Users>
+      <UserList UserList={ this.state.UserList } onClick={ this.handleClick }></UserList>
     )
   }
 }
