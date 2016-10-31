@@ -18,13 +18,13 @@ class Home extends Component {
           <p>______________</p>
           <h4>build: create-react-app</h4>
           <p>This app was built with the <code>create-react-app</code> build process.</p>
-          <p>Everything you see has been possible without using <code>eject</code>.</p>
+          <p>Everything you see has been done without using <code>eject</code>.</p>
           <p>______________</p>
           <h4>style: Milligram</h4>
           <p>This app was styled using Milligram.
             It is a CSS framework designed to be a minimal starting point.
-            It includes a bunch of css resets as well as default styles for various components.
-            Most importantly, it is only 2kB when gzipped.</p>
+            It includes a bunch of css resets as well as default styles for various components.</p>
+          <p>Most importantly, it is only 2kB when gzipped.</p>
           </div>
       </section>
     )
