@@ -15,17 +15,19 @@ class CloudChamber extends Component {
         <p>I wanted to show what these particles would look like if we could somehow see them. A <a href="https://en.wikipedia.org/wiki/Cloud_chamber">Cloud Chamber</a> is how scientists achieve this, so if you have your own, you can probably stop reading ;). Unfortunately, I could not find any video footage of one that I felt did it justice. </p>
         <p>So I set out to create a visualisation of a Cloud Chamber in action:</p>
         { codePenEmbedComponent }
+        <p> </p>
+        <h4>notes</h4>
         <p>Particles are generated in the center of the page, with a random velocity</p>
         <p>Particles are under the effect of a magnetic field, and are moving through a medium that slows them down.</p>
-        <span>Three types of particles exist:</span>
+        <p>Three types of particles exist:</p>
         <ul>
           <li><i>Alpha particles</i>, which are heavy and have a positive charge.</li>
           <li><i>Beta particles</i>: which are light and have negative charge (they are fundamentally electrons).</li>
           <li><i>Gamma particles</i>, which are massless and have a no charge.</li>
         </ul>
         <p>Decay may happen to a particle at any point - changing it from one type of particle to another and randomising its new direction.</p>
-        <h3>See Also:</h3>
-        <p><a href="https://en.wikipedia.org/wiki/Bubble_chamber">Bubble Chamber</a>, inspired by beer! 🍻</p>
+        <h3>see also</h3>
+        <p><a href="https://en.wikipedia.org/wiki/Bubble_chamber">Bubble Chamber</a>, made with beer! 🍻</p>
       </section>
     );
   }
