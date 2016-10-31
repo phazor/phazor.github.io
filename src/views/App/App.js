@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import MenuBar from 'components/MenuBar/MenuBar';
+import Footer from 'components/Footer/Footer';
 
 class App extends Component {
   render() {
@@ -7,6 +8,7 @@ class App extends Component {
       <main className="App wrapper">
         <MenuBar></MenuBar>
         {this.props.children}
+        <Footer></Footer>
       </main>
     );
   }

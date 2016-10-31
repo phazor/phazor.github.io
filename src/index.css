@@ -16,3 +16,14 @@ body {
 code {
   vertical-align: text-bottom;
 }
+
+.footer {
+  padding: 2rem;
+  margin-top: 2rem;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.footer > p {
+  margin-bottom: 0px;
+}
