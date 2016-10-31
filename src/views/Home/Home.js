@@ -25,7 +25,14 @@ class Home extends Component {
             It is a CSS framework designed to be a minimal starting point.
             It includes a bunch of css resets as well as default styles for various components.</p>
           <p>Most importantly, it is only 2kB when gzipped.</p>
-          </div>
+          <p>______________</p>
+          <h4>deploy: gh-pages script</h4>
+          <p>This app is curently hosted on Github Pages. Deployment is done using the <a href="https://github.com/tschaub/gh-pages">gh-pages</a> node module.</p>
+          <p>______________</p>
+          <h4>routing: react-router</h4>
+          <p>Routing is performed by <a href="https://github.com/ReactTraining/react-router">react-router</a>. The <code>browserHistory</code> routing scheme is used.</p>
+          <p>Github Pages needs to be tricked into accepting the routes, this is achevied by a script in the <code>404.html</code>. See <a href="https://github.com/rafrex/spa-github-pages">https://github.com/rafrex/spa-github-pages</a> for more detail.</p>
+        </div>
       </section>
     )
   }
