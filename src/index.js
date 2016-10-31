@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import Routes from './routes';
+import Routes from 'routes';
 import '../node_modules/milligram/dist/milligram.min.css';
 import './index.css';
 

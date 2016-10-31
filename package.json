@@ -18,10 +18,10 @@
     "redux": "^3.6.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "deploy": "react-scripts build && gh-pages -d build",
-    "test": "react-scripts test --env=jsdom",
+    "start": "NODE_PATH=./src react-scripts start",
+    "build": "NODE_PATH=./src react-scripts build",
+    "deploy": "NODE_PATH=./src react-scripts build && gh-pages -d build",
+    "test": "NODE_PATH=./src react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
   "homepage": "http://phazor.github.io/my-cool-single-page-app"

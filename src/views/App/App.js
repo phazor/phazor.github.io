@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import MenuBar from '../../components/MenuBar/MenuBar';
+import MenuBar from 'components/MenuBar/MenuBar';
 
 class App extends Component {
   render() {
