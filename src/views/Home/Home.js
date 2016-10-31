@@ -17,8 +17,8 @@ class Home extends Component {
           <h3>Technologies</h3>
           <p>______________</p>
           <h4>build: create-react-app</h4>
-          <p>This app was built with the create-react-app build process</p>
-          <p>It features routing, which has been possible without using <code>eject</code>.</p>
+          <p>This app was built with the <code>create-react-app</code> build process.</p>
+          <p>Everything you see has been possible without using <code>eject</code>.</p>
           <p>______________</p>
           <h4>style: Milligram</h4>
           <p>This app was styled using Milligram.
