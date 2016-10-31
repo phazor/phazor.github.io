@@ -1,18 +1,38 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router';
+import MenuItem from '../MenuItem/MenuItem';
+import hamburger from './bars.svg';
 import './MenuBar.css';
 
 class MenuBar extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      menuExpanded: false
+    }
+  }
+
+  toggleMenu = () => {
+    this.setState((prevState) => ({
+      menuExpanded: (!prevState.menuExpanded)
+    }))
+    console.log(this.state.menuExpanded);
+  }
+
   render() {
     return (
       <nav className="navigation">
-        <ul className="MenuBar">
-          <li><Link to="/">Home </Link></li>
-          <li><Link to="/cloud-chamber">CloudChamber </Link></li>
-          <li><Link to="/user-list">UserList </Link></li>
-          <li><Link to="/about">About Me </Link></li>
-          <li><Link to="/gosh">Contact </Link></li>
-        </ul>
+        <div className="wrapper">
+          <div className="hamburger">
+            <img src={hamburger} onClick={this.toggleMenu} onBlur={this.toggleMenu} alt="Expand Menu"/>
+          </div>
+          <ul className={"MenuBar " + (this.state.menuExpanded ? "expanded" : "")}>
+            <MenuItem toggleMenu={this.toggleMenu} to="/">Home </MenuItem>
+            <MenuItem toggleMenu={this.toggleMenu} to="/cloud-chamber">CloudChamber </MenuItem>
+            <MenuItem toggleMenu={this.toggleMenu} to="/user-list">UserList </MenuItem>
+            <MenuItem toggleMenu={this.toggleMenu} to="/about">About Me </MenuItem>
+            <MenuItem toggleMenu={this.toggleMenu} to="/gosh">Contact </MenuItem>
+          </ul>
+        </div>
       </nav>
     );
   }

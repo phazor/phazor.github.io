@@ -1,37 +1,71 @@
 /*         CSS Resets         */
 /*============================*/
-.MenuBar {
-  list-style: none;
-  margin-bottom: 0px;
+.navigation {
 }
 
-.MenuBar li {
+.MenuBar {
+  list-style: none;
   margin-bottom: 0px;
 }
 
 /* Menu Bar Component Styling */
 /*============================*/
 .MenuBar {
-  border-bottom: 1px solid #d1d1d1;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
 }
 
-.MenuBar ul {
-  justify-content: flex-start;
+.hamburger {
+  height: 6.8rem; /* Warning: magic number */
+  background-color: white;
+  border-bottom: 1px solid #d1d1d1;
 }
 
-.MenuBar li {
+.hamburger img {
+  float: right;
+  padding: 1rem;
+  margin: 0.8rem 2rem 0;
+  width: 5rem;
+  height: 5rem;
+  border: 1px solid #c0c0c0;
+  border-radius: 3px;
+  background-color: white;
+}
+
+.hamburger img::after {
+  content: none;
+}
+
+.hamburger img:active {
+  background-color: grey;
+}
+
+.navigation .wrapper {
   position: relative;
-  width: 90%;
-  left: 5%;
-  padding: 1.6rem 1.6rem 1.6rem; /* We want large touch targets */
-  border-bottom: 1px solid #e0e0e0;
+  width: 100%;
+  height: 5rem;
+  z-index: 2;
 }
 
-.MenuBar li:last-child {
-  border: 0px transparent;
+.navigation .wrapper:last-child {
+}
+
+.MenuBar {
+  position: absolute;
+  background-color: white;
+  z-index: -1;
+  top: -500px;
+  width: 100%;
+  border-bottom: 1px solid #d1d1d1;
+}
+
+.MenuBar.expanded {
+  animation: slide 0.5s both;
+}
+
+@keyframes slide {
+    100% { top: 6.8rem; } /* Warning: magic number */
 }
 
 .MenuBar a {
@@ -39,13 +73,17 @@
 }
 
 @media (min-width: 40rem) {
-  .MenuBar {
-    flex-direction: row;
+  .navigation .wrapper {
+    position: static;
   }
 
-  .MenuBar li {
-    position: inherit;
-    width: auto;
-    border-bottom: 0px transparent;
+  .MenuBar {
+    position: static;
+    flex-direction: row;
+    top: 0;
+  }
+
+  .hamburger {
+    display: none;
   }
 }
