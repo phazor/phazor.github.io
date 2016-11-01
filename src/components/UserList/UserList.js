@@ -6,7 +6,7 @@ class UserList extends Component {
     return (
       <section className="UserList container">
         <div className="InputArea">
-          <input type="text" placeholder="e.g. Mary Jane" ref={node => { this.input = node; }}></input>
+          <input type="text" autoFocus placeholder="e.g. Mary Jane" ref={node => { this.input = node; }}></input>
           <button onClick={() => {
             this.props.onClick(this.input.value);
             this.input.value = '';
