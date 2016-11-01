@@ -33,10 +33,6 @@
   background-color: white;
 }
 
-.hamburger img::after {
-  content: none;
-}
-
 .hamburger img:active {
   background-color: grey;
 }
@@ -48,28 +44,35 @@
   z-index: 2;
 }
 
-.navigation .wrapper:last-child {
-}
-
 .MenuBar {
   position: absolute;
   background-color: white;
   z-index: -1;
-  top: -500px;
+  top: -500px; /* Would be nice to position this without magic numbers */
   width: 100%;
   border-bottom: 1px solid #d1d1d1;
 }
 
-.MenuBar.expanded {
-  animation: slide 0.5s both;
+.MenuBar {
+  animation: 0.5s slideout forwards;
 }
 
-@keyframes slide {
-    100% { top: 6.8rem; } /* Warning: magic number */
+.MenuBar.expanded {
+  animation: 0.5s slidein forwards;
+}
+
+@keyframes slidein {
+  from { top: -50rem; }
+  to { top: 6.8rem; } /* Warning: magic number :( */
+}
+
+@keyframes slideout {
+  from { top: 6.8rem; }
+  to { top: -50rem; } /* Warning: magic number :( */
 }
 
 .MenuBar a {
-  padding: 1.6rem 1.6rem 1.6rem; /* We want large touch targets */
+  padding: 1.6rem 1.6rem 1.6rem;
 }
 
 @media (min-width: 40rem) {
