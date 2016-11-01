@@ -10,6 +10,7 @@ class UserList extends Component {
           <button onClick={() => {
             this.props.onClick(this.input.value);
             this.input.value = '';
+            this.input.focus();
           }}>Go!</button>
         </div>
         <div className="ListContainer">
