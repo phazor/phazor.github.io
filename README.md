@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/phazor/my-cool-single-page-app.svg?branch=master)](https://travis-ci.org/phazor/my-cool-single-page-app)
+
 Tech that I'm trying out with this project
 
 So far:
