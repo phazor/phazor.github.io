@@ -15,7 +15,7 @@ it('UserList is selectable with the .UserList class', () => {
     <UserList UserList={userList} />
   );
 
-  expect(component.is('.UserList')).toBe(true);
+  expect(component.is('.UserList')).toBe(false); // Fail deliberately to test travis-ci
 });
 
 // Cannot write a meaningful test on this until
