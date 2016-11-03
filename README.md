@@ -9,13 +9,13 @@ So far:
 - Webpack
 - Yarn
 - React Router
+- Travis CI
 
 To do:
 
 - Pure functions
 - Redux
 - CSS Modules
-- Travis CI
 - ImmutableJS
 - Standard
 - Docker
@@ -29,6 +29,7 @@ Pages I want to show
 - CV
 - Projects
  - Cloud Chamber
+ - React/Redux Stateful showcase (UserList?)
 
 ### Crashes:
 
