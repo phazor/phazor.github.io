@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import MenuBar from 'components/MenuBar/MenuBar';
 import Footer from 'components/Footer/Footer';
+import './App.css';
 
 class App extends Component {
   render() {
