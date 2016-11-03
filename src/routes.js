@@ -5,7 +5,7 @@ import { Router, Route } from 'react-router';
 import App from 'views/App/App';
 import About from 'views/About/About';
 import CloudChamber from 'components/CloudChamber/CloudChamber';
-import UserListContainer from 'components/UserList/UserListContainer';
+import UserListContainer from 'components/UserListContainer/UserListContainer';
 import Home from 'views/Home/Home';
 import NotFound from 'views/NotFound/NotFound';
 

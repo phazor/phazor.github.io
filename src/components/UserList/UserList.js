@@ -8,7 +8,7 @@ class UserList extends Component {
         <div className="InputArea">
           <input type="text" autoFocus placeholder="e.g. Mary Jane" ref={node => { this.input = node; }}></input>
           <button onClick={() => {
-            this.props.onClick(this.input.value);
+            this.props.handleClick(this.input.value);
             this.input.value = '';
             this.input.focus();
           }}>Go!</button>

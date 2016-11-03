@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import UserList from './UserList';
+import UserList from '../UserList/UserList';
 let nextIndex;
 
 class StatefulThingContainer extends Component {
@@ -29,7 +29,7 @@ class StatefulThingContainer extends Component {
 
   render() {
     return (
-      <UserList UserList={ this.state.UserList } onClick={ this.handleClick }></UserList>
+      <UserList UserList={ this.state.UserList } handleClick={ this.handleClick }></UserList>
     )
   }
 }
