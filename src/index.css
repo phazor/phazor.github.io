@@ -12,7 +12,12 @@ body {
   max-width: 80rem;
 }
 
-/*Milligram style tweaks*/
+/* Milligram style tweaks */
+/*========================*/
 code {
   vertical-align: text-bottom;
+}
+
+button {
+  border: 1px transparent;
 }
