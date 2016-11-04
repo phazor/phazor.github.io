@@ -6,7 +6,7 @@ import './About.css';
 class About extends Component {
   componentDidMount() {
     iframeResizer({
-        checkOrigin:false,
+        checkOrigin:['https://phazor.github.io'],
         autoResize:false
       }, '#iframe'
     );
