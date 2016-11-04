@@ -29,7 +29,7 @@ class MenuBar extends Component {
             <MenuItem toggleMenu={this.toggleMenu} to="/cloud-chamber">CloudChamber </MenuItem>
             <MenuItem toggleMenu={this.toggleMenu} to="/user-list">UserList </MenuItem>
             <MenuItem toggleMenu={this.toggleMenu} to="/about">About Me </MenuItem>
-            <MenuItem toggleMenu={this.toggleMenu} to="/gosh">Contact </MenuItem>
+            <MenuItem toggleMenu={this.toggleMenu} to="/gosh">404 </MenuItem>
           </ul>
         </div>
       </nav>
