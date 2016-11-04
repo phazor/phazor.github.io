@@ -12,6 +12,7 @@
   "dependencies": {
     "history": "^3.2.1",
     "html-to-react": "^1.2.1",
+    "iframe-resizer": "^3.5.5",
     "milligram": "^1.1.0",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
