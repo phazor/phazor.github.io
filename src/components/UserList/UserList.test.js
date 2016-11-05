@@ -9,7 +9,7 @@ it('renders without crashing', () => {
   ReactDOM.render(<UserList UserList={userList}/>, div);
 });
 
-it('UserList is selectable with the .UserList class', () => {
+it('UserList has the .UserList class', () => {
   const userList = [];
   const component = shallow(
     <UserList UserList={userList} />
