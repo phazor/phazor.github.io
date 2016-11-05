@@ -10,15 +10,15 @@ So far:
 - Yarn
 - React Router
 - Travis CI
+- Redux
 
 To do:
 
 - Pure functions
-- Redux
 - CSS Modules
 - ImmutableJS
 - Standard
-- Docker
+- Docker?
 
 Behavior I want to support
 
