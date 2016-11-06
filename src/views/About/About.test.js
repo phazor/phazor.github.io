@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { shallow, mount } from 'enzyme';
 import About from './About';
 
 it('renders without crashing', () => {
@@ -8,11 +9,19 @@ it('renders without crashing', () => {
 });
 
 it('About contains an iframe', () => {
-  const component = shallow(
-    <About />
-  );
+  const component = shallow(<About />);
+  expect(component.find('#iframe').length).toBe(1);
+});
 
-  expect(component.has('iframe')).toBe(true);
+it('About iframe contains link to about-me', () => {
+  const component = shallow(<About />);
+  expect(component.find('#iframe').prop('src')).toBe('https://phazor.github.io/about-me/');
+});
+
+it('componentDidMount should run without error', () => {
+  const spy = spyOn(About.prototype, "componentDidMount");
+  const wrapper = mount(<About />);
+  expect(spy.calls.count()).toEqual(1);
 });
 
 // TODO
