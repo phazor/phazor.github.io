@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import MenuItem from '../MenuItem/MenuItem';
 import hamburger from './bars.svg';
+import github from './github-sign.svg';
 import './MenuBar.css';
 
 class MenuBar extends Component {
@@ -17,20 +18,32 @@ class MenuBar extends Component {
     }))
   }
 
+  closeMenu = () => {
+    this.setState((prevState) => ({
+      menuExpanded: false
+    }))
+  }
+
   render() {
     return (
       <nav className="navigation">
         <div className="wrapper">
-          <div onClick={this.toggleMenu} onBlur={this.toggleMenu} className="hamburger">
-            <img src={hamburger} alt="Expand Menu"/>
-          </div>
+          <div className="block" />
           <ul className={"MenuBar " + (this.state.menuExpanded ? "expanded" : "")}>
-            <MenuItem toggleMenu={this.toggleMenu} to="/">Home </MenuItem>
-            <MenuItem toggleMenu={this.toggleMenu} to="/cloud-chamber">CloudChamber </MenuItem>
-            <MenuItem toggleMenu={this.toggleMenu} to="/user-list">UserList </MenuItem>
-            <MenuItem toggleMenu={this.toggleMenu} to="/about">About Me </MenuItem>
-            <MenuItem toggleMenu={this.toggleMenu} to="/gosh">404 </MenuItem>
+            <MenuItem handleClick={this.closeMenu} to="/">Home </MenuItem>
+            <MenuItem handleClick={this.closeMenu} to="/cloud-chamber">CloudChamber </MenuItem>
+            <MenuItem handleClick={this.closeMenu} to="/user-list">UserList </MenuItem>
+            <MenuItem handleClick={this.closeMenu} to="/about">About Me </MenuItem>
+            <MenuItem handleClick={this.closeMenu} to="/gosh">404 </MenuItem>
           </ul>
+          <div onClick={this.toggleMenu} onBlur={this.toggleMenu} className="hamburger">
+            <img className="icon" src={hamburger} alt="Expand Menu" />
+          </div>
+          <div className="gh-item">
+            <a href="https://www.github.com/phazor/my-cool-single-page-app/">
+              <img className="icon" src={github} alt="Github Repo" />
+            </a>
+          </div>
         </div>
       </nav>
     );

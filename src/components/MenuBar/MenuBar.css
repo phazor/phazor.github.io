@@ -1,6 +1,7 @@
 /*         CSS Resets         */
 /*============================*/
 .navigation {
+  border-bottom: 1px solid #d1d1d1;
 }
 
 .MenuBar {
@@ -19,29 +20,46 @@
 .hamburger {
   height: 6.8rem; /* Warning: magic number */
   background-color: white;
-  border-bottom: 1px solid #d1d1d1;
+  width: auto;
+  float: left;
 }
 
 .hamburger img {
-  float: right;
-  padding: 1rem;
-  margin: 0.8rem 2rem 0;
-  width: 5rem;
-  height: 5rem;
+  margin: 0.8rem 2rem 0.8rem;
+  float: left;
   border: 1px solid #c0c0c0;
   border-radius: 3px;
-  background-color: white;
 }
 
 .hamburger img:active {
   background-color: grey;
 }
 
+/* Shared Styles between the hamburger and Github icons */
+.icon {
+  padding: 1rem;
+  width: 5rem;
+  height: 5rem;
+  background-color: white;
+}
+
+.gh-item {
+  width: auto;
+  float: right;
+  padding: 0.8rem 2rem 0px;
+}
+
 .navigation .wrapper {
   position: relative;
-  width: 100%;
   z-index: 2;
 }
+
+/*.block {
+  position: relative;
+  z-index: 3;
+  height: 5rem;
+  background-color: white;
+}*/
 
 .MenuBar {
   position: absolute;
@@ -52,6 +70,12 @@
   border-bottom: 1px solid #d1d1d1;
 }
 
+.MenuBar a {
+  padding: 1.6rem 1.6rem 1.6rem;
+}
+
+/* Menu Bar Animation */
+/*====================*/
 .MenuBar {
   animation: 0.5s slideout forwards;
 }
@@ -70,10 +94,8 @@
   to { top: -50rem; } /* Warning: magic number :( */
 }
 
-.MenuBar a {
-  padding: 1.6rem 1.6rem 1.6rem;
-}
-
+/* Medium and Large styles */
+/*=========================*/
 @media (min-width: 40rem) {
   .navigation .wrapper {
     position: static;
@@ -81,11 +103,19 @@
 
   .MenuBar {
     position: static;
+    width: auto;
     flex-direction: row;
     top: 0;
+    float:left;
+    border: none;
   }
 
   .hamburger {
     display: none;
+  }
+
+  .gh-item {
+    width: auto;
+    padding: 0px 2rem 0px;
   }
 }
