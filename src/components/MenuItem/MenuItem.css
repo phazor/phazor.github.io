@@ -19,11 +19,12 @@
 }
 
 .MenuItem .active {
-  opacity: 0.8;
+  color: #5b2d7a;
+  font-weight: 300;
 }
 
 MenuItem a {
-  padding: 1.6rem 0.8rem 1.6rem; 
+  padding: 1.6rem 0.8rem 1.6rem;
 }
 
 @media (min-width: 40rem) {
