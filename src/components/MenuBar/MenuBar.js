@@ -38,7 +38,7 @@ class MenuBar extends Component {
             <MenuItem handleClick={this.closeMenu} to="/about">About Me </MenuItem>
             <MenuItem handleClick={this.closeMenu} to="/gosh">404 </MenuItem>
           </ul>
-          <div onClick={this.toggleMenu} onBlur={this.toggleMenu} className="hamburger">
+          <div onClick={this.toggleMenu} onBlur={this.toggleMenu} className="hamburger-bar">
             <img className="icon" src={hamburger} alt="Expand Menu" />
           </div>
           <div className="gh-item">
