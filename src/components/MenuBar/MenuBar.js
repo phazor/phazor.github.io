@@ -10,18 +10,20 @@ class MenuBar extends Component {
     this.state = {
       menuExpanded: false
     }
+
+    this.closeMenu = this.closeMenu.bind(this);
   }
 
   toggleMenu = () => {
     this.setState((prevState) => ({
       menuExpanded: (!prevState.menuExpanded)
-    }))
+    }));
   }
 
-  closeMenu = () => {
+  closeMenu() {
     this.setState((prevState) => ({
       menuExpanded: false
-    }))
+    }));
   }
 
   render() {
