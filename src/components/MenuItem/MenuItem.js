@@ -4,7 +4,7 @@ import './MenuItem.css';
 
 const MenuItem = (props) => {
   return (
-    <li className="MenuItem"><Link onClick={props.handleClick} to={props.to}>{props.children}</Link></li>
+    <li className="MenuItem"><Link onClick={props.handleClick} to={props.to} activeClassName="active">{props.children}</Link></li>
   )
 }
 

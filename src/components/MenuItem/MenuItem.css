@@ -18,6 +18,14 @@
   border: 0px transparent;
 }
 
+.MenuItem .active {
+  opacity: 0.8;
+}
+
+MenuItem a {
+  padding: 1.6rem 0.8rem 1.6rem; 
+}
+
 @media (min-width: 40rem) {
   .MenuItem {
     position: inherit;
