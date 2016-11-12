@@ -10,7 +10,7 @@ class Home extends Component {
         <section className="Home">
           <div className="Home-header">
             <img src={rocket} className="Home-logo" alt="logo" />
-            <h2>Welcome to React</h2>
+            <h2>Welcome</h2>
           </div>
           <div className="Home-intro container">
             <p>The purpose of this site is for me to learn a few technologies and then showcase them.</p>
@@ -22,7 +22,7 @@ class Home extends Component {
             <p>See the <Link to="/about">About Me</Link> page for an example.</p>
             <p>______________</p>
             <h4>style: Milligram</h4>
-            <p>This app was styled using Milligram.
+            <p>This app was styled using <a href="https://milligram.github.io/">Milligram</a>.
               It is a CSS framework designed to be a minimal starting point.
               It includes a bunch of css resets as well as default styles for various components.</p>
             <p>Most importantly, it is only 2kB when gzipped.</p>
