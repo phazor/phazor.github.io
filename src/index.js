@@ -9,7 +9,8 @@ import { useRouterHistory } from 'react-router';
 import { createHistory } from 'history';
 
 const history = useRouterHistory(createHistory)({
-  basename: '/my-cool-single-page-app'
+  // Un-Comment if restoring page to Github Pages sub-page
+  //basename: '/my-cool-single-page-app'
 });
 
 ReactDOM.render(

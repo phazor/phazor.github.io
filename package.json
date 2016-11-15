@@ -1,6 +1,6 @@
 {
   "name": "my-cool-single-page-app",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "devDependencies": {
     "enzyme": "^2.5.1",
@@ -27,5 +27,5 @@
     "test": "NODE_PATH=./src react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-  "homepage": "https://phazor.github.io/my-cool-single-page-app"
+  "homepage": "https://phazor.github.io/"
 }
