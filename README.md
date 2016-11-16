@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/phazor/my-cool-single-page-app.svg?branch=master)](https://travis-ci.org/phazor/my-cool-single-page-app)
+[![Build Status](https://travis-ci.org/phazor/phazor.github.io.svg?branch=src)](https://travis-ci.org/phazor/phazor.github.io)
 
 Tech that I'm trying out with this project
 
