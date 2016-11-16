@@ -13,7 +13,7 @@ class Home extends Component {
             <h2>Welcome</h2>
           </div>
           <div className="Home-intro container">
-            <p>The purpose of this site is for me to learn a few technologies and then showcase them.</p>
+            <p>The purpose of this site is for me to learn a few technologies and showcase them.</p>
             <p>Also contained is my cv, please check out the <Link to="/about">About Me</Link> page.</p>
             <h3>Technologies</h3>
             <p>______________</p>
