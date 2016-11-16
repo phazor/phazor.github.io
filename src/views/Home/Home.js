@@ -36,7 +36,7 @@ class Home extends Component {
             <p>______________</p>
             <h4>routing: react-router</h4>
             <p>Routing is performed by <a href="https://github.com/ReactTraining/react-router">react-router</a>. The <code>browserHistory</code> routing scheme is used.</p>
-            <p>Github Pages needs to be tricked into accepting the routes, this is achevied by a script in the <code>404.html</code>. See <a href="https://github.com/rafrex/spa-github-pages">https://github.com/rafrex/spa-github-pages</a> for more detail.</p>
+            <p>Github Pages needs to be tricked into accepting the routes, this is achieved by a script in the <code>404.html</code>. See <a href="https://github.com/rafrex/spa-github-pages">https://github.com/rafrex/spa-github-pages</a> for more detail.</p>
           </div>
         </section>
       </div>
