@@ -42,7 +42,7 @@ class MenuBar extends Component {
             <img className="icon" src={hamburger} alt="Expand Menu" />
           </div>
           <div className="gh-item">
-            <a href="https://www.github.com/phazor/">
+            <a href="https://www.github.com/phazor/phazor.github.io">
               <img className="icon" src={github} alt="Github Repo" />
             </a>
           </div>

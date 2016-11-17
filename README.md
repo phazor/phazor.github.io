@@ -14,6 +14,8 @@ So far:
 
 To do:
 
+- Preact
+- async await
 - Pure functions
 - CSS Modules
 - ImmutableJS

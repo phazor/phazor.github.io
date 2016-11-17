@@ -5,6 +5,7 @@ class UserList extends Component {
   render() {
     return (
       <section className="UserList container">
+        <h6>Messing around with React functional and presentational components</h6>
         <div className="InputArea">
           <input type="text" autoFocus placeholder="e.g. Mary Jane" ref={node => { this.input = node; }}></input>
           <button onClick={() => {
