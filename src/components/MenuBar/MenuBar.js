@@ -37,6 +37,7 @@ class MenuBar extends Component {
             <MenuItem handleClick={this.closeMenu} to="/user-list">UserList </MenuItem>
             <MenuItem handleClick={this.closeMenu} to="/about">About Me </MenuItem>
             <MenuItem handleClick={this.closeMenu} to="/gosh">404 </MenuItem>
+            <MenuItem handleClick={this.closeMenu} href="https://phazor.github.io/blog/">Blog</MenuItem>
           </ul>
           <div onClick={this.toggleMenu} onBlur={this.toggleMenu} className="hamburger-bar">
             <img className="icon" src={hamburger} alt="Expand Menu" />
