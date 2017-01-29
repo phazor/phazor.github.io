@@ -1,12 +1,16 @@
+import { createHistory } from 'history';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import { useRouterHistory } from 'react-router';
+import { createStore } from 'redux';
 
+import app from './reducers';
 import Routes from 'routes';
 import '../node_modules/milligram/dist/milligram.min.css';
 import './index.css';
 
-import { useRouterHistory } from 'react-router';
-import { createHistory } from 'history';
+let store = createStore(app);
 
 const history = useRouterHistory(createHistory)({
   // Un-Comment if restoring page to Github Pages sub-page
@@ -14,6 +18,8 @@ const history = useRouterHistory(createHistory)({
 });
 
 ReactDOM.render(
-  <Routes history={history} />,
+  <Provider store={store}>
+    <Routes history={history}/>
+  </Provider>,
   document.getElementById('root')
 );
