@@ -6,3 +6,27 @@ export const addUser = (name) => {
     index: userIndex++
   }
 }
+
+export const fetchPlanets_Request = (planets) => {
+  return {
+    type: 'FETCH_PLANETS_REQUEST',
+    planets
+  }
+}
+
+export const fetchPlanets_Failure = (planets) => {
+  return {
+    type: 'FETCH_PLANETS_FAILURE',
+    planets,
+    error: 'Oops'
+  }
+}
+
+export const fetchPlanets_Success = (planets, json) => {
+  return {
+    type: 'FETCH_PLANETS_SUCCESS',
+    planets,
+    response: json,
+    recievedAt: Date.now()
+  }
+}
