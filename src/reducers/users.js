@@ -8,7 +8,7 @@ const initialState = {
     name: 'Ali',
     index: 1
   },{
-    name: 'Jim-boo',
+    name: 'Snoopy',
     index: 2
   }]
 }
