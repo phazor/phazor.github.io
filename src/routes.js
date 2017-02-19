@@ -7,7 +7,7 @@ import App from 'views/App/App';
 import About from 'views/About/About';
 import CloudChamber from 'components/CloudChamber/CloudChamber';
 import UserListPage from 'views/UserListPage/UserListPage';
-import PlanetsPage from 'views/PlanetsPage/PlanetsPage';
+import NEOPage from 'views/NEOPage/NEOPage';
 import Home from 'views/Home/Home';
 import NotFound from 'views/NotFound/NotFound';
 
@@ -18,7 +18,7 @@ const Routes = (props) => (
       <Route path="/about" component={About} />
       <Route path="/cloud-chamber" component={CloudChamber} />
       <Route path="/user-list" component={UserListPage} />
-      <Route path="/planets" component={PlanetsPage} />
+      <Route path="/NEOs" component={NEOPage} />
       <Route path="*" component={NotFound} />
     </Route>
   </Router>

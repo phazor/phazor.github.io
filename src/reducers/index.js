@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
 import users from './users';
-import planets from './planets';
+import NEO from './NEO';
 
 const app = combineReducers({
   users,
-  planets
+  NEO
 });
 
 export default app;

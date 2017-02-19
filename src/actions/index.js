@@ -7,31 +7,36 @@ export const addUser = (name) => {
   }
 }
 
-export const fetchPlanets_Request = () => ({
-  type: 'FETCH_PLANETS_REQUEST'
+export const fetchNEO_Request = () => ({
+  type: 'FETCH_NEO_REQUEST'
 })
 
-export const fetchPlanets_Failure = reason => ({
-  type: 'FETCH_PLANETS_FAILURE',
-  error: 'Oops'
+export const fetchNEO_Failure = reason => ({
+  type: 'FETCH_NEO_FAILURE',
+  reason: reason
 })
 
-export const fetchPlanets_Success = json => ({
-  type: 'FETCH_PLANETS_SUCCESS',
-  results: json.results,
-  recievedAt: json.date
+export const fetchNEO_Success = json => ({
+  type: 'FETCH_NEO_SUCCESS',
+  response: json
 })
 
-export const fetchPlanets = planets => {
-  let bodies = planets ? planets.join(',') : ''
+const oneDayInMilliseconds = 1000 * 60 * 60 * 24;
+const dateString = (date) => (`${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`)
+
+export const fetchNEO = () => {
+  let currentDate = new Date();
+  let lastWeek = new Date(currentDate - oneDayInMilliseconds * 6); // We take 6 days, because the API is inclusive of the date range
   return dispatch => {
     // Update state
-    dispatch(fetchPlanets_Request())
+    dispatch(fetchNEO_Request())
     // We return a promise to wait for.
-    return fetch(`http://www.astro-phys.com/api/de406/states?unit=au&bodies=${bodies}`)
+    // return fetch(`https://api.nasa.gov/neo/rest/v1/feed?start_date=2017-02-13&end_date=2017-02-19&api_key=DEMO_KEY`)
+    return fetch(`https://api.nasa.gov/neo/rest/v1/feed?start_date=${dateString(lastWeek)}&end_date=${dateString(currentDate)}&api_key=DEMO_KEY`)
+    // return fetch('http://localhost:3004/NEO')
     // local api: return fetch('http://localhost:3004/search/')
       .then(response => response.json())
-      .then(json => dispatch(fetchPlanets_Success(json)))
-      .catch(reason => dispatch(fetchPlanets_Failure(reason)))
+      .then(json => dispatch(fetchNEO_Success(json)))
+      .catch(reason => dispatch(fetchNEO_Failure(reason)))
   }
 }
