@@ -19,7 +19,9 @@ const NEOList = ({ NEOs, lastAction }) => {
           </div>
         : (lastAction === "FETCH_NEO_REQUEST")
         ? <div className="Loading"><h2>Loading...</h2></div>
-        : <div className="Click Fetch"><h2>Click 'Fetch NEOs'</h2></div>
+        : (lastAction === "FETCH_NEO_FAILURE")
+        ? <div className="Error"><h2>Error...</h2></div>
+        : <div className="Click Fetch"></div>
       }
       </div>
     )
