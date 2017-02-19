@@ -29,11 +29,9 @@ export const fetchPlanets = planets => {
     dispatch(fetchPlanets_Request())
     // We return a promise to wait for.
     return fetch(`http://www.astro-phys.com/api/de406/states?unit=au&bodies=${bodies}`)
-      .then(response => {
-        return response.json()
-      }
-      ).then(json => dispatch(fetchPlanets_Success(json))
-      ).catch(reason => dispatch(fetchPlanets_Failure(reason))
-      )
+    // local api: return fetch('http://localhost:3004/search/')
+      .then(response => response.json())
+      .then(json => dispatch(fetchPlanets_Success(json)))
+      .catch(reason => dispatch(fetchPlanets_Failure(reason)))
   }
 }

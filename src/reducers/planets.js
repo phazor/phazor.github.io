@@ -55,21 +55,23 @@ const planets = (state = initialState, action) => {
       return Object.assign({}, {
         lastAction: action.type,
         isFetching: true,
-        didInvalidate: false
+        didInvalidate: false,
+        planetList: state.planetList
       })
     case('FETCH_PLANETS_SUCCESS'):
       return Object.assign({}, {
         lastAction: action.type,
         isFetching: false,
         didInvalidate: false,
-        planetList: action.results,
+        planetList: action,
         lastUpdated: action.recievedAt
       })
     case('FETCH_PLANETS_FAILURE'):
       return Object.assign({}, {
         lastAction: action.type,
         isFetching: false,
-        didInvalidate: true
+        didInvalidate: true,
+        planetList: state.planetList
       })
     default:
       return state

@@ -1,9 +1,12 @@
 import { connect } from 'react-redux'
-import Planets from '../components/PlanetsList/PlanetsList'
+import PlanetsList from '../components/PlanetsList/PlanetsList'
 
-const mapStateToProps = (state) => {
+const mapStateToProps = ({ planets }) => {
   return {
-    planets: state.planets.planetsList.results
+    planets: planets.planetList.results,
+    isFetching: planets.isFetching, // unused, for now
+    didInvalidate: planets.didInvalidate, // unused, for now
+    lastAction: planets.lastAction
   };
 };
 
