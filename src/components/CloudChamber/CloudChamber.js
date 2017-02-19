@@ -16,18 +16,19 @@ class CloudChamber extends Component {
         <p>So I set out to create a visualisation of a Cloud Chamber in action:</p>
         { codePenEmbedComponent }
         <p> </p>
-        <h4>notes</h4>
-        <p>Particles are generated in the center of the page, with a random velocity</p>
-        <p>Particles are under the effect of a magnetic field, and are moving through a medium that slows them down.</p>
-        <p>Three types of particles exist:</p>
+        <h4>rules</h4>
+        <p>Particles are emitted from the center of the page, with a random velocity.</p>
+        <p>Particles are under the effect of a uniform magnetic field pointing into the page, which causes the path of charged particles to curve.</p>
+        <p>Particles always belong to <a href="https://en.wikipedia.org/wiki/Ionizing_radiation" target="_blank">one of three types:</a></p>
         <ul>
           <li><i>Alpha particles</i>, which are heavy and have a positive charge.</li>
-          <li><i>Beta particles</i>: which are light and have negative charge (they are fundamentally electrons).</li>
+          <li><i>Beta particles</i>: which are light and have negative charge.</li>
           <li><i>Gamma particles</i>, which are massless and have a no charge.</li>
         </ul>
-        <p>Decay may happen to a particle at any point - changing it from one type of particle to another and randomising its new direction.</p>
+        <p>Particles are moving through a medium that uniformly decelerates them.</p>
+        <p>Decay or collision may happen to a particle at any point - changing it from one type of particle to another and giving it a new direction.</p>
         <h3>see also</h3>
-        <p><a href="https://en.wikipedia.org/wiki/Bubble_chamber">Bubble Chamber</a>, made with beer! 🍻</p>
+        <p><a href="https://en.wikipedia.org/wiki/Bubble_chamber">Bubble Chamber</a>. Interesting fact - the first one was made with beer! 🍻</p>
       </section>
     );
   }
