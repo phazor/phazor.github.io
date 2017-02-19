@@ -3,7 +3,6 @@ import React, { PropTypes } from 'react';
 const NEOList = ({ NEOs, lastAction }) => {
   return (
     <div>
-      { console.log(lastAction + 'NEOs: ' + NEOs) }
       {(lastAction === "FETCH_NEO_SUCCESS")
         ? <div className="ListContainer">
             <ul>
