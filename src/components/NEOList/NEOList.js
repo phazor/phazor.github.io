@@ -10,8 +10,8 @@ const NEOList = ({ NEOs, lastAction }) => {
                 .sort((a,b) => a.close_approach_data[0].miss_distance.kilometers - b.close_approach_data[0].miss_distance.kilometers)
                 .map((NEO, index) =>
                 <li key={index}>Name: {NEO.name}.
-                  miss-distance: {NEO.close_approach_data[0].miss_distance.kilometers / 6371} earth radii,
-                  diameter: {NEO.estimated_diameter.kilometers.estimated_diameter_max} km
+                  miss-distance: {Math.round(NEO.close_approach_data[0].miss_distance.kilometers / 6371)} earth radii,
+                  diameter: {Math.round(NEO.estimated_diameter.kilometers.estimated_diameter_max * 1000)} m
                 </li>
               )}
             </ul>
