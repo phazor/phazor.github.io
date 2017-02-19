@@ -7,7 +7,7 @@ class UserListPage extends Component {
   render() {
     return (
       <section className="UserList container">
-        <h6>Messing around in React and redux with functional and presentational components</h6>
+        <h6>A super basic list in React and redux with functional and presentational components</h6>
         <AddUser />
         <VisibleUserList />
       </section>
