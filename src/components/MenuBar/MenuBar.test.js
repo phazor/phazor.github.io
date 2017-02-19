@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom';
 import { shallow, mount } from 'enzyme';
 import MenuBar from './MenuBar';
 
-it('Menu Bar renders 6 menu items with no errors', () => {
+it('Menu Bar renders 7 menu items with no errors', () => {
   const wrapper = shallow(<MenuBar/>);
-  expect(wrapper.find('MenuItem').length).toEqual(6);
+  expect(wrapper.find('MenuItem').length).toEqual(7);
 });
 
 // This runs into the "Invariant Violation: <Link>s rendered outside of a router context cannot navigate."
