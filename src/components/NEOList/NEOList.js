@@ -11,7 +11,7 @@ const NEOList = ({ NEOs, lastAction }) => {
                 .map((NEO, index) =>
                 <li key={index}>Name: {NEO.name}.
                   miss-distance: {Math.round(NEO.close_approach_data[0].miss_distance.kilometers / 6371)} earth radii,
-                  diameter: {Math.round(NEO.estimated_diameter.kilometers.estimated_diameter_max * 1000)} m
+                  length: {Math.round(NEO.estimated_diameter.kilometers.estimated_diameter_max * 1000)} m
                 </li>
               )}
             </ul>
