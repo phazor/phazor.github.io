@@ -8,6 +8,7 @@ import thunkMiddleware from 'redux-thunk';
 // import createLogger from 'redux-logger';
 
 import app from './reducers';
+import { addUser } from './actions';
 import Routes from 'routes';
 import '../node_modules/milligram/dist/milligram.min.css';
 import './index.css';
@@ -22,6 +23,11 @@ let store = createStore(
     // , loggerMiddleware
   )
 );
+
+// Add some initial state
+store.dispatch(addUser('Tristan'));
+store.dispatch(addUser('Ali'));
+store.dispatch(addUser('Snoopy'));
 
 const history = useRouterHistory(createHistory)({
   // Un-Comment if restoring page to Github Pages sub-page

@@ -1,16 +1,5 @@
 const initialState = {
-  testField: 'hello hello hello',
-  userList :
-  [{
-    name: 'Tristan',
-    index: 0
-  },{
-    name: 'Ali',
-    index: 1
-  },{
-    name: 'Snoopy',
-    index: 2
-  }]
+  userList: []
 }
 
 const user = (state = {}, action) => {

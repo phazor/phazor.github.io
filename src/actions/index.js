@@ -1,4 +1,4 @@
-let userIndex = 3; // See initial state in src/reducers/users.js
+let userIndex = 0;
 export const addUser = (name) => {
   return {
     type: 'ADD_USER',
