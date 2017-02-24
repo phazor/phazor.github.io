@@ -13,12 +13,11 @@ class Planets extends Component {
 
   updateFPS() {
     this.setState({ fps: frames_per_sec });
-    // frames_per_sec++;
   }
 
   componentDidMount() {
     renderScene()
-    this.fpsID = setInterval(this.updateFPS, 100)
+    this.fpsID = setInterval(this.updateFPS, 500)
   }
 
   componentWillUnmount() {
