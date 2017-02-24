@@ -10,6 +10,7 @@ import UserListPage from 'views/UserListPage/UserListPage';
 import NEOPage from 'views/NEOPage/NEOPage';
 import Home from 'views/Home/Home';
 import NotFound from 'views/NotFound/NotFound';
+import Planets from 'views/Planets/Planets';
 
 const Routes = (props) => (
   <Router {...props}>
@@ -19,6 +20,7 @@ const Routes = (props) => (
       <Route path="/cloud-chamber" component={CloudChamber} />
       <Route path="/user-list" component={UserListPage} />
       <Route path="/NEOs" component={NEOPage} />
+      <Route path="/Planets" component={Planets} />
       <Route path="*" component={NotFound} />
     </Route>
   </Router>
