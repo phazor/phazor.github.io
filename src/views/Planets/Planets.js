@@ -2,19 +2,25 @@ import React, { Component } from 'react';
 import * as THREE from 'three';
 import Three_OrbitControls from 'three-orbit-controls';
 import Detector from '../../lib/three-detector';
+import arrow from './arrow.svg';
 
-// AMD Module format hackery
-const OrbitControls = Three_OrbitControls(THREE);
-
+const OrbitControls = Three_OrbitControls(THREE); // AMD Module format coercion
 let frames_per_sec = 0;
 
 // Planets Component
 class Planets extends Component {
   constructor(props) {
     super(props);
-
     this.updateFPS = this.updateFPS.bind(this);
     this.state = {};
+  }
+
+  handleFullScreenClick() {
+    document.getElementById('canvasWrapper').lastChild.scrollIntoView(true);
+  }
+
+  handleMoveToTopClick() {
+    document.body.scrollIntoView(true);
   }
 
   updateFPS() {
@@ -31,29 +37,42 @@ class Planets extends Component {
     clearInterval(this.fpsID);
   }
 
-  handleClick() {
-    document.getElementById('canvasWrapper').lastChild.scrollIntoView(true);
-  }
-
   render() {
     return (
-      <div style={{
+      <div id="Planets" style={{
         textAlign: 'center',
         marginTop: '2rem'
       }}>
         <h3>Trappist-1</h3>
         <p>This page shows a scale model of the Trappist-1 system. The speed has been increased by a factor of 8,640 so that 1 earth day equals 10 simulation seconds.</p>
         <button
-           onClick={this.handleClick}
+           onClick={this.handleFullScreenClick}
            style={{ marginBottom: '2rem' }}>
            Full Screen
          </button>
         <p>For more information about the Trappist-1 system, see the <a href="https://www.nasa.gov/press-release/nasa-telescope-reveals-largest-batch-of-earth-size-habitable-zone-planets-around">NASA Press Release</a>.</p>
-        <FPS fps={this.state.fps} />
         <div id="canvasWrapper" style={{
-          display: 'inline-block'
+          display: 'inline-block',
+          position: 'relative'
         }}>
+        {(this.state.webGL) &&
+          <div>
+            <FPS fps={this.state.fps} />
+            <img
+              src={arrow}
+              onClick={this.handleMoveToTopClick}
+              style={{
+                width: '80px',
+                height: 'auto',
+                cursor: 'pointer',
+                padding: '1rem',
+                position: 'absolute',
+                right: '1rem'
+              }}/>
+          </div>
+        }
         </div>
+
         {(!this.state.webGL) &&
           <p className="web-gl-error">Error: WebGL Not Found</p>
         }
@@ -64,24 +83,21 @@ class Planets extends Component {
 
 // Kepler Equations
 //
-// Given that:
+// Parameters:
 // a = semimajor axis
 // e = eccentricity
 // theta = angle
 //
-// then:
+// Relationship:
 // r(theta) = a * (1 - e^2) / (1 + e * cos(theta))
-
+//
 // Conversion to cartesian
 // x = r * cos(theta)
 // z = r * sin(theta)
-
-// Vector = new THREE.Vector3(x, 0, y)
-
+//
 // TODO: For the correct time-dependant solution, radial speed will need to be
 // adjusted based on the bessel function:
 // http://matlab-monkey.com/astro/keplerEquation/KeplerEquationPub.html
-
 const next = (body, delta_t, elements, period) => {
   const {a, e} = elements;
   let radialSpeed = 2 * Math.PI / period; // radians per second
@@ -97,13 +113,17 @@ const next = (body, delta_t, elements, period) => {
 
 // FPS Component
 const FPS = ({fps}) => (
-  <p>fps: {fps}</p>
+  <p
+  style={{
+    color: 'white',
+    position: 'absolute',
+    top: '1rem',
+    left: '1rem'
+  }}>fps: {fps}</p>
 );
 
-const AU = 149597870.7;
-
 function renderScene() {
-  let scaleFactor = 1;
+  const AU = 149597870.7;
   let addToScene = (scene, object) => {
     let mesh = new THREE.Mesh(
       new (Function.prototype.bind.apply(object.geometryType, [null, ...object.geometry]))(),
@@ -124,7 +144,7 @@ function renderScene() {
     },
     b: {
       geometryType: THREE.SphereGeometry,
-      geometry: [ 1.086 * 6371 * scaleFactor, 32, 32 ],
+      geometry: [ 1.086 * 6371, 32, 32 ],
       materialType: THREE.MeshBasicMaterial,
       material: { color: 0xf4a261 },
       start: [0, 0, 0.01111 * AU],
@@ -132,7 +152,7 @@ function renderScene() {
     },
     c: {
       geometryType: THREE.SphereGeometry,
-      geometry: [ 1.056 * 6371 * scaleFactor, 32, 32 ],
+      geometry: [ 1.056 * 6371, 32, 32 ],
       materialType: THREE.MeshBasicMaterial,
       material: { color: 0xffa69e },
       start: [0, 0, 0.01522 * AU],
@@ -140,7 +160,7 @@ function renderScene() {
     },
     d: {
       geometryType: THREE.SphereGeometry,
-      geometry: [ 0.772 * 6371 * scaleFactor, 32, 32 ],
+      geometry: [ 0.772 * 6371, 32, 32 ],
       materialType: THREE.MeshBasicMaterial,
       material: { color: 0x028090 },
       start: [0, 0, 0.021 * AU],
@@ -148,7 +168,7 @@ function renderScene() {
     },
     e: {
       geometryType: THREE.SphereGeometry,
-      geometry: [ 0.918 * 6371 * scaleFactor, 32, 32 ],
+      geometry: [ 0.918 * 6371, 32, 32 ],
       materialType: THREE.MeshBasicMaterial,
       material: { color: 0x05668d },
       start: [0, 0, 0.028 * AU],
@@ -156,7 +176,7 @@ function renderScene() {
     },
     f: {
       geometryType: THREE.SphereGeometry,
-      geometry: [ 1.045 * 6371 * scaleFactor, 32, 32 ],
+      geometry: [ 1.045 * 6371, 32, 32 ],
       materialType: THREE.MeshBasicMaterial,
       material: { color: 0x05668d },
       start: [0, 0, 0.037 * AU],
@@ -164,7 +184,7 @@ function renderScene() {
     },
     g: {
       geometryType: THREE.SphereGeometry,
-      geometry: [ 1.127 * 6371 * scaleFactor, 32, 32 ],
+      geometry: [ 1.127 * 6371, 32, 32 ],
       materialType: THREE.MeshBasicMaterial,
       material: { color: 0x05668d },
       start: [0, 0, 0.045 * AU],
@@ -172,7 +192,7 @@ function renderScene() {
     },
     h: {
       geometryType: THREE.SphereGeometry,
-      geometry: [ 0.755 * 6371 * scaleFactor, 32, 32 ],
+      geometry: [ 0.755 * 6371, 32, 32 ],
       materialType: THREE.MeshBasicMaterial,
       material: { color: 0x05668d },
       start: [0, 0, 0.063 * AU],
@@ -189,7 +209,6 @@ function renderScene() {
   var renderer = new THREE.WebGLRenderer({ antialias: true });
   renderer.setSize( window.innerWidth, window.innerHeight );
   document.getElementById('canvasWrapper').appendChild( renderer.domElement );
-  // document.getElementById('canvasWrapper').lastChild.scrollIntoView(true);
 
   let trappist_1a = addToScene(scene, trappist_1.a);
   let trappist_1b = addToScene(scene, trappist_1.b);
