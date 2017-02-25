@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import * as THREE from 'three';
+import Three_OrbitControls from 'three-orbit-controls';
+// AMD Module format hackery
+const OrbitControls = Three_OrbitControls(THREE);
 
 let frames_per_sec = 5;
 
@@ -46,7 +49,9 @@ const FPS = ({fps}) => (
 );
 
 function renderScene() {
+  // Used for FPS Calcs
   let last = 0;
+  let controls;
   var scene = new THREE.Scene();
   var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
 
@@ -61,10 +66,10 @@ function renderScene() {
 
   camera.position.z = 5;
 
+  controls = new OrbitControls( camera, renderer.domElement );
+
   function render() {
   	requestAnimationFrame( render );
-    cube.rotation.x += 0.1;
-    cube.rotation.y += 0.1;
   	renderer.render( scene, camera );
     fpsCalc();
   }
