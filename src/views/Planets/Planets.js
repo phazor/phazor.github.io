@@ -45,31 +45,36 @@ class Planets extends Component {
   }
 }
 
-// Orbital path
+// Kepler Equations
 //
+// Given that:
+// a = semimajor axis
+// e = eccentricity
+// theta = angle
+//
+// then:
 // r(theta) = a * (1 - e^2) / (1 + e * cos(theta))
 
 // Conversion to cartesian
 // x = r * cos(theta)
-// y = r * sin(theta)
+// z = r * sin(theta)
 
 // Vector = new THREE.Vector3(x, 0, y)
 
-const next = (mesh, delta_t, elements) => {
-  let radialSpeed = 1; // radians per millisecond
-  // Consider using time as an input, make it more functional
+// For the correct time-dependant solution, radial speed will need to be
+// adjusted based on the bessel function:
+// http://matlab-monkey.com/astro/keplerEquation/KeplerEquationPub.html
+
+const next = (body, delta_t, elements) => {
   const {a, e} = elements;
-  let pos = mesh.position.clone();
-  let startPos = (new THREE.Spherical()).setFromVector3(pos);
-  let deltaTheta = radialSpeed * delta_t;
-  let startTheta = startPos.theta;
-  let theta = startTheta + deltaTheta;
+  let radialSpeed = 1; // radians per second
+  let startPos = (new THREE.Spherical()).setFromVector3(body.position);
+  let theta = startPos.theta + radialSpeed * delta_t;
   let r = a * (1 - ( e ** 2 ) ) / (1 + ( e * Math.cos(theta) ) );
 
-  let nextPosSpherical = new THREE.Spherical(r, Math.PI / 2, theta);
-  // let nextPosVector = new THREE.Vector3().setFromSpherical(new THREE.Spherical(r, Math.PI / 2, theta));
-  // debugger;
-  return nextPosSpherical;
+  // This assumes an orbit along the solar plane. Matrix transform will be
+  // required here for a non-zero inclination
+  return new THREE.Spherical(r, Math.PI / 2, theta);
 }
 
 // FPS Component
