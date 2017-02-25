@@ -30,7 +30,7 @@ class Planets extends Component {
   componentDidMount() {
     this.setState({ webGL: Detector.webgl });
     if (Detector.webgl) { renderScene(); }
-    this.fpsID = setInterval(this.updateFPS, 500);
+    this.fpsID = setInterval(this.updateFPS, 200);
   }
 
   componentWillUnmount() {
@@ -44,13 +44,13 @@ class Planets extends Component {
         marginTop: '2rem'
       }}>
         <h3>Trappist-1</h3>
-        <p>This page shows a scale model of the Trappist-1 system. The speed has been increased by a factor of 8,640 so that 1 earth day equals 10 simulation seconds.</p>
+        <p>This page shows a scale model of the Trappist-1 solar system. The speed has been increased by a factor of 8,640 so that 1 earth day equals 10 simulation seconds.</p>
         <button
            onClick={this.handleFullScreenClick}
            style={{ marginBottom: '2rem' }}>
            Full Screen
          </button>
-        <p>For more information about the Trappist-1 system, see the <a href="https://www.nasa.gov/press-release/nasa-telescope-reveals-largest-batch-of-earth-size-habitable-zone-planets-around">NASA Press Release</a>.</p>
+        <p>For more information about Trappist-1, see the <a href="https://www.nasa.gov/press-release/nasa-telescope-reveals-largest-batch-of-earth-size-habitable-zone-planets-around">NASA Press Release</a> or the <a href="https://en.wikipedia.org/wiki/TRAPPIST-1">Wikipedia article</a>.</p>
         <div id="canvasWrapper" style={{
           display: 'inline-block',
           position: 'relative'
