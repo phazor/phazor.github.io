@@ -150,6 +150,7 @@ function renderScene() {
       materialType: THREE.MeshBasicMaterial,
       material: { color: 0xf4a261 },
       start: [0, 0, 0.01111 * AU],
+      elements: { a: 0.01111 * AU, e: 0.081 },
       period: 1.51087081
     },
     c: {
@@ -158,6 +159,7 @@ function renderScene() {
       materialType: THREE.MeshBasicMaterial,
       material: { color: 0xffa69e },
       start: [0, 0, 0.01522 * AU],
+      elements: { a: 0.01522 * AU, e: 0.083 },
       period: 2.4218233
     },
     d: {
@@ -166,6 +168,7 @@ function renderScene() {
       materialType: THREE.MeshBasicMaterial,
       material: { color: 0x028090 },
       start: [0, 0, 0.021 * AU],
+      elements: { a: 0.021 * AU, e: 0.070 },
       period: 4.049610
     },
     e: {
@@ -174,6 +177,7 @@ function renderScene() {
       materialType: THREE.MeshBasicMaterial,
       material: { color: 0x05668d },
       start: [0, 0, 0.028 * AU],
+      elements: { a: 0.028 * AU, e: 0.085 },
       period: 6.099615
     },
     f: {
@@ -182,6 +186,7 @@ function renderScene() {
       materialType: THREE.MeshBasicMaterial,
       material: { color: 0x05668d },
       start: [0, 0, 0.037 * AU],
+      elements: { a: 0.037 * AU, e: 0.063 },
       period: 9.206690
     },
     g: {
@@ -190,6 +195,7 @@ function renderScene() {
       materialType: THREE.MeshBasicMaterial,
       material: { color: 0x05668d },
       start: [0, 0, 0.045 * AU],
+      elements: { a: 0.045 * AU, e: 0.061 },
       period: 12.35294
     },
     h: {
@@ -198,10 +204,12 @@ function renderScene() {
       materialType: THREE.MeshBasicMaterial,
       material: { color: 0x05668d },
       start: [0, 0, 0.063 * AU],
+      elements: { a: 0.063 * AU, e: 0.1 },
       period: 20
     }
   }
 
+  const lines = [];
   // Used for FPS Calcs
   let last = 0;
   let clock = new THREE.Clock();
@@ -213,6 +221,7 @@ function renderScene() {
   document.getElementById('canvasWrapper').appendChild( renderer.domElement );
   window.addEventListener('resize', onWindowResize, false);
 
+  // Add Planets
   let trappist_1a = addToScene(scene, trappist_1.a);
   let trappist_1b = addToScene(scene, trappist_1.b);
   let trappist_1c = addToScene(scene, trappist_1.c);
@@ -221,11 +230,37 @@ function renderScene() {
   let trappist_1f = addToScene(scene, trappist_1.f);
   let trappist_1g = addToScene(scene, trappist_1.g);
   let trappist_1h = addToScene(scene, trappist_1.h);
+
+  // Set Camera
   camera.position.y = AU / 80;
   camera.position.z = AU / 20;
   camera.position.x = AU / 100
   camera.lookAt(trappist_1a.position);
 
+  // Add Ellipses
+  function createOrbitLine(elements) {
+    var material = new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.25 });
+    const {a, e} = elements;
+    const b = a * Math.sqrt( 1 - ( e ** 2 ) );
+    const c = - Math.sqrt( ( a ** 2 ) - ( b ** 2 ) );
+
+    var ellipse = new THREE.EllipseCurve(0, 0, a, b, 0, 2.0 * Math.PI, false);
+    var ellipsePath = new THREE.CurvePath();
+    ellipsePath.add(ellipse);
+    var ellipseGeometry = ellipsePath.createPointsGeometry(100).rotateX(Math.PI / 2).translate(0, 0, c);
+    return new THREE.Line(ellipseGeometry, material);
+  }
+
+  Object.keys(trappist_1)
+    .filter((key) => (trappist_1[key].elements !== undefined))
+    .forEach((key) => {
+      let line = createOrbitLine(trappist_1[key].elements)
+      lines.push(line);
+      scene.add(line);
+    }
+  );
+
+  // Add Mouse Controls
   new OrbitControls( camera, renderer.domElement );
 
   render();
@@ -236,25 +271,25 @@ function renderScene() {
 
     let delta = clock.getDelta();
 
-    let nextPos = next(trappist_1b, delta, { a: trappist_1.b.start[2] , e: 0.081 }, trappist_1.b.period);
+    let nextPos = next(trappist_1b, delta, trappist_1.b.elements, trappist_1.b.period);
     trappist_1b.position.setFromSpherical(nextPos);
 
-    nextPos = next(trappist_1c, delta, { a: trappist_1.c.start[2] , e: 0.083 }, trappist_1.c.period);
+    nextPos = next(trappist_1c, delta, trappist_1.c.elements, trappist_1.c.period);
     trappist_1c.position.setFromSpherical(nextPos);
 
-    nextPos = next(trappist_1d, delta, { a: trappist_1.d.start[2] , e: 0.070 }, trappist_1.d.period);
+    nextPos = next(trappist_1d, delta, trappist_1.d.elements, trappist_1.d.period);
     trappist_1d.position.setFromSpherical(nextPos);
 
-    nextPos = next(trappist_1e, delta, { a: trappist_1.e.start[2] , e: 0.085 }, trappist_1.e.period);
+    nextPos = next(trappist_1e, delta, trappist_1.e.elements, trappist_1.e.period);
     trappist_1e.position.setFromSpherical(nextPos);
 
-    nextPos = next(trappist_1f, delta, { a: trappist_1.f.start[2] , e: 0.063 }, trappist_1.f.period);
+    nextPos = next(trappist_1f, delta, trappist_1.f.elements, trappist_1.f.period);
     trappist_1f.position.setFromSpherical(nextPos);
 
-    nextPos = next(trappist_1g, delta, { a: trappist_1.g.start[2] , e: 0.061 }, trappist_1.g.period);
+    nextPos = next(trappist_1g, delta, trappist_1.g.elements, trappist_1.g.period);
     trappist_1g.position.setFromSpherical(nextPos);
 
-    nextPos = next(trappist_1h, delta, { a: trappist_1.h.start[2] , e: 0.081 }, trappist_1.h.period);
+    nextPos = next(trappist_1h, delta, trappist_1.h.elements, trappist_1.h.period);
     trappist_1h.position.setFromSpherical(nextPos);
 
     fpsCalc();
