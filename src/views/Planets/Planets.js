@@ -68,7 +68,8 @@ class Planets extends Component {
                 cursor: 'pointer',
                 padding: '1rem',
                 position: 'absolute',
-                right: '1rem'
+                right: '1rem',
+                bottom: '2rem'
               }}/>
           </div>
         }
@@ -210,6 +211,7 @@ function renderScene() {
   var renderer = new THREE.WebGLRenderer({ antialias: true });
   renderer.setSize( window.innerWidth, window.innerHeight );
   document.getElementById('canvasWrapper').appendChild( renderer.domElement );
+  window.addEventListener('resize', onWindowResize, false);
 
   let trappist_1a = addToScene(scene, trappist_1.a);
   let trappist_1b = addToScene(scene, trappist_1.b);
@@ -231,8 +233,6 @@ function renderScene() {
   //Functions
 
   function render() {
-  	requestAnimationFrame( render );
-  	renderer.render( scene, camera );
 
     let delta = clock.getDelta();
 
@@ -258,6 +258,15 @@ function renderScene() {
     trappist_1h.position.setFromSpherical(nextPos);
 
     fpsCalc();
+
+  	requestAnimationFrame( render );
+  	renderer.render( scene, camera );
+  }
+
+  function onWindowResize(){
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize( window.innerWidth, window.innerHeight );
   }
 
   function fpsCalc() {
