@@ -59,6 +59,7 @@ class Planets extends Component {
           <div>
             <FPS fps={this.state.fps} />
             <img
+              alt="Jump to top of page"
               src={arrow}
               onClick={this.handleMoveToTopClick}
               style={{
