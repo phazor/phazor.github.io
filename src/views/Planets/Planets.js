@@ -52,13 +52,9 @@ const FPS = ({fps}) => (
 
 function renderScene() {
   let addToScene = (scene, object) => {
-    let start = new THREE.Vector3(...object.start);
     let mesh = new THREE.Mesh(
       new (Function.prototype.bind.apply(object.geometryType, [null, ...object.geometry]))(),
       new (Function.prototype.bind.call(object.materialType, null, object.material))()
-    // ).translateOnAxis(
-    //   start.normalize(),
-    //   start.length()
     )
     scene.add(mesh);
     mesh.position.set(...object.start);
@@ -69,21 +65,41 @@ function renderScene() {
       geometryType: THREE.SphereGeometry,
       geometry: [ 0.6, 16, 16 ],
       materialType: THREE.MeshBasicMaterial,
-      material: { color: 0xff0000 },
+      material: { color: 0xe76f51 },
       start: [0, 0, 0]
     },
     b: {
       geometryType: THREE.SphereGeometry,
+      geometry: [ 0.2, 32, 32 ],
+      materialType: THREE.MeshBasicMaterial,
+      material: { color: 0xf4a261 },
+      start: [-2, 0, -2]
+    },
+    c: {
+      geometryType: THREE.SphereGeometry,
+      geometry: [ 0.2, 32, 32 ],
+      materialType: THREE.MeshBasicMaterial,
+      material: { color: 0xffa69e },
+      start: [-1.5, 0, -1]
+    },
+    d: {
+      geometryType: THREE.SphereGeometry,
       geometry: [ 0.2, 16, 16 ],
       materialType: THREE.MeshBasicMaterial,
-      material: { color: 0x00ff00 },
+      material: { color: 0x028090 },
+      start: [0, 0, 4]
+    },
+    e: {
+      geometryType: THREE.SphereGeometry,
+      geometry: [ 0.2, 16, 16 ],
+      materialType: THREE.MeshBasicMaterial,
+      material: { color: 0x05668d },
       start: [5, 0, 0]
     }
   }
 
   // Used for FPS Calcs
   let last = 0;
-  let controls;
   var scene = new THREE.Scene();
   var camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 0.1, 1000 );
 
@@ -93,9 +109,12 @@ function renderScene() {
 
   addToScene(scene, trappist_1.a);
   addToScene(scene, trappist_1.b);
+  addToScene(scene, trappist_1.c);
+  addToScene(scene, trappist_1.d);
+  addToScene(scene, trappist_1.e);
   camera.position.z = 10;
 
-  controls = new OrbitControls( camera, renderer.domElement );
+  new OrbitControls( camera, renderer.domElement );
 
   render();
 
