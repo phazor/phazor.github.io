@@ -28,13 +28,24 @@ class Planets extends Component {
     clearInterval(this.fpsID);
   }
 
+  handleClick() {
+    document.getElementById('canvasWrapper').lastChild.scrollIntoView(true);
+  }
+
   render() {
     return (
-      <div id="canvasWrapper" style={{
+      <div style={{
         textAlign: 'center',
         marginTop: '2rem'
       }}>
-        <h3>Trappist</h3>
+        <h3>Trappist-1</h3>
+        <p>This page shows a scale model of the Trappist-1 system. The speed has been increased by a factor of 8,640 so that 1 earth day equals 10 simulation seconds.</p>
+        <button
+           onClick={this.handleClick}
+           style={{ marginBottom: '2rem' }}>
+           Full Screen
+         </button>
+        <p>For more information about the Trappist-1 system, see the <a href="https://www.nasa.gov/press-release/nasa-telescope-reveals-largest-batch-of-earth-size-habitable-zone-planets-around">NASA Press Release</a>.</p>
         <FPS fps={this.state.fps} />
         <div id="canvasWrapper" style={{
           display: 'inline-block'
@@ -61,7 +72,7 @@ class Planets extends Component {
 
 // Vector = new THREE.Vector3(x, 0, y)
 
-// For the correct time-dependant solution, radial speed will need to be
+// TODO: For the correct time-dependant solution, radial speed will need to be
 // adjusted based on the bessel function:
 // http://matlab-monkey.com/astro/keplerEquation/KeplerEquationPub.html
 
@@ -172,7 +183,7 @@ function renderScene() {
   var renderer = new THREE.WebGLRenderer({ antialias: true });
   renderer.setSize( window.innerWidth, window.innerHeight );
   document.getElementById('canvasWrapper').appendChild( renderer.domElement );
-  document.getElementById('canvasWrapper').lastChild.scrollIntoView(true);
+  // document.getElementById('canvasWrapper').lastChild.scrollIntoView(true);
 
   let trappist_1a = addToScene(scene, trappist_1.a);
   let trappist_1b = addToScene(scene, trappist_1.b);
