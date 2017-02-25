@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import * as THREE from 'three';
 import Three_OrbitControls from 'three-orbit-controls';
+import Detector from '../../lib/three-detector';
+
 // AMD Module format hackery
 const OrbitControls = Three_OrbitControls(THREE);
 
-let frames_per_sec = 5;
+let frames_per_sec = 0;
 
 // Planets Component
 class Planets extends Component {
@@ -20,8 +22,9 @@ class Planets extends Component {
   }
 
   componentDidMount() {
-    renderScene()
-    this.fpsID = setInterval(this.updateFPS, 500)
+    this.setState({ webGL: Detector.webgl });
+    if (Detector.webgl) { renderScene(); }
+    this.fpsID = setInterval(this.updateFPS, 500);
   }
 
   componentWillUnmount() {
@@ -51,6 +54,9 @@ class Planets extends Component {
           display: 'inline-block'
         }}>
         </div>
+        {(!this.state.webGL) &&
+          <p className="web-gl-error">Error: WebGL Not Found</p>
+        }
       </div>
     )
   }
