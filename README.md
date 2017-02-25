@@ -11,12 +11,14 @@ So far:
 - React Router
 - Travis CI
 - Redux
+- fetch
+- WebGL
+- Pure functions
 
 To do:
 
 - Preact
 - async await
-- Pure functions
 - CSS Modules
 - ImmutableJS
 - Standard
@@ -24,13 +26,16 @@ To do:
 
 Behavior I want to support
 
+- Fully Responsive
 - Screen Readers
 - Accessibility
+- Legacy Browsers
 
 Pages I want to show
 - CV
 - Projects
  - Cloud Chamber
+ - Trappist-1 planetary model
  - React/Redux Stateful showcase (UserList?)
 
 ### Crashes:
