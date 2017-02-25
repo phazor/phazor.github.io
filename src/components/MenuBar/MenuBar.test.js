@@ -5,7 +5,7 @@ import MenuBar from './MenuBar';
 
 it('Menu Bar renders 7 menu items with no errors', () => {
   const wrapper = shallow(<MenuBar/>);
-  expect(wrapper.find('MenuItem').length).toEqual(7);
+  expect(wrapper.find('MenuItem').length).toEqual(8);
 });
 
 // This runs into the "Invariant Violation: <Link>s rendered outside of a router context cannot navigate."
