@@ -86,6 +86,7 @@ const FPS = ({fps}) => (
 const AU = 149597870.7;
 
 function renderScene() {
+  let scaleFactor = 1;
   let addToScene = (scene, object) => {
     let mesh = new THREE.Mesh(
       new (Function.prototype.bind.apply(object.geometryType, [null, ...object.geometry]))(),
@@ -99,14 +100,14 @@ function renderScene() {
   let trappist_1 = {
     a: {
       geometryType: THREE.SphereGeometry,
-      geometry: [ 0.114 * 695700, 16, 16 ],
+      geometry: [ 0.114 * 695700, 32, 32 ],
       materialType: THREE.MeshBasicMaterial,
       material: { color: 0xe76f51 },
       start: [0, 0, 0]
     },
     b: {
       geometryType: THREE.SphereGeometry,
-      geometry: [ 1.086 * 6371, 32, 32 ],
+      geometry: [ 1.086 * 6371 * scaleFactor, 32, 32 ],
       materialType: THREE.MeshBasicMaterial,
       material: { color: 0xf4a261 },
       start: [0, 0, 0.01111 * AU],
@@ -114,7 +115,7 @@ function renderScene() {
     },
     c: {
       geometryType: THREE.SphereGeometry,
-      geometry: [ 1.056 * 6371, 32, 32 ],
+      geometry: [ 1.056 * 6371 * scaleFactor, 32, 32 ],
       materialType: THREE.MeshBasicMaterial,
       material: { color: 0xffa69e },
       start: [0, 0, 0.01522 * AU],
@@ -122,7 +123,7 @@ function renderScene() {
     },
     d: {
       geometryType: THREE.SphereGeometry,
-      geometry: [ 0.772 * 6371, 16, 16 ],
+      geometry: [ 0.772 * 6371 * scaleFactor, 32, 32 ],
       materialType: THREE.MeshBasicMaterial,
       material: { color: 0x028090 },
       start: [0, 0, 0.021 * AU],
@@ -130,7 +131,7 @@ function renderScene() {
     },
     e: {
       geometryType: THREE.SphereGeometry,
-      geometry: [ 0.918 * 6371, 16, 16 ],
+      geometry: [ 0.918 * 6371 * scaleFactor, 32, 32 ],
       materialType: THREE.MeshBasicMaterial,
       material: { color: 0x05668d },
       start: [0, 0, 0.028 * AU],
@@ -138,7 +139,7 @@ function renderScene() {
     },
     f: {
       geometryType: THREE.SphereGeometry,
-      geometry: [ 1.045 * 6371, 16, 16 ],
+      geometry: [ 1.045 * 6371 * scaleFactor, 32, 32 ],
       materialType: THREE.MeshBasicMaterial,
       material: { color: 0x05668d },
       start: [0, 0, 0.037 * AU],
@@ -146,7 +147,7 @@ function renderScene() {
     },
     g: {
       geometryType: THREE.SphereGeometry,
-      geometry: [ 1.127 * 6371, 16, 16 ],
+      geometry: [ 1.127 * 6371 * scaleFactor, 32, 32 ],
       materialType: THREE.MeshBasicMaterial,
       material: { color: 0x05668d },
       start: [0, 0, 0.045 * AU],
@@ -154,7 +155,7 @@ function renderScene() {
     },
     h: {
       geometryType: THREE.SphereGeometry,
-      geometry: [ 0.755 * 6371, 16, 16 ],
+      geometry: [ 0.755 * 6371 * scaleFactor, 32, 32 ],
       materialType: THREE.MeshBasicMaterial,
       material: { color: 0x05668d },
       start: [0, 0, 0.063 * AU],
@@ -166,9 +167,9 @@ function renderScene() {
   let last = 0;
   let clock = new THREE.Clock();
   var scene = new THREE.Scene();
-  var camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 0.001, 30000000 );
+  var camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 0.00001, 3000000000 );
 
-  var renderer = new THREE.WebGLRenderer();
+  var renderer = new THREE.WebGLRenderer({ antialias: true });
   renderer.setSize( window.innerWidth, window.innerHeight );
   document.getElementById('canvasWrapper').appendChild( renderer.domElement );
   document.getElementById('canvasWrapper').lastChild.scrollIntoView(true);
@@ -185,7 +186,6 @@ function renderScene() {
   camera.position.z = AU / 20;
   camera.position.x = AU / 100
   camera.lookAt(trappist_1a.position);
-
 
   new OrbitControls( camera, renderer.domElement );
 
