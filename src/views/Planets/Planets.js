@@ -45,6 +45,33 @@ class Planets extends Component {
   }
 }
 
+// Orbital path
+//
+// r(theta) = a * (1 - e^2) / (1 + e * cos(theta))
+
+// Conversion to cartesian
+// x = r * cos(theta)
+// y = r * sin(theta)
+
+// Vector = new THREE.Vector3(x, 0, y)
+
+const next = (mesh, delta_t, elements) => {
+  let radialSpeed = 1; // radians per millisecond
+  // Consider using time as an input, make it more functional
+  const {a, e} = elements;
+  let pos = mesh.position.clone();
+  let startPos = (new THREE.Spherical()).setFromVector3(pos);
+  let deltaTheta = radialSpeed * delta_t;
+  let startTheta = startPos.theta;
+  let theta = startTheta + deltaTheta;
+  let r = a * (1 - ( e ** 2 ) ) / (1 + ( e * Math.cos(theta) ) );
+
+  let nextPosSpherical = new THREE.Spherical(r, Math.PI / 2, theta);
+  // let nextPosVector = new THREE.Vector3().setFromSpherical(new THREE.Spherical(r, Math.PI / 2, theta));
+  // debugger;
+  return nextPosSpherical;
+}
+
 // FPS Component
 const FPS = ({fps}) => (
   <p>fps: {fps}</p>
@@ -58,6 +85,7 @@ function renderScene() {
     )
     scene.add(mesh);
     mesh.position.set(...object.start);
+    return mesh;
   }
 
   let trappist_1 = {
@@ -73,7 +101,7 @@ function renderScene() {
       geometry: [ 0.2, 32, 32 ],
       materialType: THREE.MeshBasicMaterial,
       material: { color: 0xf4a261 },
-      start: [-2, 0, -2]
+      start: [2, 2, 2]
     },
     c: {
       geometryType: THREE.SphereGeometry,
@@ -100,6 +128,8 @@ function renderScene() {
 
   // Used for FPS Calcs
   let last = 0;
+  let clock = new THREE.Clock();
+  // THREE.Object3D.DefaultMatrixAutoUpdate = true;
   var scene = new THREE.Scene();
   var camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 0.1, 1000 );
 
@@ -107,11 +137,11 @@ function renderScene() {
   renderer.setSize( window.innerWidth / 2, window.innerHeight / 2 );
   document.getElementById('canvasWrapper').appendChild( renderer.domElement );
 
-  addToScene(scene, trappist_1.a);
-  addToScene(scene, trappist_1.b);
-  addToScene(scene, trappist_1.c);
-  addToScene(scene, trappist_1.d);
-  addToScene(scene, trappist_1.e);
+  let trappist_1a = addToScene(scene, trappist_1.a);
+  let trappist_1b = addToScene(scene, trappist_1.b);
+  let trappist_1c = addToScene(scene, trappist_1.c);
+  let trappist_1d = addToScene(scene, trappist_1.d);
+  let trappist_1e = addToScene(scene, trappist_1.e);
   camera.position.z = 10;
 
   new OrbitControls( camera, renderer.domElement );
@@ -123,6 +153,10 @@ function renderScene() {
   function render() {
   	requestAnimationFrame( render );
   	renderer.render( scene, camera );
+
+    let nextPos =  next(trappist_1b, clock.getDelta(), { a: 2, e: 0.5 });
+    trappist_1b.position.setFromSpherical(nextPos);
+
     fpsCalc();
   }
 
