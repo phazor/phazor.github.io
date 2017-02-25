@@ -65,11 +65,12 @@ class Planets extends Component {
 // adjusted based on the bessel function:
 // http://matlab-monkey.com/astro/keplerEquation/KeplerEquationPub.html
 
-const next = (body, delta_t, elements) => {
+const next = (body, delta_t, elements, period) => {
   const {a, e} = elements;
-  let radialSpeed = 1; // radians per second
+  let radialSpeed = 2 * Math.PI / period; // radians per second
+  let adJustedRadialSpeed = radialSpeed / 10; // 1 real day = 10 simulation seconds
   let startPos = (new THREE.Spherical()).setFromVector3(body.position);
-  let theta = startPos.theta + radialSpeed * delta_t;
+  let theta = startPos.theta + adJustedRadialSpeed * delta_t;
   let r = a * (1 - ( e ** 2 ) ) / (1 + ( e * Math.cos(theta) ) );
 
   // This assumes an orbit along the solar plane. Matrix transform will be
@@ -81,6 +82,8 @@ const next = (body, delta_t, elements) => {
 const FPS = ({fps}) => (
   <p>fps: {fps}</p>
 );
+
+const AU = 149597870.7;
 
 function renderScene() {
   let addToScene = (scene, object) => {
@@ -96,58 +99,93 @@ function renderScene() {
   let trappist_1 = {
     a: {
       geometryType: THREE.SphereGeometry,
-      geometry: [ 0.6, 16, 16 ],
+      geometry: [ 0.114 * 695700, 16, 16 ],
       materialType: THREE.MeshBasicMaterial,
       material: { color: 0xe76f51 },
       start: [0, 0, 0]
     },
     b: {
       geometryType: THREE.SphereGeometry,
-      geometry: [ 0.2, 32, 32 ],
+      geometry: [ 1.086 * 6371, 32, 32 ],
       materialType: THREE.MeshBasicMaterial,
       material: { color: 0xf4a261 },
-      start: [2, 2, 2]
+      start: [0, 0, 0.01111 * AU],
+      period: 1.51087081
     },
     c: {
       geometryType: THREE.SphereGeometry,
-      geometry: [ 0.2, 32, 32 ],
+      geometry: [ 1.056 * 6371, 32, 32 ],
       materialType: THREE.MeshBasicMaterial,
       material: { color: 0xffa69e },
-      start: [-1.5, 0, -1]
+      start: [0, 0, 0.01522 * AU],
+      period: 2.4218233
     },
     d: {
       geometryType: THREE.SphereGeometry,
-      geometry: [ 0.2, 16, 16 ],
+      geometry: [ 0.772 * 6371, 16, 16 ],
       materialType: THREE.MeshBasicMaterial,
       material: { color: 0x028090 },
-      start: [0, 0, 4]
+      start: [0, 0, 0.021 * AU],
+      period: 4.049610
     },
     e: {
       geometryType: THREE.SphereGeometry,
-      geometry: [ 0.2, 16, 16 ],
+      geometry: [ 0.918 * 6371, 16, 16 ],
       materialType: THREE.MeshBasicMaterial,
       material: { color: 0x05668d },
-      start: [5, 0, 0]
+      start: [0, 0, 0.028 * AU],
+      period: 6.099615
+    },
+    f: {
+      geometryType: THREE.SphereGeometry,
+      geometry: [ 1.045 * 6371, 16, 16 ],
+      materialType: THREE.MeshBasicMaterial,
+      material: { color: 0x05668d },
+      start: [0, 0, 0.037 * AU],
+      period: 9.206690
+    },
+    g: {
+      geometryType: THREE.SphereGeometry,
+      geometry: [ 1.127 * 6371, 16, 16 ],
+      materialType: THREE.MeshBasicMaterial,
+      material: { color: 0x05668d },
+      start: [0, 0, 0.045 * AU],
+      period: 12.35294
+    },
+    h: {
+      geometryType: THREE.SphereGeometry,
+      geometry: [ 0.755 * 6371, 16, 16 ],
+      materialType: THREE.MeshBasicMaterial,
+      material: { color: 0x05668d },
+      start: [0, 0, 0.063 * AU],
+      period: 20
     }
   }
 
   // Used for FPS Calcs
   let last = 0;
   let clock = new THREE.Clock();
-  // THREE.Object3D.DefaultMatrixAutoUpdate = true;
   var scene = new THREE.Scene();
-  var camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 0.1, 1000 );
+  var camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 0.001, 30000000 );
 
   var renderer = new THREE.WebGLRenderer();
-  renderer.setSize( window.innerWidth / 2, window.innerHeight / 2 );
+  renderer.setSize( window.innerWidth, window.innerHeight );
   document.getElementById('canvasWrapper').appendChild( renderer.domElement );
+  document.getElementById('canvasWrapper').lastChild.scrollIntoView(true);
 
   let trappist_1a = addToScene(scene, trappist_1.a);
   let trappist_1b = addToScene(scene, trappist_1.b);
   let trappist_1c = addToScene(scene, trappist_1.c);
   let trappist_1d = addToScene(scene, trappist_1.d);
   let trappist_1e = addToScene(scene, trappist_1.e);
-  camera.position.z = 10;
+  let trappist_1f = addToScene(scene, trappist_1.f);
+  let trappist_1g = addToScene(scene, trappist_1.g);
+  let trappist_1h = addToScene(scene, trappist_1.h);
+  camera.position.y = AU / 80;
+  camera.position.z = AU / 20;
+  camera.position.x = AU / 100
+  camera.lookAt(trappist_1a.position);
+
 
   new OrbitControls( camera, renderer.domElement );
 
@@ -159,8 +197,28 @@ function renderScene() {
   	requestAnimationFrame( render );
   	renderer.render( scene, camera );
 
-    let nextPos =  next(trappist_1b, clock.getDelta(), { a: 2, e: 0.5 });
+    let delta = clock.getDelta();
+
+    let nextPos = next(trappist_1b, delta, { a: trappist_1.b.start[2] , e: 0.081 }, trappist_1.b.period);
     trappist_1b.position.setFromSpherical(nextPos);
+
+    nextPos = next(trappist_1c, delta, { a: trappist_1.c.start[2] , e: 0.083 }, trappist_1.c.period);
+    trappist_1c.position.setFromSpherical(nextPos);
+
+    nextPos = next(trappist_1d, delta, { a: trappist_1.d.start[2] , e: 0.070 }, trappist_1.d.period);
+    trappist_1d.position.setFromSpherical(nextPos);
+
+    nextPos = next(trappist_1e, delta, { a: trappist_1.e.start[2] , e: 0.085 }, trappist_1.e.period);
+    trappist_1e.position.setFromSpherical(nextPos);
+
+    nextPos = next(trappist_1f, delta, { a: trappist_1.f.start[2] , e: 0.063 }, trappist_1.f.period);
+    trappist_1f.position.setFromSpherical(nextPos);
+
+    nextPos = next(trappist_1g, delta, { a: trappist_1.g.start[2] , e: 0.061 }, trappist_1.g.period);
+    trappist_1g.position.setFromSpherical(nextPos);
+
+    nextPos = next(trappist_1h, delta, { a: trappist_1.h.start[2] , e: 0.081 }, trappist_1.h.period);
+    trappist_1h.position.setFromSpherical(nextPos);
 
     fpsCalc();
   }
