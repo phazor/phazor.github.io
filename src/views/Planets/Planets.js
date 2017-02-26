@@ -1,14 +1,20 @@
 import React, { Component } from 'react';
+import FPS from './FPS';
 import * as THREE from 'three';
 import Three_OrbitControls from 'three-orbit-controls';
 import Detector from '../../lib/three-detector';
 import arrow from './arrow.svg';
-import sunmap from './sunmap.jpg';
-
-debugger;
+import sunmap from './1a_map.jpg';
 
 const OrbitControls = Three_OrbitControls(THREE); // AMD Module format coercion
 let frames_per_sec = 0;
+
+// TODOS:
+// High res background image option
+// Remove orbits
+// Hide background
+// Speed slider
+// High DPI render mode (for retina screens)
 
 // Planets Component
 class Planets extends Component {
@@ -33,7 +39,7 @@ class Planets extends Component {
   componentDidMount() {
     this.setState({ webGL: Detector.webgl });
     if (Detector.webgl) { renderScene(); }
-    this.fpsID = setInterval(this.updateFPS, 200);
+    this.fpsID = setInterval(this.updateFPS, 100);
   }
 
   componentWillUnmount() {
@@ -47,7 +53,8 @@ class Planets extends Component {
         marginTop: '2rem'
       }}>
         <h3>Trappist-1</h3>
-        <p>This page shows a scale model of the Trappist-1 solar system. The speed has been increased by a factor of 8,640 so that 1 earth day equals 10 simulation seconds.</p>
+        <p>This page shows a scale model of the Trappist-1 solar system. It is a unique solar system because the planets are so small but orbit so close together.</p>
+          <p>The simulation's speed has been increased by a factor of 8,640 so that 1 earth day equals 10 simulation seconds.</p>
         <button
            onClick={this.handleFullScreenClick}
            style={{ marginBottom: '2rem' }}>
@@ -67,7 +74,8 @@ class Planets extends Component {
               right: '0px',
               margin: 'auto',
               top: '1rem',
-              color: 'lightgrey'
+              color: 'white',
+              opacity: '70%'
             }}>drag/swipe to rotate | scroll/pinch to zoom</p>
             <img
               alt="Jump to top of page"
@@ -124,38 +132,13 @@ const next = (body, delta_t, elements, period) => {
   return new THREE.Spherical(r, Math.PI / 2, theta);
 }
 
-// FPS Component
-const FPS = ({fps}) => (
-  <p
-  style={{
-    position: 'absolute',
-    bottom: '1rem',
-    left: '1rem',
-    color: 'lightgrey'
-  }}>fps: {fps}</p>
-);
-
-// var textureLoader = new THREE.TextureLoader();
-// var sky;
-// textureLoader.crossOrigin = true;
-// textureLoader.load("https://cdn.eso.org/images/publicationjpg/eso0932a.jpg", function(texture) {
-//   var material = new THREE.MeshBasicMaterial({ map: texture });
-//   var skyGeo = new THREE.SphereGeometry(AU * 10000, 25, 25);
-//   sky = new THREE.Mesh(skyGeo, material);
-//   sky.material.side = THREE.BackSide;
-//   sky.material.transparent = true;
-//   sky.material.opacity = 0;
-//   skyboxScene.add(sky);
-// });
-
 function renderScene() {
   const AU = 149597870.7;
-  let addToScene = (scene, object) => {
+  let createMesh = (object) => {
     let mesh = new THREE.Mesh(
       new (Function.prototype.bind.apply(object.geometryType, [null, ...object.geometry]))(),
       new (Function.prototype.bind.call(object.materialType, null, object.material))()
     )
-    scene.add(mesh);
     mesh.position.set(...object.start);
     return mesh;
   }
@@ -243,19 +226,30 @@ function renderScene() {
 
   var renderer = new THREE.WebGLRenderer({ antialias: true, logarithmicDepthBuffer: true });
   renderer.autoClear = false;
+	// renderer.setPixelRatio( window.devicePixelRatio );
   renderer.setSize( window.innerWidth, window.innerHeight );
+
   document.getElementById('canvasWrapper').appendChild( renderer.domElement );
   window.addEventListener('resize', onWindowResize, false);
 
   // Add Planets
-  let trappist_1a = addToScene(scene, trappist_1.a);
-  let trappist_1b = addToScene(scene, trappist_1.b);
-  let trappist_1c = addToScene(scene, trappist_1.c);
-  let trappist_1d = addToScene(scene, trappist_1.d);
-  let trappist_1e = addToScene(scene, trappist_1.e);
-  let trappist_1f = addToScene(scene, trappist_1.f);
-  let trappist_1g = addToScene(scene, trappist_1.g);
-  let trappist_1h = addToScene(scene, trappist_1.h);
+  let trappist_1a = createMesh(trappist_1.a);
+  let trappist_1b = createMesh(trappist_1.b);
+  let trappist_1c = createMesh(trappist_1.c);
+  let trappist_1d = createMesh(trappist_1.d);
+  let trappist_1e = createMesh(trappist_1.e);
+  let trappist_1f = createMesh(trappist_1.f);
+  let trappist_1g = createMesh(trappist_1.g);
+  let trappist_1h = createMesh(trappist_1.h);
+
+  scene.add(trappist_1a);
+  scene.add(trappist_1b);
+  scene.add(trappist_1c);
+  scene.add(trappist_1d);
+  scene.add(trappist_1e);
+  scene.add(trappist_1f);
+  scene.add(trappist_1g);
+  scene.add(trappist_1h);
 
   // Set Camera
   camera.position.y = AU / 80;
