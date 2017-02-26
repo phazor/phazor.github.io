@@ -23,8 +23,36 @@ let frames_per_sec = 0;
 
 // TODO: Use redux for state
 const settings = {
-  background: {
+  fps: {
     id: 0,
+    showFPS: false,
+    text: function() {
+      return (this.showFPS) ? 'Hide FPS' : 'Show FPS';
+    },
+    handleClick: (setting) => {
+      setting.showFPS = !setting.showFPS;
+    }
+  },
+  tips: {
+    id: 1,
+    text: () => 'Show Tips',
+    handleClick: (setting, context) => {
+      context.setState({ showTips: true });
+      setTimeout(() => {context.setState({ showTips: false })}, 5000);
+    }
+  },
+  orbit: {
+    id: 2,
+    showOrbits: false,
+    text: function() {
+      return (this.showOrbits) ? 'Hide Orbits' : 'Show Orbits';
+    },
+    handleClick: (setting) => {
+      setting.showOrbits = !setting.showOrbits;
+    }
+  },
+  background: {
+    id: 3,
     handleClick: (setting) => {
       setting.showSky = !setting.showSky;
     },
@@ -40,16 +68,6 @@ const settings = {
     showSky: false,
     isLoading: false,
     fetchedSkybox: false
-  },
-  fps: {
-    id: 1,
-    text: function() {
-      return (this.showFPS) ? 'Hide FPS' : 'Show FPS';
-    },
-    handleClick: (setting) => {
-      setting.showFPS = !setting.showFPS;
-    },
-    showFPS: false
   }
 };
 
@@ -281,7 +299,9 @@ function renderScene() {
     var ellipsePath = new THREE.CurvePath();
     ellipsePath.add(ellipse);
     var ellipseGeometry = ellipsePath.createPointsGeometry(100).rotateX(Math.PI / 2).translate(0, 0, c);
-    return new THREE.Line(ellipseGeometry, material);
+    let line = new THREE.Line(ellipseGeometry, material);
+    line.visible = false;
+    return line;
   }
 
   Object.keys(trappist_1)
@@ -312,7 +332,7 @@ function renderScene() {
 
     // Show/hide sky
     if (sky !== undefined && settings.background.showSky && sky.material.opacity < 1) {
-      sky.material.visible = true;
+      sky.visible = true;
       sky.material.transparent = true;
       sky.material.opacity += delta;
     }
@@ -325,7 +345,14 @@ function renderScene() {
       sky.material.opacity -= delta / 2;
     }
     if (sky !== undefined && !settings.background.showSky && sky.material.opacity <= 0) {
-      sky.material.visible = false;
+      sky.visible = false;
+    }
+
+    if (settings.orbit.showOrbits && !lines[0].visible) {
+      lines.forEach((line) => {line.visible = true})
+    }
+    if (!settings.orbit.showOrbits && lines[0].visible) {
+      lines.forEach((line) => {line.visible = false})
     }
 
     let nextPos = next(trappist_1b, delta, trappist_1.b.elements, trappist_1.b.period);

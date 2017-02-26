@@ -15,7 +15,7 @@
   margin: auto;
   top: 1rem;
   color: white;
-  filter: opacity(0.7);
+  opacity: 0.7;
 }
 
 img.Arrow {
@@ -86,20 +86,38 @@ img.Arrow.Up:hover {
 }
 
 /* Animation */
-.example-enter {
+.settings-enter {
   opacity: 0.01;
 }
 
-.example-enter.example-enter-active {
+.settings-enter.settings-enter-active {
   opacity: 1;
   transition: opacity 500ms ease-in;
 }
 
-.example-leave {
+.settings-leave {
   opacity: 1;
 }
 
-.example-leave.example-leave-active {
+.settings-leave.settings-leave-active {
   opacity: 0.01;
   transition: opacity 300ms ease-in;
+}
+
+.tips-enter {
+  opacity: 0.01;
+}
+
+.tips-enter.tips-enter-active {
+  opacity: 0.7;
+  transition:
+}
+
+.tips-leave {
+  opacity: 0.7;
+}
+
+.tips-leave.tips-leave-active {
+  opacity: 0.01;
+  transition: opacity 1000ms ease-in;
 }

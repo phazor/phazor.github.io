@@ -9,8 +9,13 @@ class Overlay extends Component {
     super(props);
     this.handleSettingsClick = this.handleSettingsClick.bind(this);
     this.state = {
-      showSettings: false
+      showSettings: false,
+      showTips: true
     }
+  }
+
+  componentDidMount() {
+    setTimeout(() => {this.setState({ showTips: false })}, 5000);
   }
 
   handleSettingsClick() {
@@ -19,13 +24,13 @@ class Overlay extends Component {
 
   render() {
     const {fps, showFPS, handleClick, settings} = this.props;
-    const {showSettings} = this.state;
+    const {showSettings, showTips} = this.state;
 
     const items = (showSettings)
       ? Object.values(settings).map((setting, key) => (
           <li key={key}><button onClick={() => {
             this.setState({ showSettings: false });
-            setting.handleClick(setting);
+            setting.handleClick(setting, this);
           }}>
             {setting.text()}
           </button></li>
@@ -33,7 +38,14 @@ class Overlay extends Component {
       : [];
     return (
       <div>
-        <p className="Tips">drag/swipe to rotate | scroll/pinch to zoom</p>
+        <ReactCSSTransitionGroup
+          transitionName="tips"
+          transitionEnterTimeout={300}
+          transitionLeaveTimeout={5000}>
+            { (showTips) &&
+              <p id="0" className="Tips">drag/swipe to rotate | scroll/pinch to zoom</p>
+            }
+        </ReactCSSTransitionGroup>
         { (showFPS) &&
           <FPS fps={fps} />
         }
@@ -41,9 +53,7 @@ class Overlay extends Component {
           <Cog className="SettingsCog" onClick={this.handleSettingsClick} />
           <ul className="SettingsList">
             <ReactCSSTransitionGroup
-              transitionName="example"
-              transitionAppear={true}
-              transitionAppearTimeout={500}
+              transitionName="settings"
               transitionEnterTimeout={500}
               transitionLeaveTimeout={300}>
               {items}
