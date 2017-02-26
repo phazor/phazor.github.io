@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import Overlay from './Overlay';
+import Helmet from 'react-helmet';
 import * as THREE from 'three';
 import Three_OrbitControls from 'three-orbit-controls';
 import Detector from '../../lib/three-detector';
+import Overlay from './Overlay';
+// Assets
 import arrow from './arrow.svg';
 import sunmap from './1a_map.jpg';
 import skydome_med from './eso0932a_med.jpg';
@@ -112,6 +114,16 @@ class Planets extends Component {
   render() {
     return (
       <div className="Planets" id="Planets">
+        <Helmet
+          title="Trappist-1 Simulation"
+          meta={[
+            { name: "description", content: "A scale simulation of the Trappist-1 System." },
+            { property: "og:title", content: "Trappist-1 Simulation" },
+            { property: "og:description", content: "A scale simulation of the Trappist-1 System." },
+            { property: "og:image", content:"https://phazor.github.io/preview.jpg" },
+
+          ]}
+        />
 
         {/* Intro text */}
         <h3>Trappist-1</h3>
