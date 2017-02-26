@@ -8,18 +8,13 @@
   position: relative;
 }
 
-p.Tips {
-  display: inline-block;
-  height: auto;
-}
-
 .Tips {
   position: absolute;
   left: 0px;
   right: 0px;
   margin: auto;
   color: white;
-  opacity: 0.7;
+  opacity: 0.8;
 
   /* Vertically position block elements */
   height: auto;
@@ -36,7 +31,7 @@ img.Arrow {
 img.Arrow.Up {
   padding: 1rem;
   position: absolute;
-  right: 1rem;
+  left: 1rem;
   bottom: 1.5rem;
   filter: opacity(0.5);
 }
@@ -63,7 +58,7 @@ img.Arrow.Up:hover {
   width: 3.5rem;
   height: auto;
   position: absolute;
-  left: 2rem;
+  right: 2rem;
   bottom: 2rem;
   cursor: pointer;
 }
@@ -74,23 +69,49 @@ img.Arrow.Up:hover {
 
 .FPS {
   position: absolute;
-  bottom: 0px;
+  top: 0px;
   left: 1.5rem;
   color: lightgrey;
 }
 
 .SettingsList {
-  left: 0px;
-  right: 0px;
-  width: auto;
-  bottom: 4rem;
+  right: 1rem;
+  bottom: 3rem;
   position: absolute;
   color: white;
-}
-
-.SettingsList {
   list-style-type: none;
 }
+
+.SettingsList li {
+  text-align: right;
+}
+
+@media screen and (min-width: 800px) {
+  .SettingsList {
+    /*Horizontally center*/
+    left: 0px;
+    right: 0px;
+    width: auto;
+
+    bottom: auto;
+
+    /* Vertically center block elements */
+    height: auto;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .SettingsList li {
+    text-align: inherit;
+  }
+}
+
+/*@media (min-device-width: 600px) {
+  .SettingList {
+    bottom: auto;
+  }
+}*/
+
 
 /* Animation */
 .settings-enter {
@@ -116,15 +137,15 @@ img.Arrow.Up:hover {
 }
 
 .tips-enter.tips-enter-active {
-  opacity: 0.7;
-  transition:
+  opacity: 0.8;
+  transition: opacity 300ms ease-in;
 }
 
 .tips-leave {
-  opacity: 0.7;
+  opacity: 0.8;
 }
 
 .tips-leave.tips-leave-active {
   opacity: 0.01;
-  transition: opacity 1000ms ease-in;
+  transition: opacity 2000ms ease-in;
 }

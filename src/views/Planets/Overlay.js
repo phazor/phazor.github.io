@@ -15,7 +15,7 @@ class Overlay extends Component {
   }
 
   componentDidMount() {
-    setTimeout(() => {this.setState({ showTips: false })}, 5000);
+    setTimeout(() => {this.setState({ showTips: false })}, 3000);
   }
 
   handleSettingsClick() {
@@ -41,7 +41,7 @@ class Overlay extends Component {
         <ReactCSSTransitionGroup
           transitionName="tips"
           transitionEnterTimeout={300}
-          transitionLeaveTimeout={5000}>
+          transitionLeaveTimeout={2000}>
             { (showTips) &&
               <div className="Tips" id="0">
                 <p>drag/swipe to rotate</p>

@@ -23,34 +23,6 @@ let frames_per_sec = 0;
 
 // TODO: Use redux for state
 const settings = {
-  fps: {
-    id: 0,
-    showFPS: false,
-    text: function() {
-      return (this.showFPS) ? 'Hide FPS' : 'Show FPS';
-    },
-    handleClick: (setting) => {
-      setting.showFPS = !setting.showFPS;
-    }
-  },
-  tips: {
-    id: 1,
-    text: () => 'Show Tips',
-    handleClick: (setting, context) => {
-      context.setState({ showTips: true });
-      setTimeout(() => {context.setState({ showTips: false })}, 5000);
-    }
-  },
-  orbit: {
-    id: 2,
-    showOrbits: false,
-    text: function() {
-      return (this.showOrbits) ? 'Hide Orbits' : 'Show Orbits';
-    },
-    handleClick: (setting) => {
-      setting.showOrbits = !setting.showOrbits;
-    }
-  },
   background: {
     id: 3,
     handleClick: (setting) => {
@@ -68,6 +40,34 @@ const settings = {
     showSky: false,
     isLoading: false,
     fetchedSkybox: false
+  },
+  orbit: {
+    id: 2,
+    showOrbits: false,
+    text: function() {
+      return (this.showOrbits) ? 'Hide Orbits' : 'Show Orbits';
+    },
+    handleClick: (setting) => {
+      setting.showOrbits = !setting.showOrbits;
+    }
+  },
+  tips: {
+    id: 1,
+    text: () => 'Show Tips',
+    handleClick: (setting, context) => {
+      context.setState({ showTips: true });
+      setTimeout(() => {context.setState({ showTips: false })}, 3000);
+    }
+  },
+  fps: {
+    id: 0,
+    showFPS: false,
+    text: function() {
+      return (this.showFPS) ? 'Hide FPS' : 'Show FPS';
+    },
+    handleClick: (setting) => {
+      setting.showFPS = !setting.showFPS;
+    }
   }
 };
 
