@@ -3,6 +3,9 @@ import * as THREE from 'three';
 import Three_OrbitControls from 'three-orbit-controls';
 import Detector from '../../lib/three-detector';
 import arrow from './arrow.svg';
+import sunmap from './sunmap.jpg';
+
+debugger;
 
 const OrbitControls = Three_OrbitControls(THREE); // AMD Module format coercion
 let frames_per_sec = 0;
@@ -124,6 +127,19 @@ const FPS = ({fps}) => (
   }}>fps: {fps}</p>
 );
 
+// var textureLoader = new THREE.TextureLoader();
+// var sky;
+// textureLoader.crossOrigin = true;
+// textureLoader.load("https://cdn.eso.org/images/publicationjpg/eso0932a.jpg", function(texture) {
+//   var material = new THREE.MeshBasicMaterial({ map: texture });
+//   var skyGeo = new THREE.SphereGeometry(AU * 10000, 25, 25);
+//   sky = new THREE.Mesh(skyGeo, material);
+//   sky.material.side = THREE.BackSide;
+//   sky.material.transparent = true;
+//   sky.material.opacity = 0;
+//   skyboxScene.add(sky);
+// });
+
 function renderScene() {
   const AU = 149597870.7;
   let addToScene = (scene, object) => {
@@ -141,7 +157,7 @@ function renderScene() {
       geometryType: THREE.SphereGeometry,
       geometry: [ 0.114 * 695700, 32, 32 ],
       materialType: THREE.MeshBasicMaterial,
-      material: { color: 0xe76f51 },
+      material: { map: new THREE.TextureLoader().load(sunmap) },
       start: [0, 0, 0]
     },
     b: {
@@ -217,7 +233,7 @@ function renderScene() {
   var scene = new THREE.Scene();
   var camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 0.00001, 3000000000 );
 
-  var renderer = new THREE.WebGLRenderer({ antialias: true });
+  var renderer = new THREE.WebGLRenderer({ antialias: true, logarithmicDepthBuffer: true });
   renderer.autoClear = false;
   renderer.setSize( window.innerWidth, window.innerHeight );
   document.getElementById('canvasWrapper').appendChild( renderer.domElement );
@@ -271,6 +287,7 @@ function renderScene() {
     var skyGeo = new THREE.SphereGeometry(AU * 10000, 25, 25);
     sky = new THREE.Mesh(skyGeo, material);
     sky.material.side = THREE.BackSide;
+    sky.material.depthFunc = THREE.NeverDepth;
     sky.material.transparent = true;
     sky.material.opacity = 0;
     skyboxScene.add(sky);
@@ -285,17 +302,16 @@ function renderScene() {
   //Functions
 
   function render() {
+    requestAnimationFrame( render );
 
     // Fade in sky
-    if (sky !== undefined && sky.material.opacity < 0.8) {
+    if (sky !== undefined && sky.material.opacity < 1) {
       sky.material.opacity += 0.008;
     }
-
-    requestAnimationFrame( render );
-    renderer.clear();
-    renderer.render( skyboxScene, camera );
-    renderer.clearDepth();
-    renderer.render( scene, camera );
+    if (sky !== undefined && sky.material.opacity > 1) {
+      sky.material.opacity = 1;
+      sky.material.transparent = false;
+    }
 
     let delta = clock.getDelta();
 
@@ -325,6 +341,11 @@ function renderScene() {
     // camera.lookAt(trappist_1b.position);
 
     fpsCalc();
+
+    renderer.clear();
+    renderer.render( skyboxScene, camera );
+    renderer.clearDepth();
+    renderer.render( scene, camera );
   }
 
   function onWindowResize(){
