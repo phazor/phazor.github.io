@@ -15,8 +15,6 @@ let frames_per_sec = 0;
 
 // TODOS:
 // High res background image option
-// Remove orbits
-// Hide background
 // Speed slider
 // High DPI render mode (for retina screens)
 // View from other planets
@@ -35,7 +33,7 @@ const settings = {
       if (!this.showSky && this.fetchedSkybox) {
         return 'Show Galaxy';
       }
-      return 'Load Galaxy';
+      return 'Load Galaxy (5MB)';
     },
     showSky: false,
     isLoading: false,
