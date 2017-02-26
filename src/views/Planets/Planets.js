@@ -68,6 +68,16 @@ const settings = {
     handleClick: (setting) => {
       setting.showFPS = !setting.showFPS;
     }
+  },
+  pause: {
+    id: 4,
+    isPaused: false,
+    handleClick: function(setting) {
+      setting.isPaused = !setting.isPaused;
+    },
+    text: function() {
+      return (this.isPaused) ? 'Un-Pause' : 'Pause'
+    }
   }
 };
 
@@ -355,26 +365,28 @@ function renderScene() {
       lines.forEach((line) => {line.visible = false})
     }
 
-    let nextPos = next(trappist_1b, delta, trappist_1.b.elements, trappist_1.b.period);
-    trappist_1b.position.setFromSpherical(nextPos);
+    if (!settings.pause.isPaused) {
+      let nextPos = next(trappist_1b, delta, trappist_1.b.elements, trappist_1.b.period);
+      trappist_1b.position.setFromSpherical(nextPos);
 
-    nextPos = next(trappist_1c, delta, trappist_1.c.elements, trappist_1.c.period);
-    trappist_1c.position.setFromSpherical(nextPos);
+      nextPos = next(trappist_1c, delta, trappist_1.c.elements, trappist_1.c.period);
+      trappist_1c.position.setFromSpherical(nextPos);
 
-    nextPos = next(trappist_1d, delta, trappist_1.d.elements, trappist_1.d.period);
-    trappist_1d.position.setFromSpherical(nextPos);
+      nextPos = next(trappist_1d, delta, trappist_1.d.elements, trappist_1.d.period);
+      trappist_1d.position.setFromSpherical(nextPos);
 
-    nextPos = next(trappist_1e, delta, trappist_1.e.elements, trappist_1.e.period);
-    trappist_1e.position.setFromSpherical(nextPos);
+      nextPos = next(trappist_1e, delta, trappist_1.e.elements, trappist_1.e.period);
+      trappist_1e.position.setFromSpherical(nextPos);
 
-    nextPos = next(trappist_1f, delta, trappist_1.f.elements, trappist_1.f.period);
-    trappist_1f.position.setFromSpherical(nextPos);
+      nextPos = next(trappist_1f, delta, trappist_1.f.elements, trappist_1.f.period);
+      trappist_1f.position.setFromSpherical(nextPos);
 
-    nextPos = next(trappist_1g, delta, trappist_1.g.elements, trappist_1.g.period);
-    trappist_1g.position.setFromSpherical(nextPos);
+      nextPos = next(trappist_1g, delta, trappist_1.g.elements, trappist_1.g.period);
+      trappist_1g.position.setFromSpherical(nextPos);
 
-    nextPos = next(trappist_1h, delta, trappist_1.h.elements, trappist_1.h.period);
-    trappist_1h.position.setFromSpherical(nextPos);
+      nextPos = next(trappist_1h, delta, trappist_1.h.elements, trappist_1.h.period);
+      trappist_1h.position.setFromSpherical(nextPos);
+    }
 
     // Set camera to watch a planet from the surface of another planet
     // camera.position.set(trappist_1c.position.x, trappist_1c.position.y + trappist_1.c.geometry[0] + 1, trappist_1c.position.z);

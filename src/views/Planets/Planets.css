@@ -69,7 +69,7 @@ img.Arrow.Up:hover {
 
 .FPS {
   position: absolute;
-  top: 0px;
+  top: 1rem;
   left: 1.5rem;
   color: lightgrey;
 }
