@@ -8,14 +8,23 @@
   position: relative;
 }
 
+p.Tips {
+  display: inline-block;
+  height: auto;
+}
+
 .Tips {
   position: absolute;
   left: 0px;
   right: 0px;
   margin: auto;
-  top: 1rem;
   color: white;
   opacity: 0.7;
+
+  /* Vertically position block elements */
+  height: auto;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 img.Arrow {
@@ -54,9 +63,7 @@ img.Arrow.Up:hover {
   width: 3.5rem;
   height: auto;
   position: absolute;
-  left: 0px;
-  right: 0px;
-  margin: auto;
+  left: 2rem;
   bottom: 2rem;
   cursor: pointer;
 }

@@ -43,7 +43,11 @@ class Overlay extends Component {
           transitionEnterTimeout={300}
           transitionLeaveTimeout={5000}>
             { (showTips) &&
-              <p id="0" className="Tips">drag/swipe to rotate | scroll/pinch to zoom</p>
+              <div className="Tips" id="0">
+                <p>drag/swipe to rotate</p>
+                <p>scroll/pinch to zoom</p>
+                <p>tap the cog for settings</p>
+              </div>
             }
         </ReactCSSTransitionGroup>
         { (showFPS) &&
