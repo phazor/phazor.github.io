@@ -61,6 +61,14 @@ class Planets extends Component {
         {(this.state.webGL) &&
           <div>
             <FPS fps={this.state.fps} />
+            <p style={{
+              position: 'absolute',
+              left: '0px',
+              right: '0px',
+              margin: 'auto',
+              top: '1rem',
+              color: 'lightgrey'
+            }}>drag/swipe to rotate | scroll/pinch to zoom</p>
             <img
               alt="Jump to top of page"
               src={arrow}
@@ -120,10 +128,10 @@ const next = (body, delta_t, elements, period) => {
 const FPS = ({fps}) => (
   <p
   style={{
-    color: 'white',
     position: 'absolute',
     top: '1rem',
-    left: '1rem'
+    left: '1rem',
+    color: 'lightgrey'
   }}>fps: {fps}</p>
 );
 
