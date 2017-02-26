@@ -21,3 +21,9 @@ code {
 button {
   border: 1px transparent;
 }
+
+@media print {
+  .navigation, .Footer {
+    display: none;
+  }
+}
