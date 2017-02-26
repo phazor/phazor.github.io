@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import FPS from './FPS';
+import Overlay from './Overlay';
 import * as THREE from 'three';
 import Three_OrbitControls from 'three-orbit-controls';
 import Detector from '../../lib/three-detector';
@@ -7,10 +7,10 @@ import arrow from './arrow.svg';
 import sunmap from './1a_map.jpg';
 import skydome_med from './eso0932a_med.jpg';
 // import skydome_lrg from './eso0932a_lrg.jpg';
-// import Cog from './Cog.jsx';
 import './Planets.css';
 
-const OrbitControls = Three_OrbitControls(THREE); // AMD Module format coercion
+THREE.OrbitControls = Three_OrbitControls(THREE); // AMD Module format coercion
+
 let frames_per_sec = 0;
 
 // TODOS:
@@ -20,6 +20,25 @@ let frames_per_sec = 0;
 // Speed slider
 // High DPI render mode (for retina screens)
 // View from other planets
+
+// TODO: Use redux for state
+const settings = {
+  background: {
+    id: 0,
+    text: function() {
+      if (this.showSky) {
+        return 'Hide Galaxy';
+      }
+      if (!this.showSky && this.fetchedSkybox) {
+        return 'Show Galaxy';
+      }
+      return 'Load Galaxy';
+    },
+    showSky: false,
+    isLoading: false,
+    fetchedSkybox: false
+  }
+};
 
 // Planets Component
 class Planets extends Component {
@@ -54,24 +73,22 @@ class Planets extends Component {
   render() {
     return (
       <div className="Planets" id="Planets">
-        <h3>Trappist-1</h3>
 
+        {/* Intro text */}
+        <h3>Trappist-1</h3>
         <p>This page shows a scale model of the Trappist-1 solar system. It is a unique solar system because the planets are so small but orbit so close together.</p>
         <p>The simulation's speed has been increased by a factor of 8,640 so that 1 earth day equals 10 simulation seconds.</p>
         <p>For more information about Trappist-1, see the <a href="https://www.nasa.gov/press-release/nasa-telescope-reveals-largest-batch-of-earth-size-habitable-zone-planets-around">NASA Press Release</a> or the <a href="https://en.wikipedia.org/wiki/TRAPPIST-1">Wikipedia article</a>.</p>
         <img className="Arrow Down" alt="Jump to simulation" src={arrow}onClick={this.handleFullScreenClick}/>
 
+        {/* Draw area */}
         <div className="CanvasWrapper" id="canvasWrapper">
           {(this.state.webGL) &&
-          <div>
-            <p className="Tips">drag/swipe to rotate | scroll/pinch to zoom</p>
-            <FPS fps={this.state.fps} />
-            {/* <Cog className="Settings" /> */}
-            <img className="Arrow Up" alt="Jump to top of page" src={arrow} onClick={this.handleMoveToTopClick} />
-          </div>
+          <Overlay fps={this.state.fps} handleClick={this.handleMoveToTopClick} settings={settings} />
           }
         </div>
 
+        {/* WebGL Error message */}
         {(!this.state.webGL) &&
           <p className="web-gl-error">Error: WebGL Not Found</p>
         }
@@ -197,6 +214,8 @@ function renderScene() {
   const lines = [];
   // Used for FPS Calcs
   let last = 0;
+  // Used to see whether the skybox has been set or not
+  let sky;
   let clock = new THREE.Clock();
   var skyboxScene = new THREE.Scene();
   var scene = new THREE.Scene();
@@ -261,22 +280,8 @@ function renderScene() {
     }
   );
 
-  // Add Skybox
-  let textureLoader = new THREE.TextureLoader();
-  let sky;
-  textureLoader.load(skydome_med, function(texture) {
-    let material = new THREE.MeshBasicMaterial({ map: texture });
-    let skyGeo = new THREE.SphereGeometry(AU * 10000, 25, 25);
-    sky = new THREE.Mesh(skyGeo, material);
-    sky.material.side = THREE.BackSide;
-    sky.material.depthFunc = THREE.NeverDepth;
-    sky.material.transparent = true;
-    sky.material.opacity = 0;
-    skyboxScene.add(sky);
-  });
-
   // Add Mouse Controls
-  const controls = new OrbitControls( camera, renderer.domElement );
+  const controls = new THREE.OrbitControls( camera, renderer.domElement );
   controls.maxDistance = 10 * AU;
 
   render();
@@ -285,17 +290,30 @@ function renderScene() {
 
   function render() {
     requestAnimationFrame( render );
+    let delta = clock.getDelta();
 
-    // Fade in sky
-    if (sky !== undefined && sky.material.opacity < 1) {
-      sky.material.opacity += 0.008;
+    // Add sky when load background button is clicked
+    if (settings.background.showSky && !settings.background.isLoading && sky === undefined) {
+      addSkybox();
+    }
+
+    // Show/hide sky
+    if (sky !== undefined && settings.background.showSky && sky.material.opacity < 1) {
+      sky.material.visible = true;
+      sky.material.transparent = true;
+      sky.material.opacity += delta;
     }
     if (sky !== undefined && sky.material.opacity > 1) {
       sky.material.opacity = 1;
       sky.material.transparent = false;
     }
-
-    let delta = clock.getDelta();
+    if (sky !== undefined && !settings.background.showSky && sky.material.opacity > 0 ) {
+      sky.material.transparent = true;
+      sky.material.opacity -= delta / 2;
+    }
+    if (sky !== undefined && !settings.background.showSky && sky.material.opacity <= 0) {
+      sky.material.visible = false;
+    }
 
     let nextPos = next(trappist_1b, delta, trappist_1.b.elements, trappist_1.b.period);
     trappist_1b.position.setFromSpherical(nextPos);
@@ -328,6 +346,24 @@ function renderScene() {
     renderer.render( skyboxScene, camera );
     renderer.clearDepth();
     renderer.render( scene, camera );
+  }
+
+  function addSkybox() {
+    settings.background.isLoading = true;
+    let textureLoader = new THREE.TextureLoader();
+    textureLoader.load(skydome_med, function(texture) {
+      let material = new THREE.MeshBasicMaterial({ map: texture });
+      let skyGeo = new THREE.SphereGeometry(AU * 10000, 25, 25);
+      sky = new THREE.Mesh(skyGeo, material);
+      sky.material.side = THREE.BackSide;
+      sky.material.depthFunc = THREE.NeverDepth;
+      sky.material.transparent = true;
+      sky.material.opacity = 0;
+      skyboxScene.add(sky);
+
+      settings.background.isLoading = false;
+      settings.background.fetchedSkybox = true;
+    });
   }
 
   function resizeCanvas(){

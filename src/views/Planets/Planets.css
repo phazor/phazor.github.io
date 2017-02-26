@@ -46,7 +46,9 @@ img.Arrow.Up:hover {
   filter: opacity(0.8);
 }
 
-.Settings {
+/* GUI Styles */
+
+.SettingsCog {
   color: white;
   filter: opacity(0.5);
   width: 3.5rem;
@@ -59,7 +61,7 @@ img.Arrow.Up:hover {
   cursor: pointer;
 }
 
-.Settings:hover {
+.SettingsCog:hover {
   filter: opacity(0.8)
 }
 
@@ -68,4 +70,36 @@ img.Arrow.Up:hover {
   bottom: 0px;
   left: 1.5rem;
   color: lightgrey;
+}
+
+.SettingsList {
+  left: 0px;
+  right: 0px;
+  width: auto;
+  bottom: 4rem;
+  position: absolute;
+  color: white;
+}
+
+.SettingsList {
+  list-style-type: none;
+}
+
+/* Animation */
+.example-enter {
+  opacity: 0.01;
+}
+
+.example-enter.example-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+
+.example-leave {
+  opacity: 1;
+}
+
+.example-leave.example-leave-active {
+  opacity: 0.01;
+  transition: opacity 300ms ease-in;
 }
