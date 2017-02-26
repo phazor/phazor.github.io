@@ -5,6 +5,10 @@ import Three_OrbitControls from 'three-orbit-controls';
 import Detector from '../../lib/three-detector';
 import arrow from './arrow.svg';
 import sunmap from './1a_map.jpg';
+import skydome_med from './eso0932a_med.jpg';
+// import skydome_lrg from './eso0932a_lrg.jpg';
+// import Cog from './Cog.jsx';
+import './Planets.css';
 
 const OrbitControls = Three_OrbitControls(THREE); // AMD Module format coercion
 let frames_per_sec = 0;
@@ -15,6 +19,7 @@ let frames_per_sec = 0;
 // Hide background
 // Speed slider
 // High DPI render mode (for retina screens)
+// View from other planets
 
 // Planets Component
 class Planets extends Component {
@@ -48,50 +53,23 @@ class Planets extends Component {
 
   render() {
     return (
-      <div id="Planets" style={{
-        textAlign: 'center',
-        marginTop: '2rem'
-      }}>
+      <div className="Planets" id="Planets">
         <h3>Trappist-1</h3>
+
         <p>This page shows a scale model of the Trappist-1 solar system. It is a unique solar system because the planets are so small but orbit so close together.</p>
-          <p>The simulation's speed has been increased by a factor of 8,640 so that 1 earth day equals 10 simulation seconds.</p>
-        <button
-           onClick={this.handleFullScreenClick}
-           style={{ marginBottom: '2rem' }}>
-           Full Screen
-         </button>
+        <p>The simulation's speed has been increased by a factor of 8,640 so that 1 earth day equals 10 simulation seconds.</p>
         <p>For more information about Trappist-1, see the <a href="https://www.nasa.gov/press-release/nasa-telescope-reveals-largest-batch-of-earth-size-habitable-zone-planets-around">NASA Press Release</a> or the <a href="https://en.wikipedia.org/wiki/TRAPPIST-1">Wikipedia article</a>.</p>
-        <div id="canvasWrapper" style={{
-          display: 'inline-block',
-          position: 'relative'
-        }}>
-        {(this.state.webGL) &&
+        <img className="Arrow Down" alt="Jump to simulation" src={arrow}onClick={this.handleFullScreenClick}/>
+
+        <div className="CanvasWrapper" id="canvasWrapper">
+          {(this.state.webGL) &&
           <div>
+            <p className="Tips">drag/swipe to rotate | scroll/pinch to zoom</p>
             <FPS fps={this.state.fps} />
-            <p style={{
-              position: 'absolute',
-              left: '0px',
-              right: '0px',
-              margin: 'auto',
-              top: '1rem',
-              color: 'white',
-              opacity: '70%'
-            }}>drag/swipe to rotate | scroll/pinch to zoom</p>
-            <img
-              alt="Jump to top of page"
-              src={arrow}
-              onClick={this.handleMoveToTopClick}
-              style={{
-                width: '80px',
-                height: 'auto',
-                cursor: 'pointer',
-                padding: '1rem',
-                position: 'absolute',
-                right: '1rem',
-                bottom: '2rem'
-              }}/>
+            {/* <Cog className="Settings" /> */}
+            <img className="Arrow Up" alt="Jump to top of page" src={arrow} onClick={this.handleMoveToTopClick} />
           </div>
-        }
+          }
         </div>
 
         {(!this.state.webGL) &&
@@ -222,15 +200,18 @@ function renderScene() {
   let clock = new THREE.Clock();
   var skyboxScene = new THREE.Scene();
   var scene = new THREE.Scene();
-  var camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 0.00001, 3000000000 );
-
+  var camera = new THREE.PerspectiveCamera( 40, document.body.clientWidth / window.innerHeight, 0.00001, 3000000000 );
   var renderer = new THREE.WebGLRenderer({ antialias: true, logarithmicDepthBuffer: true });
-  renderer.autoClear = false;
 	// renderer.setPixelRatio( window.devicePixelRatio );
-  renderer.setSize( window.innerWidth, window.innerHeight );
 
   document.getElementById('canvasWrapper').appendChild( renderer.domElement );
-  window.addEventListener('resize', onWindowResize, false);
+  resizeCanvas();
+  resizeCanvas();
+  renderer.autoClear = false;
+
+
+  window.addEventListener('resize', resizeCanvas);
+  window.addEventListener('orientationchange', resizeCanvas);
 
   // Add Planets
   let trappist_1a = createMesh(trappist_1.a);
@@ -281,12 +262,11 @@ function renderScene() {
   );
 
   // Add Skybox
-  var textureLoader = new THREE.TextureLoader();
-  var sky;
-  textureLoader.crossOrigin = true;
-  textureLoader.load("https://cdn.eso.org/images/publicationjpg/eso0932a.jpg", function(texture) {
-    var material = new THREE.MeshBasicMaterial({ map: texture });
-    var skyGeo = new THREE.SphereGeometry(AU * 10000, 25, 25);
+  let textureLoader = new THREE.TextureLoader();
+  let sky;
+  textureLoader.load(skydome_med, function(texture) {
+    let material = new THREE.MeshBasicMaterial({ map: texture });
+    let skyGeo = new THREE.SphereGeometry(AU * 10000, 25, 25);
     sky = new THREE.Mesh(skyGeo, material);
     sky.material.side = THREE.BackSide;
     sky.material.depthFunc = THREE.NeverDepth;
@@ -350,10 +330,10 @@ function renderScene() {
     renderer.render( scene, camera );
   }
 
-  function onWindowResize(){
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize( window.innerWidth, window.innerHeight );
+  function resizeCanvas(){
+    renderer.setSize( document.body.clientWidth, window.innerHeight );
+    camera.aspect = document.body.clientWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
   }
 
   function fpsCalc() {
