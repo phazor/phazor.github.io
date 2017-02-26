@@ -213,10 +213,12 @@ function renderScene() {
   // Used for FPS Calcs
   let last = 0;
   let clock = new THREE.Clock();
+  var skyboxScene = new THREE.Scene();
   var scene = new THREE.Scene();
   var camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 0.00001, 3000000000 );
 
   var renderer = new THREE.WebGLRenderer({ antialias: true });
+  renderer.autoClear = false;
   renderer.setSize( window.innerWidth, window.innerHeight );
   document.getElementById('canvasWrapper').appendChild( renderer.domElement );
   window.addEventListener('resize', onWindowResize, false);
@@ -260,14 +262,40 @@ function renderScene() {
     }
   );
 
+  // Add Skybox
+  var textureLoader = new THREE.TextureLoader();
+  var sky;
+  textureLoader.crossOrigin = true;
+  textureLoader.load("https://cdn.eso.org/images/publicationjpg/eso0932a.jpg", function(texture) {
+    var material = new THREE.MeshBasicMaterial({ map: texture });
+    var skyGeo = new THREE.SphereGeometry(AU * 10000, 25, 25);
+    sky = new THREE.Mesh(skyGeo, material);
+    sky.material.side = THREE.BackSide;
+    sky.material.transparent = true;
+    sky.material.opacity = 0;
+    skyboxScene.add(sky);
+  });
+
   // Add Mouse Controls
-  new OrbitControls( camera, renderer.domElement );
+  const controls = new OrbitControls( camera, renderer.domElement );
+  controls.maxDistance = 10 * AU;
 
   render();
 
   //Functions
 
   function render() {
+
+    // Fade in sky
+    if (sky !== undefined && sky.material.opacity < 0.8) {
+      sky.material.opacity += 0.008;
+    }
+
+    requestAnimationFrame( render );
+    renderer.clear();
+    renderer.render( skyboxScene, camera );
+    renderer.clearDepth();
+    renderer.render( scene, camera );
 
     let delta = clock.getDelta();
 
@@ -292,10 +320,11 @@ function renderScene() {
     nextPos = next(trappist_1h, delta, trappist_1.h.elements, trappist_1.h.period);
     trappist_1h.position.setFromSpherical(nextPos);
 
-    fpsCalc();
+    // Set camera to watch a planet from the surface of another planet
+    // camera.position.set(trappist_1c.position.x, trappist_1c.position.y + trappist_1.c.geometry[0] + 1, trappist_1c.position.z);
+    // camera.lookAt(trappist_1b.position);
 
-  	requestAnimationFrame( render );
-  	renderer.render( scene, camera );
+    fpsCalc();
   }
 
   function onWindowResize(){
