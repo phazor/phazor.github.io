@@ -36,7 +36,7 @@ class MenuBar extends Component {
             <MenuItem handleClick={this.closeMenu} to="/cloud-chamber">CloudChamber </MenuItem>
             <MenuItem handleClick={this.closeMenu} to="/user-list">UserList </MenuItem>
             <MenuItem handleClick={this.closeMenu} to="/NEOs">NEOs </MenuItem>
-            <MenuItem handleClick={this.closeMenu} to="/Planets">Planets </MenuItem>
+            <MenuItem handleClick={this.closeMenu} to="/planets">Planets </MenuItem>
             <MenuItem handleClick={this.closeMenu} to="/about">About Me </MenuItem>
             <MenuItem handleClick={this.closeMenu} to="/gosh">404 </MenuItem>
             <MenuItem handleClick={this.closeMenu} href="https://phazor.github.io/blog/">Blog</MenuItem>

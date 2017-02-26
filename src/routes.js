@@ -20,7 +20,7 @@ const Routes = (props) => (
       <Route path="/cloud-chamber" component={CloudChamber} />
       <Route path="/user-list" component={UserListPage} />
       <Route path="/NEOs" component={NEOPage} />
-      <Route path="/Planets" component={Planets} />
+      <Route path="/planets" component={Planets} />
       <Route path="*" component={NotFound} />
     </Route>
   </Router>
