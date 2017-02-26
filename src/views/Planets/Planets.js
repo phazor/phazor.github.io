@@ -25,6 +25,9 @@ let frames_per_sec = 0;
 const settings = {
   background: {
     id: 0,
+    handleClick: (setting) => {
+      setting.showSky = !setting.showSky;
+    },
     text: function() {
       if (this.showSky) {
         return 'Hide Galaxy';
@@ -37,6 +40,16 @@ const settings = {
     showSky: false,
     isLoading: false,
     fetchedSkybox: false
+  },
+  fps: {
+    id: 1,
+    text: function() {
+      return (this.showFPS) ? 'Hide FPS' : 'Show FPS';
+    },
+    handleClick: (setting) => {
+      setting.showFPS = !setting.showFPS;
+    },
+    showFPS: false
   }
 };
 
@@ -84,7 +97,7 @@ class Planets extends Component {
         {/* Draw area */}
         <div className="CanvasWrapper" id="canvasWrapper">
           {(this.state.webGL) &&
-          <Overlay fps={this.state.fps} handleClick={this.handleMoveToTopClick} settings={settings} />
+          <Overlay fps={this.state.fps} showFPS={settings.fps.showFPS} handleClick={this.handleMoveToTopClick} settings={settings} />
           }
         </div>
 

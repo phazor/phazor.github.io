@@ -18,22 +18,25 @@ class Overlay extends Component {
   }
 
   render() {
-    const {fps, handleClick, settings} = this.props;
+    const {fps, showFPS, handleClick, settings} = this.props;
     const {showSettings} = this.state;
 
     const items = (showSettings)
       ? Object.values(settings).map((setting, key) => (
           <li key={key}><button onClick={() => {
             this.setState({ showSettings: false });
-            setting.showSky = !setting.showSky;
-          }}>{setting.text()}</button></li>
+            setting.handleClick(setting);
+          }}>
+            {setting.text()}
+          </button></li>
         ))
       : [];
-
     return (
       <div>
         <p className="Tips">drag/swipe to rotate | scroll/pinch to zoom</p>
-        <FPS fps={fps} />
+        { (showFPS) &&
+          <FPS fps={fps} />
+        }
         <div>
           <Cog className="SettingsCog" onClick={this.handleSettingsClick} />
           <ul className="SettingsList">
