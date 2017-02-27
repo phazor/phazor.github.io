@@ -16,6 +16,9 @@
   color: white;
   opacity: 0.8;
 
+  /* Prevent the mouse from interacting with the text */
+  pointer-events:none;
+
   /* Vertically position block elements */
   height: auto;
   top: 50%;
