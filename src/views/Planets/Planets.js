@@ -139,7 +139,7 @@ class Planets extends Component {
         <div className="container">
           <h3>Trappist-1</h3>
           <p>This page shows a model of the Trappist-1 solar system.</p>
-          <p>It is a unique solar system because the planets are earth-like in size, and orbit very close together. At times, the second planet would appear larger from the surface of the first planet, than our moon appears to us. The star, planets and their orbital paths have been kept to scale to help to visualise this.</p>
+          <p>It is a unique solar system because the planets are earth-like in size and have much closer orbits than ours. The star, planets and their orbital paths have been kept to scale to help to visualise this.</p>
           <p>The simulation's speed has been increased by a factor of 8,640 so that 1 earth day equals 10 simulation seconds.</p>
           <p>For more information about Trappist-1, see the <a href="https://www.nasa.gov/press-release/nasa-telescope-reveals-largest-batch-of-earth-size-habitable-zone-planets-around">NASA Press Release</a> or the <a href="https://en.wikipedia.org/wiki/TRAPPIST-1">Wikipedia article</a>.</p>
           <img className="Arrow Down" alt="Jump to simulation" src={arrow}onClick={this.handleFullScreenClick}/>
