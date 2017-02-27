@@ -18,7 +18,7 @@
   opacity: 0.8;
   /*padding: auto;*/
 }
-.Mask button {
+.CenteringDiv button {
   display: inline-block;
   opacity: 1;
   transform: translateY(-50%);
@@ -187,4 +187,18 @@ img.Arrow.Up:hover {
 .begin-leave.begin-leave-active {
   opacity: 0.01;
   transition: opacity 500ms ease-in;
+}
+
+/* Z-Indexes */
+/* Grouped together to make it easier to see their interactions */
+.Mask {
+  z-index: 10;
+}
+
+.CenteringDiv {
+  z-index: 20;
+}
+
+img.Arrow.Up {
+  z-index: 20;
 }
