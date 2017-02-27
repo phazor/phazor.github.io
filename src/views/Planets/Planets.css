@@ -8,6 +8,34 @@
   position: relative;
 }
 
+.Mask {
+  position: absolute;
+  background-color: black;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
+  opacity: 0.8;
+  /*padding: auto;*/
+}
+.Mask button {
+  display: inline-block;
+  opacity: 1;
+  transform: translateY(-50%);
+  z-index: 100;
+}
+
+.CenteringDiv {
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
+  /* Vertically position block elements */
+  height: auto;
+  top: 50%;
+}
+
 .Tips {
   position: absolute;
   left: 0px;
@@ -20,7 +48,6 @@
   pointer-events:none;
 
   /* Vertically position block elements */
-  height: auto;
   top: 50%;
   transform: translateY(-50%);
 }
@@ -151,4 +178,13 @@ img.Arrow.Up:hover {
 .tips-leave.tips-leave-active {
   opacity: 0.01;
   transition: opacity 2000ms ease-in;
+}
+
+.begin-leave {
+  opacity: 0.8;
+}
+
+.begin-leave.begin-leave-active {
+  opacity: 0.01;
+  transition: opacity 500ms ease-in;
 }

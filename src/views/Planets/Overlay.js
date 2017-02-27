@@ -8,23 +8,27 @@ class Overlay extends Component {
   constructor(props) {
     super(props);
     this.handleSettingsClick = this.handleSettingsClick.bind(this);
+    this.beginSimulation = this.beginSimulation.bind(this);
     this.state = {
       showSettings: false,
-      showTips: true
+      showTips: false,
+      showMask: true
     }
-  }
-
-  componentDidMount() {
-    setTimeout(() => {this.setState({ showTips: false })}, 3000);
   }
 
   handleSettingsClick() {
     this.setState({ showSettings: !this.state.showSettings });
   }
 
+  beginSimulation() {
+    this.setState({ showMask: false });
+    this.setState({ showTips: true });
+    setTimeout(() => {this.setState({ showTips: false })}, 3000);
+  }
+
   render() {
     const {fps, showFPS, handleClick, settings} = this.props;
-    const {showSettings, showTips} = this.state;
+    const {showSettings, showTips, showMask} = this.state;
 
     const items = (showSettings)
       ? Object.values(settings).map((setting, key) => (
@@ -38,6 +42,19 @@ class Overlay extends Component {
       : [];
     return (
       <div>
+        <ReactCSSTransitionGroup
+          transitionName="begin"
+          transitionEnterTimeout={300}
+          transitionLeaveTimeout={500}>
+          { (showMask) &&
+            <div id="0">
+              <div className="Mask" />
+              <div className="CenteringDiv">
+                <button className="Begin" onClick={this.beginSimulation}>Begin Simulation</button>
+              </div>
+            </div>
+          }
+        </ReactCSSTransitionGroup>
         <ReactCSSTransitionGroup
           transitionName="tips"
           transitionEnterTimeout={300}
@@ -53,17 +70,15 @@ class Overlay extends Component {
         { (showFPS) &&
           <FPS fps={fps} />
         }
-        <div>
-          <Cog className="SettingsCog" onClick={this.handleSettingsClick} />
-          <ul className="SettingsList">
-            <ReactCSSTransitionGroup
-              transitionName="settings"
-              transitionEnterTimeout={500}
-              transitionLeaveTimeout={300}>
-              {items}
-            </ReactCSSTransitionGroup>
-          </ul>
-        </div>
+        <Cog className="SettingsCog" onClick={this.handleSettingsClick} />
+        <ul className="SettingsList">
+          <ReactCSSTransitionGroup
+            transitionName="settings"
+            transitionEnterTimeout={500}
+            transitionLeaveTimeout={300}>
+            {items}
+          </ReactCSSTransitionGroup>
+        </ul>
         <img className="Arrow Up" alt="Jump to top of page" src={arrow} onClick={handleClick} />
       </div>
     )
