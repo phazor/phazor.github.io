@@ -69,6 +69,16 @@ const settings = {
       setting.showFPS = !setting.showFPS;
     }
   },
+  dpiScaling: {
+    id: 5,
+    showHighDPIScaling: false,
+    handleClick: (setting) => {
+      setting.showHighDPIScaling = !setting.showHighDPIScaling;
+    },
+    text: function() {
+      return (this.showHighDPIScaling) ? 'Low DPI' : 'High DPI';
+    }
+  },
   pause: {
     id: 4,
     isPaused: false,
@@ -399,6 +409,14 @@ function renderScene() {
 
       nextPos = next(trappist_1h, delta, trappist_1.h.elements, trappist_1.h.period);
       trappist_1h.position.setFromSpherical(nextPos);
+    }
+
+    if (settings.dpiScaling.showHighDPIScaling && (renderer.getPixelRatio() !== window.devicePixelRatio)) {
+      renderer.setPixelRatio( window.devicePixelRatio );
+    }
+
+    if (!settings.dpiScaling.showHighDPIScaling && (renderer.getPixelRatio() !== 1)) {
+      renderer.setPixelRatio( 1 );
     }
 
     // Set camera to watch a planet from the surface of another planet
