@@ -1,8 +1,12 @@
 {
-  "main.css": "static/css/main.d616c00e.css",
-  "main.css.map": "static/css/main.d616c00e.css.map",
-  "main.js": "static/js/main.5064be2b.js",
-  "main.js.map": "static/js/main.5064be2b.js.map",
+  "main.css": "static/css/main.3979682d.css",
+  "main.css.map": "static/css/main.3979682d.css.map",
+  "main.js": "static/js/main.4a28c029.js",
+  "main.js.map": "static/js/main.4a28c029.js.map",
   "static/media/1a_map.jpg": "static/media/1a_map.b3c78a01.jpg",
-  "static/media/eso0932a_med.jpg": "static/media/eso0932a_med.cb36eb8f.jpg"
+  "static/media/arrow.svg": "static/media/arrow.04f8accd.svg",
+  "static/media/bars.svg": "static/media/bars.51f8f52c.svg",
+  "static/media/eso0932a_med.jpg": "static/media/eso0932a_med.cb36eb8f.jpg",
+  "static/media/github-sign.svg": "static/media/github-sign.8f8edc5f.svg",
+  "static/media/rocket.svg": "static/media/rocket.11218177.svg"
 }
