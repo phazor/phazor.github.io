@@ -26,7 +26,7 @@ export const fetchNEO_Success = json => ({
 })
 
 const oneDayInMilliseconds = 1000 * 60 * 60 * 24;
-const dateString = (date) => (`${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`)
+const dateString = (date) => (`${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`)
 
 export const fetchNEO = () => {
   let currentDate = new Date();
