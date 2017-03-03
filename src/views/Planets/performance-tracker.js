@@ -22,10 +22,13 @@
 // }
 const performanceTracker = () => {
   let values = [];
+  // Expects value in milliseconds
   return function(value) {
-    values.push(value);
+    if (typeof value === 'number') {
+      values.push(value);
+    }
     if (values.length === 60) {
-      let average = values.reduce((a, b) => (a + b)) / values.length; // This is in milliseconds
+      let average = values.reduce((a, b) => (a + b)) / values.length;
       console.log(`average execution time: ${100 * (average * 60) / 1000}%`)
       console.log(`frame skips: ${values.filter((a) => (a > (1000 / 60))).length}`);
       console.log(`longest frame: ${values.reduce((a, b) => (a > b ? a : b))}ms`)
