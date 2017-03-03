@@ -1,3 +1,7 @@
+import fetch from 'isomorphic-fetch';
+
+const NASA_API_KEY = 'tqE8FJHw4JIR7UXxpfrUsw1XwV2z74HOUTCdhQ1s';
+
 let userIndex = 0;
 export const addUser = (name) => {
   return {
@@ -31,10 +35,9 @@ export const fetchNEO = () => {
     // Update state
     dispatch(fetchNEO_Request())
     // We return a promise to wait for.
-    // return fetch(`https://api.nasa.gov/neo/rest/v1/feed?start_date=2017-02-13&end_date=2017-02-19&api_key=DEMO_KEY`)
-    return fetch(`https://api.nasa.gov/neo/rest/v1/feed?start_date=${dateString(lastWeek)}&end_date=${dateString(currentDate)}&api_key=DEMO_KEY`)
-    // return fetch('http://localhost:3004/NEO')
-    // local api: return fetch('http://localhost:3004/search/')
+    return fetch(`https://api.nasa.gov/neo/rest/v1/feed?start_date=${dateString(lastWeek)}&end_date=${dateString(currentDate)}&api_key=${NASA_API_KEY}`)
+    // return fetch('http://localhost:3004/NEO') // Comment back in for testing locally
+    // local api: return fetch('http://localhost:3004/search/') // Comment back in for testing locally
       .then(response => response.json())
       .then(json => dispatch(fetchNEO_Success(json)))
       .catch(reason => dispatch(fetchNEO_Failure(reason)))
