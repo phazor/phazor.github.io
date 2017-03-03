@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import { useRouterHistory } from 'react-router';
 import { createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
+import shims from './shims';
 // import createLogger from 'redux-logger';
 
 import app from './reducers';
@@ -12,6 +13,9 @@ import { addUser } from './actions';
 import Routes from 'routes';
 import '../node_modules/milligram/dist/milligram.min.css';
 import './index.css';
+
+// Add shims if required.
+shims();
 
 // const loggerMiddleware = createLogger()
 
