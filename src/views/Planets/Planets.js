@@ -4,7 +4,6 @@ import * as THREE from 'three';
 import Three_OrbitControls from 'three-orbit-controls';
 import Detector from '../../lib/three-detector';
 import Overlay from './Overlay';
-import performanceTracker from './performance-tracker';
 // Assets
 import arrow from './arrow.svg';
 import sunmap from './1a_map.jpg';
@@ -279,7 +278,6 @@ function renderScene() {
   const lines = [];
   // Used for FPS Calcs
   let last = 0;
-  const tracker = new performanceTracker();
   // Used to see whether the skybox has been set or not
   let sky;
   let clock = new THREE.Clock();
@@ -356,7 +354,6 @@ function renderScene() {
   //Functions
 
   function render() {
-    let start = performance.now();
     requestAnimationFrame( render );
     let delta = clock.getDelta();
 
@@ -431,9 +428,6 @@ function renderScene() {
     renderer.render( skyboxScene, camera );
     renderer.clearDepth();
     renderer.render( scene, camera );
-
-    let end = performance.now();
-    tracker(end - start);
   }
 
   function addSkybox() {
