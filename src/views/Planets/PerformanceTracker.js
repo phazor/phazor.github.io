@@ -13,14 +13,14 @@
 //
 // e.g:
 //
-// const tracker = performanceTracker(60)
+// const tracker = PerformanceTracker()
 // 60fpsLoop {
 //   let start = performance.now()
 //   doSomething()
 //   let end = performance.now()
 //   tracker(end - start)
 // }
-const performanceTracker = () => {
+const PerformanceTracker = () => {
   let values = [];
   // Expects value in milliseconds
   return function(value) {
@@ -37,4 +37,4 @@ const performanceTracker = () => {
   }
 }
 
-export default performanceTracker;
+export default PerformanceTracker;
