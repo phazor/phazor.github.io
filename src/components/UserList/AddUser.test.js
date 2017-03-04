@@ -5,8 +5,11 @@ import { shallow, mount } from 'enzyme';
 import AddUser from './AddUser';
 
 let fakeStore;
+let dispatchSpy;
 
 beforeEach(function() {
+  dispatchSpy = jasmine.createSpy();
+
   fakeStore = {
     getState: () => ({
       NEO: {
@@ -17,11 +20,11 @@ beforeEach(function() {
       },
     }),
     subscribe: () => ({}),
-    dispatch: () => ({})
+    dispatch: dispatchSpy
   };
 })
 
-it('component shallow renders with no errors', () => {
+it('AddUser shallow renders with no errors', () => {
   const wrapper = shallow(
     <Provider store={fakeStore}>
       <AddUser />
@@ -29,10 +32,13 @@ it('component shallow renders with no errors', () => {
   );
 });
 
-it('component renders with no errors', () => {
+it('AddUser button click calls dispatch', () => {
+  expect(dispatchSpy.calls.any()).toEqual(false);
   const wrapper = mount(
     <Provider store={fakeStore}>
       <AddUser />
     </Provider>
   );
+  wrapper.find('button').simulate('click');
+  expect(dispatchSpy).toHaveBeenCalled();
 });
