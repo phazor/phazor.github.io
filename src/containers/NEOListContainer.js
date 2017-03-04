@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import NEOList from '../components/NEOList/NEOList'
 
-//Object.keys(blah).map(key => blah[key]).reduce((a,b) => a.concat(b))
+// Concatenate paginated NEOs into a single level
 const flatten = (list) => (
   Object.keys(list.near_earth_objects)
     .map(key => list.near_earth_objects[key])
@@ -18,8 +18,8 @@ const mapStateToProps = ({ NEO }) => {
   };
 };
 
-const VisibleNEOList = connect(
+const NEOListContainer = connect(
   mapStateToProps
 )(NEOList);
 
-export default VisibleNEOList;
+export default NEOListContainer;
