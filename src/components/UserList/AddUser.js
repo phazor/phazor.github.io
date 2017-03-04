@@ -8,7 +8,6 @@ let AddUser = ({ dispatch }) => {
   return (<div className="InputArea">
     <input type="text" autoFocus placeholder="e.g. Mary Jane" ref={node => { input = node; }}></input>
     <button onClick={() => {
-      // this.props.handleClick(this.input.value);
       dispatch(addUser(input.value));
       input.value = '';
       input.focus();
