@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Parser } from 'html-to-react';
-import EmbedComponent from './EmbedComponent';
+import EmbedComponent from '../EmbedComponent/EmbedComponent';
 import './CloudChamber.css'
 
 var codePenEmbedString = "<iframe height='500' scrolling='no' src='//codepen.io/phazor-1471862257/embed/xEXbmX/?height=500&theme-id=light&default-tab=result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/phazor-1471862257/pen/xEXbmX/'>Cloud Chamber</a> by phazor (<a href='http://codepen.io/phazor-1471862257'>@phazor-1471862257</a>) on <a href='http://codepen.io'>CodePen</a>.</iframe>"

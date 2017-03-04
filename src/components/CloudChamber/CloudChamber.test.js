@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { shallow } from 'enzyme';
 import CloudChamber from './CloudChamber';
-import EmbedComponent from './EmbedComponent';
+import EmbedComponent from '../EmbedComponent/EmbedComponent';
 
 it('Cloud Chamber renders with no errors', () => {
   const wrapper = shallow(<CloudChamber />);
