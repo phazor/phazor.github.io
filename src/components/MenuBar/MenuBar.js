@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import MenuItem from '../MenuItem/MenuItem';
-import hamburger from './bars.svg';
-import github from './github-sign.svg';
+import hamburger from './assets/bars.svg';
+import github from './assets/github-sign.svg';
 import './MenuBar.css';
 
 class MenuBar extends Component {
