@@ -4,12 +4,9 @@ import { Provider } from 'react-redux';
 import { shallow, mount } from 'enzyme';
 import NEOList from './NEOList';
 
-let dispatchSpy;
 let fakeStore;
 
 beforeEach(function() {
-  dispatchSpy = jasmine.createSpy();
-
   fakeStore = {
     getState: () => ({
       NEO: {
@@ -20,7 +17,7 @@ beforeEach(function() {
       },
     }),
     subscribe: () => ({}),
-    dispatch: dispatchSpy
+    dispatch: () => ({})
   };
 })
 
