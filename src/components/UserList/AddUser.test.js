@@ -11,14 +11,7 @@ beforeEach(function() {
   dispatchSpy = jasmine.createSpy();
 
   fakeStore = {
-    getState: () => ({
-      NEO: {
-        NEOList: {
-          near_earth_objects: [[]]
-        },
-        lastAction: ""
-      },
-    }),
+    getState: () => ({}),
     subscribe: () => ({}),
     dispatch: dispatchSpy
   };
