@@ -1,3 +1,5 @@
+// This library is copied here because it is not yet available on NPM
+
 /**
  * @author alteredq / http://alteredqualia.com/
  * @author mr.doob / http://mrdoob.com/
