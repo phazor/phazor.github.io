@@ -23,7 +23,6 @@ const createFakeStore = fakeData => ({
 });
 
 it('renders without crashing', () => {
-  const userList = [];
   const div = document.createElement('div');
   ReactDOM.render(
     <Provider store={createFakeStore()}>
