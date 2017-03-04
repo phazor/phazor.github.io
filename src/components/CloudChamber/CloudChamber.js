@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Parser } from 'html-to-react';
+import EmbedComponent from './EmbedComponent';
 import './CloudChamber.css'
 
 var codePenEmbedString = "<iframe height='500' scrolling='no' src='//codepen.io/phazor-1471862257/embed/xEXbmX/?height=500&theme-id=light&default-tab=result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/phazor-1471862257/pen/xEXbmX/'>Cloud Chamber</a> by phazor (<a href='http://codepen.io/phazor-1471862257'>@phazor-1471862257</a>) on <a href='http://codepen.io'>CodePen</a>.</iframe>"
@@ -14,7 +15,8 @@ class CloudChamber extends Component {
         <p>One of the coolest things in nature is how particles are constantly whizzing around us and through us, but at the same time they are imperceptible to human senses.</p>
         <p>I wanted to show what these particles would look like if we could somehow see them. A <a href="https://en.wikipedia.org/wiki/Cloud_chamber">Cloud Chamber</a> is how scientists achieve this, so if you have your own, you can probably stop reading ;). Unfortunately, I could not find any video footage of one that I felt did it justice. </p>
         <p>So I set out to create a visualisation of a Cloud Chamber in action:</p>
-        { codePenEmbedComponent }
+        {/* { codePenEmbedComponent } */}
+        <EmbedComponent embedString={codePenEmbedString} />
         <p> </p>
         <h4>rules</h4>
         <p>Particles are emitted from the center of the page, with a random velocity.</p>
