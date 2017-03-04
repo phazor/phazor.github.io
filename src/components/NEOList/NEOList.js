@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
 
-const NEOList = ({ NEOs, lastAction }) => {
+let NEOList = ({ NEOs, lastAction }) => {
   return (
     <div>
       {(lastAction === "FETCH_NEO_SUCCESS")
@@ -20,14 +21,40 @@ const NEOList = ({ NEOs, lastAction }) => {
         ? <div className="Loading"><h2>Loading...</h2></div>
         : (lastAction === "FETCH_NEO_FAILURE")
         ? <div className="Error"><h2>Error...</h2></div>
-        : <div className="Click Fetch"></div>
+        : <div></div>
       }
       </div>
     )
 }
 
 NEOList.propTypes = {
-  NEOs: PropTypes.array
+  NEO: PropTypes.object
 };
+
+// Redux Wiring
+// Note: Connecting the Component in this file means we can't test the un-reduxed
+// Component in isolation. May not be important, but something to be aware of
+
+// Concatenate paginated NEOs into a single level
+const flatten = (list) => (
+  Object.keys(list.near_earth_objects)
+    .map(key => list.near_earth_objects[key])
+    .reduce((a,b) => a.concat(b))
+)
+
+// const mapStateToProps = ({ NEO }) => {
+const mapStateToProps = ({ NEO }) => {
+  return {
+    elementCount: NEO.NEOList.elementCount,
+    NEOs: flatten(NEO.NEOList),
+    isFetching: NEO.isFetching, // unused, for now
+    didInvalidate: NEO.didInvalidate, // unused, for now
+    lastAction: NEO.lastAction
+  };
+};
+
+NEOList = connect(
+  mapStateToProps
+)(NEOList);
 
 export default NEOList;

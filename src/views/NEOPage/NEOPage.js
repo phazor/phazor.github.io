@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
-import NEOList from '../../containers/NEOListContainer';
+import NEOList from '../../components/NEOList/NEOList';
 import FetchNEO from '../../components/NEOList/FetchNEO';
 // import './PlanetsPage.css';
 // https://api.nasa.gov/neo/rest/v1/feed?start_date=2015-09-07&end_date=2015-09-08&api_key=DEMO_KEY

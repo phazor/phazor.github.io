@@ -5,7 +5,6 @@ import { Provider } from 'react-redux';
 import NEOPage from './NEOPage';
 import FetchNEO from '../../components/NEOList/FetchNEO';
 import NEOList from '../../components/NEOList/NEOList';
-import NEOListContainer from '../../containers/NEOListContainer';
 
 const createFakeStore = fakeData => ({
   getState() {
@@ -49,5 +48,5 @@ it('NEOPage renders the FetchNEO Component', () => {
 
 it('NEOPage renders the NEOList Container', () => {
   const wrapper = shallow(<NEOPage />);
-  expect(wrapper.find(NEOListContainer)).toHaveLength(1);
+  expect(wrapper.find(NEOList)).toHaveLength(1);
 });
