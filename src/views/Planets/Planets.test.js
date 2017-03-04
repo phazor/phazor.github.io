@@ -10,3 +10,15 @@ it('renders in a non-WebGL context without crashing', () => {
     <Planets />
   , div);
 });
+
+it('renders a wrapper div with the "Planets" className', () => {
+  let wrapper = shallow(<Planets />);
+  expect(wrapper.find('.Planets').length).toEqual(1);
+});
+
+it('renders an error message when no WebGL exists', () => {
+  // Assumes that there is no WebGL in Phantom/CI
+  let wrapper = shallow(<Planets />);
+  expect(wrapper.find('canvas').length).toEqual(0);
+  expect(wrapper.text()).toContain('Error: WebGL Not Found');
+});
