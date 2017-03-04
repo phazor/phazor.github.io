@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import FPS from './FPS';
-import arrow from './arrow.svg';
-import Cog from './Cog.js';
+import arrow from './assets/arrow.svg';
+import Cog from './assets/Cog.js';
 
 class Overlay extends Component {
   constructor(props) {

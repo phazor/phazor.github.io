@@ -5,10 +5,9 @@ import Three_OrbitControls from 'three-orbit-controls';
 import Detector from '../../lib/three-detector';
 import Overlay from './Overlay';
 // Assets
-import arrow from './arrow.svg';
-import sunmap from './1a_map.jpg';
-import skydome_med from './eso0932a_med.jpg';
-// import skydome_lrg from './eso0932a_lrg.jpg';
+import arrow from './assets/arrow.svg';
+import sunmap from './assets/1a_map.jpg';
+import skydome_med from './assets/eso0932a_med.jpg';
 import './Planets.css';
 
 THREE.OrbitControls = Three_OrbitControls(THREE); // AMD Module format coercion
