@@ -1,4 +1,3 @@
-import React, { Component } from 'react';
 import { Parser } from 'html-to-react';
 
 const EmbedComponent = ({embedString}) => {
