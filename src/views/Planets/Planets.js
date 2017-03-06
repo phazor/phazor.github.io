@@ -12,7 +12,6 @@ import './Planets.css';
 THREE.OrbitControls = Three_OrbitControls(THREE); // AMD Module format coercion
 
 let frames_per_sec = 0;
-
 // TODOS:
 // High res background image option
 // Speed slider
@@ -89,6 +88,13 @@ const settings = {
   }
 };
 
+// This variable represents a horrible way of controlling the render loop.
+// TODO: Refactor render loop to not require this hack.
+// Store system's state in redux, or in dedicated component, and externalise
+// requestAnimationFrame in component so that it can be interrupted from the
+// outside of the render loop.
+let active = false;
+
 // Planets Component
 class Planets extends Component {
   constructor(props) {
@@ -111,11 +117,15 @@ class Planets extends Component {
 
   componentDidMount() {
     this.setState({ webGL: Detector.webgl });
-    if (Detector.webgl) { renderScene(); }
+    if (Detector.webgl) {
+      active = true; // Tells the render loop that it can start (rather clumsily)
+      renderScene();
+    }
     this.fpsID = setInterval(this.updateFPS, 100);
   }
 
   componentWillUnmount() {
+    active = false; // Kills the render loop (rather clumsily)
     clearInterval(this.fpsID);
   }
 
@@ -341,7 +351,6 @@ function renderScene() {
   //Functions
 
   function render() {
-    requestAnimationFrame( render );
     let delta = clock.getDelta();
 
     // Add sky when load background button is clicked
@@ -415,6 +424,8 @@ function renderScene() {
     renderer.render( skyboxScene, camera );
     renderer.clearDepth();
     renderer.render( scene, camera );
+
+    if (active) { requestAnimationFrame( render ) }
   }
 
   function addSkybox() {
