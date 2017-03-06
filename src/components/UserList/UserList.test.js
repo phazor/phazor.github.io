@@ -11,11 +11,11 @@ let users = [{
     name: 'Test User 2'
   }];
 
-it('UserList shallow renders with no errors', () => {
+it('shallow renders with no errors', () => {
   const wrapper = shallow(<UserList users={[]}/>);
 });
 
-it('UserList renders list items', () => {
+it('renders list items', () => {
   const wrapper = shallow(<UserList users={users} />);
 
   expect(wrapper.find('li').length).toEqual(2);

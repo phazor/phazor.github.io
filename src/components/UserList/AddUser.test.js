@@ -17,7 +17,7 @@ beforeEach(function() {
   };
 })
 
-it('AddUser shallow renders with no errors', () => {
+it('shallow renders with no errors', () => {
   const wrapper = shallow(
     <Provider store={fakeStore}>
       <AddUser />
@@ -25,7 +25,7 @@ it('AddUser shallow renders with no errors', () => {
   );
 });
 
-it('AddUser button click calls dispatch', () => {
+it('calls dispatch when button is clicked', () => {
   expect(dispatchSpy.calls.any()).toEqual(false);
   const wrapper = mount(
     <Provider store={fakeStore}>

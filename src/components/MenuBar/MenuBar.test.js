@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { shallow, mount } from 'enzyme';
 import MenuBar from './MenuBar';
 
-it('Menu Bar renders 7 menu items with no errors', () => {
+it('renders all menu items with no errors', () => {
   const wrapper = shallow(<MenuBar/>);
   expect(wrapper.find('MenuItem').length).toEqual(8);
 });

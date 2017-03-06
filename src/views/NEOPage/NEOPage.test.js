@@ -36,17 +36,17 @@ it('renders without crashing', () => {
   </Provider>, div);
 });
 
-it('NEOPage renders a section', () => {
+it('renders a section', () => {
   const wrapper = shallow(<NEOPage />);
   expect(wrapper.find('section')).toHaveLength(1);
 });
 
-it('NEOPage renders the FetchNEO Component', () => {
+it('renders the FetchNEO Component', () => {
   const wrapper = shallow(<NEOPage />);
   expect(wrapper.find(FetchNEO)).toHaveLength(1);
 });
 
-it('NEOPage renders the NEOList Container', () => {
+it('renders the NEOList Container', () => {
   const wrapper = shallow(<NEOPage />);
   expect(wrapper.find(NEOList)).toHaveLength(1);
 });

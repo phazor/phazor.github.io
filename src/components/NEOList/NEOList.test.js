@@ -21,7 +21,7 @@ beforeEach(function() {
   };
 })
 
-it('component shallow renders with no errors', () => {
+it('shallow renders with no errors', () => {
   const wrapper = shallow(
     <Provider store={fakeStore}>
       <NEOList />
@@ -29,7 +29,7 @@ it('component shallow renders with no errors', () => {
   );
 });
 
-it('component dom renders with no errors', () => {
+it('dom renders with no errors', () => {
   const wrapper = mount(
     <Provider store={fakeStore}>
       <NEOList />
@@ -37,7 +37,7 @@ it('component dom renders with no errors', () => {
   );
 });
 
-it('component shows error message on failed request', () => {
+it('shows error message on failed request', () => {
   fakeStore.getState = () => ({
     NEO: {
       NEOList: {
@@ -55,7 +55,7 @@ it('component shows error message on failed request', () => {
   expect(wrapper.text()).toContain('Error');
 });
 
-it('component shows loading message when requesting', () => {
+it('shows loading message when requesting', () => {
   fakeStore.getState = () => ({
     NEO: {
       NEOList: {
@@ -73,7 +73,7 @@ it('component shows loading message when requesting', () => {
   expect(wrapper.text()).toContain('Loading');
 });
 
-it('component shows no message on first load', () => {
+it('shows no message on first load', () => {
   const wrapper = mount(
     <Provider store={fakeStore}>
       <NEOList />
@@ -83,7 +83,7 @@ it('component shows no message on first load', () => {
   expect(wrapper.text()).toContain('');
 });
 
-it('component renders provided list items', () => {
+it('renders the provided list items', () => {
   fakeStore.getState = () => ({
     NEO: {
       NEOList: {

@@ -5,7 +5,7 @@ const runX = (func, n_times, value) => {
   Array(n_times).fill('').forEach(() => func(value))
 }
 
-it('performance tracker can be set up without errors', () => {
+it('can be set up without errors', () => {
   const spy = spyOn(console, 'log');
   let tracker = PerformanceTracker();
 
@@ -14,7 +14,7 @@ it('performance tracker can be set up without errors', () => {
   expect(spy.calls.any()).toEqual(false);
 });
 
-it('performance tracker prints after 60th input', () => {
+it('prints after 60th input', () => {
   const spy = spyOn(console, 'log');
   let tracker = PerformanceTracker();
 
@@ -24,7 +24,7 @@ it('performance tracker prints after 60th input', () => {
   expect(spy.calls.any()).toEqual(true);
 });
 
-it('performance tracker does not print after 59th input', () => {
+it('does not print after 59th input', () => {
   const spy = spyOn(console, 'log');
   let tracker = PerformanceTracker();
 
@@ -34,7 +34,7 @@ it('performance tracker does not print after 59th input', () => {
   expect(spy.calls.any()).toEqual(false);
 });
 
-it('performance tracker ignores non-number values', () => {
+it('ignores non-number values', () => {
   const spy = spyOn(console, 'log');
   let tracker = PerformanceTracker();
 

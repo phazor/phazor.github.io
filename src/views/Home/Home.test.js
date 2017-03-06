@@ -8,7 +8,7 @@ it('renders without crashing', () => {
   ReactDOM.render(<Home />, div);
 });
 
-it('Home contains section element', () => {
+it('contains section element', () => {
   let wrapper = shallow(<Home />);
   expect(wrapper.find('section').length).toEqual(1);
 })

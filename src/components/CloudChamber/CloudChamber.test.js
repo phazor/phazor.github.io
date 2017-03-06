@@ -4,11 +4,11 @@ import { shallow } from 'enzyme';
 import CloudChamber from './CloudChamber';
 import EmbedComponent from '../EmbedComponent/EmbedComponent';
 
-it('Cloud Chamber renders with no errors', () => {
+it('shallow renders with no errors', () => {
   const wrapper = shallow(<CloudChamber />);
 });
 
-it('CloudChamber loads CloudPen html component', () => {
+it('loads CloudPen html component', () => {
   const wrapper = shallow(<CloudChamber />);
   expect(wrapper.find(EmbedComponent)).toHaveLength(1);
 });
