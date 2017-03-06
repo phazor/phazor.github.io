@@ -9,9 +9,9 @@ class NEOPage extends Component {
     return (
       <section className="NEOList container">
         <h3>Near Earth Objects</h3>
-        <h6>The purpose of this page is to demonstrate async with Redux Thunk.</h6>
-        <h6>The list below shows the position and size of the closest Near Earth Objects (NEOs) for this week, fetched from NASA's Near Earth Object Web Service <Link href="https://api.nasa.gov/api.html#NeoWS" target="_blank">https://api.nasa.gov/api.html#NeoWS</Link>.</h6>
-        <h6>NEOs are ordered closest-first.</h6>
+        <p>The purpose of this page is to demonstrate async with Redux Thunk.</p>
+        <p>The list below shows the position and size of the closest Near Earth Objects (NEOs) for this week, fetched from NASA's Near Earth Object Web Service <Link href="https://api.nasa.gov/api.html#NeoWS" target="_blank">https://api.nasa.gov/api.html#NeoWS</Link>.</p>
+        <p>NEOs are ordered closest-first.</p>
         <FetchNEO />
         <NEOList />
       </section>
