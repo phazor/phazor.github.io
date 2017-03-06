@@ -17,7 +17,7 @@ beforeEach(function() {
   };
 })
 
-it('component renders a button', () => {
+it('renders a button', () => {
   const wrapper = mount(
     <Provider store={fakeStore}>
       <FetchNEO />
@@ -26,7 +26,7 @@ it('component renders a button', () => {
   expect(wrapper.find('button')).toHaveLength(1)
 });
 
-it('component button calls handleClick', () => {
+it('calls handleClick correctly', () => {
   expect(dispatchSpy.calls.any()).toEqual(false);
   const wrapper = mount(
     <Provider store={fakeStore}>
