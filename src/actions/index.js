@@ -37,7 +37,6 @@ export const fetchNEO = () => {
     // We return a promise to wait for.
     return fetch(`https://api.nasa.gov/neo/rest/v1/feed?start_date=${dateString(lastWeek)}&end_date=${dateString(currentDate)}&api_key=${NASA_API_KEY}`)
     // return fetch('http://localhost:3004/NEO') // Comment back in for testing locally
-    // local api: return fetch('http://localhost:3004/search/') // Comment back in for testing locally
       .then(response => response.json())
       .then(json => dispatch(fetchNEO_Success(json)))
       .catch(reason => dispatch(fetchNEO_Failure(reason)))
