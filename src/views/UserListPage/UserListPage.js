@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import AddUser from '../../components/UserList/AddUser';
-import VisibleUserList from '../../containers/VisibleUserList';
+import UserListContainer from '../../containers/UserListContainer';
 import './UserListPage.css';
 
 class UserListPage extends Component {
@@ -9,7 +9,7 @@ class UserListPage extends Component {
       <section className="UserList container">
         <h6>A super basic list in React and redux with presentational and container components</h6>
         <AddUser />
-        <VisibleUserList />
+        <UserListContainer />
       </section>
     )
   }
