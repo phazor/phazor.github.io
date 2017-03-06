@@ -29,7 +29,7 @@ class Home extends Component {
             <p>Github Pages needs to be tricked into accepting the routes, this is achieved by a script in the <code>404.html</code>. See <Link href="https://github.com/rafrex/spa-github-pages" target="_blank">https://github.com/rafrex/spa-github-pages</Link> for more detail.</p>
             <p>______________</p>
             <h4>state: redux</h4>
-            <p>State is stored with <Link href="https://redux.js.org" target="_blank">redux</Link> in the <Link to="/user-list">UserList</Link> page. There is no ajax yet - so no middleware is used.</p>
+            <p>State is stored with <Link href="https://redux.js.org" target="_blank">redux</Link> in the <Link to="/user-list">UserList</Link> and <Link to="/NEOs">Near Earth Objects</Link> pages. The latter uses <Link href="https://github.com/gaearon/redux-thunk">redux-thunk</Link> to handle async behavior.</p>
             <p>______________</p>
             <h4>build: create-react-app</h4>
             <p>This app is built with <Link href="https://github.com/facebookincubator/create-react-app/" target="_blank">create-react-app</Link>.</p>
