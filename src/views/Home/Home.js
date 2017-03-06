@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
-import rocket from './rocket.svg';
+import rocket from './assets/rocket.svg';
 import './Home.css';
 
 class Home extends Component {
