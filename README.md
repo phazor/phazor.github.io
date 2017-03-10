@@ -17,11 +17,12 @@ So far:
 
 To do:
 
+- WebAssembly
 - Preact
 - async await
 - CSS Modules
 - ImmutableJS
-- Standard
+- Standard / Prettier
 - Docker?
 
 Behavior I want to support
