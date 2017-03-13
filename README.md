@@ -24,6 +24,8 @@ To do:
 - ImmutableJS
 - Standard / Prettier
 - Docker?
+- Websockets
+- ML
 
 Behavior I want to support
 
