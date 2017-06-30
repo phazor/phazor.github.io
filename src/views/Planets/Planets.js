@@ -205,7 +205,8 @@ function renderScene() {
       geometry: [ 0.114 * 695700, 32, 32 ],
       materialType: THREE.MeshBasicMaterial,
       material: { map: new THREE.TextureLoader().load(sunmap) },
-      start: [0, 0, 0]
+      start: [0, 0, 0],
+      label: 'TRAPPIST-1a'
     },
     b: {
       geometryType: THREE.SphereGeometry,
@@ -214,7 +215,8 @@ function renderScene() {
       material: { color: 0xf4a261 },
       start: [0, 0, 0.01111 * AU],
       elements: { a: 0.01111 * AU, e: 0.081 },
-      period: 1.51087081
+      period: 1.51087081,
+      label: 'TRAPPIST-1b'
     },
     c: {
       geometryType: THREE.SphereGeometry,
@@ -223,7 +225,8 @@ function renderScene() {
       material: { color: 0xffa69e },
       start: [0, 0, 0.01522 * AU],
       elements: { a: 0.01522 * AU, e: 0.083 },
-      period: 2.4218233
+      period: 2.4218233,
+      label: 'TRAPPIST-1c'
     },
     d: {
       geometryType: THREE.SphereGeometry,
@@ -232,7 +235,8 @@ function renderScene() {
       material: { color: 0x028090 },
       start: [0, 0, 0.021 * AU],
       elements: { a: 0.021 * AU, e: 0.070 },
-      period: 4.049610
+      period: 4.049610,
+      label: 'TRAPPIST-1d'
     },
     e: {
       geometryType: THREE.SphereGeometry,
@@ -241,7 +245,8 @@ function renderScene() {
       material: { color: 0x05668d },
       start: [0, 0, 0.028 * AU],
       elements: { a: 0.028 * AU, e: 0.085 },
-      period: 6.099615
+      period: 6.099615,
+      label: 'TRAPPIST-1e'
     },
     f: {
       geometryType: THREE.SphereGeometry,
@@ -250,7 +255,8 @@ function renderScene() {
       material: { color: 0x05668d },
       start: [0, 0, 0.037 * AU],
       elements: { a: 0.037 * AU, e: 0.063 },
-      period: 9.206690
+      period: 9.206690,
+      label: 'TRAPPIST-1f'
     },
     g: {
       geometryType: THREE.SphereGeometry,
@@ -259,7 +265,8 @@ function renderScene() {
       material: { color: 0x05668d },
       start: [0, 0, 0.045 * AU],
       elements: { a: 0.045 * AU, e: 0.061 },
-      period: 12.35294
+      period: 12.35294,
+      label: 'TRAPPIST-1g'
     },
     h: {
       geometryType: THREE.SphereGeometry,
@@ -268,7 +275,8 @@ function renderScene() {
       material: { color: 0x05668d },
       start: [0, 0, 0.063 * AU],
       elements: { a: 0.063 * AU, e: 0.1 },
-      period: 20
+      period: 20,
+      label: 'TRAPPIST-1h'
     }
   }
 
@@ -293,30 +301,34 @@ function renderScene() {
   window.addEventListener('resize', resizeCanvas);
   window.addEventListener('orientationchange', resizeCanvas);
 
-  // Add Planets
-  let trappist_1a = createMesh(trappist_1.a);
-  let trappist_1b = createMesh(trappist_1.b);
-  let trappist_1c = createMesh(trappist_1.c);
-  let trappist_1d = createMesh(trappist_1.d);
-  let trappist_1e = createMesh(trappist_1.e);
-  let trappist_1f = createMesh(trappist_1.f);
-  let trappist_1g = createMesh(trappist_1.g);
-  let trappist_1h = createMesh(trappist_1.h);
+  // Add Planets and Stars
+  const bodies = Object.keys(trappist_1).map(objKey =>
+    createMesh(trappist_1[objKey])
+  );
+  bodies.forEach(body => scene.add(body));
+  // let trappist_1a = createMesh(trappist_1.a);
+  // let trappist_1b = createMesh(trappist_1.b);
+  // let trappist_1c = createMesh(trappist_1.c);
+  // let trappist_1d = createMesh(trappist_1.d);
+  // let trappist_1e = createMesh(trappist_1.e);
+  // let trappist_1f = createMesh(trappist_1.f);
+  // let trappist_1g = createMesh(trappist_1.g);
+  // let trappist_1h = createMesh(trappist_1.h);
 
-  scene.add(trappist_1a);
-  scene.add(trappist_1b);
-  scene.add(trappist_1c);
-  scene.add(trappist_1d);
-  scene.add(trappist_1e);
-  scene.add(trappist_1f);
-  scene.add(trappist_1g);
-  scene.add(trappist_1h);
+  // scene.add(trappist_1a);
+  // scene.add(trappist_1b);
+  // scene.add(trappist_1c);
+  // scene.add(trappist_1d);
+  // scene.add(trappist_1e);
+  // scene.add(trappist_1f);
+  // scene.add(trappist_1g);
+  // scene.add(trappist_1h);
 
   // Set Camera
   camera.position.y = AU / 80;
   camera.position.z = AU / 20;
   camera.position.x = AU / 100
-  camera.lookAt(trappist_1a.position);
+  camera.lookAt(bodies[0].position);
 
   // Add Ellipses
   function createOrbitLine(elements) {
@@ -384,26 +396,11 @@ function renderScene() {
     }
 
     if (!settings.pause.isPaused) {
-      let nextPos = next(trappist_1b, delta, trappist_1.b.elements, trappist_1.b.period);
-      trappist_1b.position.setFromSpherical(nextPos);
-
-      nextPos = next(trappist_1c, delta, trappist_1.c.elements, trappist_1.c.period);
-      trappist_1c.position.setFromSpherical(nextPos);
-
-      nextPos = next(trappist_1d, delta, trappist_1.d.elements, trappist_1.d.period);
-      trappist_1d.position.setFromSpherical(nextPos);
-
-      nextPos = next(trappist_1e, delta, trappist_1.e.elements, trappist_1.e.period);
-      trappist_1e.position.setFromSpherical(nextPos);
-
-      nextPos = next(trappist_1f, delta, trappist_1.f.elements, trappist_1.f.period);
-      trappist_1f.position.setFromSpherical(nextPos);
-
-      nextPos = next(trappist_1g, delta, trappist_1.g.elements, trappist_1.g.period);
-      trappist_1g.position.setFromSpherical(nextPos);
-
-      nextPos = next(trappist_1h, delta, trappist_1.h.elements, trappist_1.h.period);
-      trappist_1h.position.setFromSpherical(nextPos);
+      bodies.filter((e, i) => i !== 0).forEach((body, index) => {
+        let objKey = String.fromCharCode(index + 98);
+        let nextPos = next(body, delta, trappist_1[objKey].elements, trappist_1[objKey].period);
+        body.position.setFromSpherical(nextPos);
+      });
     }
 
     if (settings.dpiScaling.showHighDPIScaling && (renderer.getPixelRatio() !== window.devicePixelRatio)) {
