@@ -6,6 +6,7 @@
 .CanvasWrapper {
   display: inline-block;
   position: relative;
+  overflow: hidden;
 }
 
 .Mask {
@@ -187,6 +188,16 @@ img.Arrow.Up:hover {
 .begin-leave.begin-leave-active {
   opacity: 0.01;
   transition: opacity 500ms ease-in;
+}
+
+.text-label {
+  font-weight: bold;
+  font-size: 12px;
+  margin: -10px 0 0 15px;
+  pointer-events:none;
+
+  white-space: nowrap;
+  text-overflow: clip;
 }
 
 /* Z-Indexes */

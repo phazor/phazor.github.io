@@ -175,7 +175,7 @@ class Planets extends Component {
 // TODO: For the correct time-dependant solution, radial speed will need to be
 // adjusted based on the bessel function:
 // http://matlab-monkey.com/astro/keplerEquation/KeplerEquationPub.html
-const next = (body, delta_t, elements, period) => {
+const _next = (body, delta_t, elements, period) => {
   const {a, e} = elements;
   let radialSpeed = 2 * Math.PI / period; // radians per second
   let adJustedRadialSpeed = radialSpeed / 10; // 1 real day = 10 simulation seconds
@@ -187,6 +187,44 @@ const next = (body, delta_t, elements, period) => {
   // required here for a non-zero inclination
   return new THREE.Spherical(r, Math.PI / 2, theta);
 }
+
+const _createTextLabel = (text) => {
+    var div = document.createElement('div');
+    div.className = 'text-label';
+    div.style.position = 'absolute';
+    div.style.width = 100;
+    div.style.height = 100;
+    div.innerHTML = text;
+    div.style.top = -1000;
+    div.style.left = -1000;
+
+    return {
+      element: div,
+      parent: false,
+      position: new THREE.Vector3(0,0,0),
+      setHTML: function(html) {
+        this.element.innerHTML = html;
+      },
+      setParent: function(threejsobj) {
+        this.parent = threejsobj;
+      },
+      updatePosition: function(camera) {
+        if(parent) {
+          this.position.copy(this.parent.position);
+        }
+
+        var coords2d = this.get2DCoords(this.position, camera);
+        this.element.style.left = coords2d.x + 'px';
+        this.element.style.top = coords2d.y + 'px';
+      },
+      get2DCoords: function(position, camera) {
+        var vector = position.project(camera);
+        vector.x = (vector.x + 1)/2 * window.innerWidth;
+        vector.y = -(vector.y - 1)/2 * window.innerHeight;
+        return vector;
+      }
+    };
+};
 
 function renderScene() {
   const AU = 149597870.7;
@@ -206,7 +244,7 @@ function renderScene() {
       materialType: THREE.MeshBasicMaterial,
       material: { map: new THREE.TextureLoader().load(sunmap) },
       start: [0, 0, 0],
-      label: 'TRAPPIST-1a'
+      label: _createTextLabel('TRAPPIST-1a')
     },
     b: {
       geometryType: THREE.SphereGeometry,
@@ -216,7 +254,7 @@ function renderScene() {
       start: [0, 0, 0.01111 * AU],
       elements: { a: 0.01111 * AU, e: 0.081 },
       period: 1.51087081,
-      label: 'TRAPPIST-1b'
+      label: _createTextLabel('TRAPPIST-1b')
     },
     c: {
       geometryType: THREE.SphereGeometry,
@@ -226,7 +264,7 @@ function renderScene() {
       start: [0, 0, 0.01522 * AU],
       elements: { a: 0.01522 * AU, e: 0.083 },
       period: 2.4218233,
-      label: 'TRAPPIST-1c'
+      label: _createTextLabel('TRAPPIST-1c')
     },
     d: {
       geometryType: THREE.SphereGeometry,
@@ -236,7 +274,7 @@ function renderScene() {
       start: [0, 0, 0.021 * AU],
       elements: { a: 0.021 * AU, e: 0.070 },
       period: 4.049610,
-      label: 'TRAPPIST-1d'
+      label: _createTextLabel('TRAPPIST-1d')
     },
     e: {
       geometryType: THREE.SphereGeometry,
@@ -246,7 +284,7 @@ function renderScene() {
       start: [0, 0, 0.028 * AU],
       elements: { a: 0.028 * AU, e: 0.085 },
       period: 6.099615,
-      label: 'TRAPPIST-1e'
+      label: _createTextLabel('TRAPPIST-1e')
     },
     f: {
       geometryType: THREE.SphereGeometry,
@@ -256,7 +294,7 @@ function renderScene() {
       start: [0, 0, 0.037 * AU],
       elements: { a: 0.037 * AU, e: 0.063 },
       period: 9.206690,
-      label: 'TRAPPIST-1f'
+      label: _createTextLabel('TRAPPIST-1f')
     },
     g: {
       geometryType: THREE.SphereGeometry,
@@ -266,7 +304,7 @@ function renderScene() {
       start: [0, 0, 0.045 * AU],
       elements: { a: 0.045 * AU, e: 0.061 },
       period: 12.35294,
-      label: 'TRAPPIST-1g'
+      label: _createTextLabel('TRAPPIST-1g')
     },
     h: {
       geometryType: THREE.SphereGeometry,
@@ -276,7 +314,7 @@ function renderScene() {
       start: [0, 0, 0.063 * AU],
       elements: { a: 0.063 * AU, e: 0.1 },
       period: 20,
-      label: 'TRAPPIST-1h'
+      label: _createTextLabel('TRAPPIST-1h')
     }
   }
 
@@ -290,9 +328,10 @@ function renderScene() {
   var scene = new THREE.Scene();
   var camera = new THREE.PerspectiveCamera( 40, document.body.clientWidth / window.innerHeight, 0.00001, 3000000000 );
   var renderer = new THREE.WebGLRenderer({ antialias: true, logarithmicDepthBuffer: true });
+  const wrapper = document.getElementById('canvasWrapper');
 	// renderer.setPixelRatio( window.devicePixelRatio );
 
-  document.getElementById('canvasWrapper').appendChild( renderer.domElement );
+  wrapper.appendChild( renderer.domElement );
   resizeCanvas();
   resizeCanvas();
   renderer.autoClear = false;
@@ -302,27 +341,14 @@ function renderScene() {
   window.addEventListener('orientationchange', resizeCanvas);
 
   // Add Planets and Stars
-  const bodies = Object.keys(trappist_1).map(objKey =>
-    createMesh(trappist_1[objKey])
-  );
+  const bodies = Object.keys(trappist_1).map(objKey => {
+    let objDef = trappist_1[objKey];
+    let mesh = createMesh(objDef);
+    objDef.label.setParent(mesh);
+    wrapper.appendChild(objDef.label.element);
+    return mesh;
+  });
   bodies.forEach(body => scene.add(body));
-  // let trappist_1a = createMesh(trappist_1.a);
-  // let trappist_1b = createMesh(trappist_1.b);
-  // let trappist_1c = createMesh(trappist_1.c);
-  // let trappist_1d = createMesh(trappist_1.d);
-  // let trappist_1e = createMesh(trappist_1.e);
-  // let trappist_1f = createMesh(trappist_1.f);
-  // let trappist_1g = createMesh(trappist_1.g);
-  // let trappist_1h = createMesh(trappist_1.h);
-
-  // scene.add(trappist_1a);
-  // scene.add(trappist_1b);
-  // scene.add(trappist_1c);
-  // scene.add(trappist_1d);
-  // scene.add(trappist_1e);
-  // scene.add(trappist_1f);
-  // scene.add(trappist_1g);
-  // scene.add(trappist_1h);
 
   // Set Camera
   camera.position.y = AU / 80;
@@ -397,11 +423,18 @@ function renderScene() {
 
     if (!settings.pause.isPaused) {
       bodies.filter((e, i) => i !== 0).forEach((body, index) => {
-        let objKey = String.fromCharCode(index + 98);
-        let nextPos = next(body, delta, trappist_1[objKey].elements, trappist_1[objKey].period);
+        let objDef = trappist_1[String.fromCharCode(index + 98)]
+        let nextPos = _next(body, delta, objDef.elements, objDef.period);
         body.position.setFromSpherical(nextPos);
       });
     }
+
+    bodies.forEach((body, index) => {
+    let objDef = trappist_1[String.fromCharCode(index + 97)]
+    objDef.label.updatePosition(camera);
+  });
+
+
 
     if (settings.dpiScaling.showHighDPIScaling && (renderer.getPixelRatio() !== window.devicePixelRatio)) {
       renderer.setPixelRatio( window.devicePixelRatio );
