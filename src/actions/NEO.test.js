@@ -1,17 +1,5 @@
 import * as actions from './index';
 
-it('should create addUser actions', () => {
-  const expected = {
-    type: 'ADD_USER',
-    name: 'Test User',
-    index: 0
-  }
-
-  const result = actions.addUser('Test User')
-
-  expect(result).toEqual(expected);
-});
-
 it('should create NEO fetch actions', () => {
   const expected_fetchNEO_Request = {
     type: 'FETCH_NEO_REQUEST'

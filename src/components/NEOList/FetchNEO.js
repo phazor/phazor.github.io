@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import React from 'react';
-import { fetchNEO } from '../../actions'
+import { fetchNEO } from '../../actions/NEO'
 
 let FetchNEO = ({ dispatch }) => {
   const handleClick = () => {

@@ -2,15 +2,6 @@ import fetch from 'isomorphic-fetch';
 
 const NASA_API_KEY = 'tqE8FJHw4JIR7UXxpfrUsw1XwV2z74HOUTCdhQ1s';
 
-let userIndex = 0;
-export const addUser = (name) => {
-  return {
-    type: 'ADD_USER',
-    name: name,
-    index: userIndex++
-  }
-}
-
 export const fetchNEO_Request = () => ({
   type: 'FETCH_NEO_REQUEST'
 })
