@@ -40,7 +40,7 @@ const settings = {
   },
   orbit: {
     id: 2,
-    showOrbits: false,
+    showOrbits: true,
     text: function() {
       return (this.showOrbits) ? 'Hide Orbits' : 'Show Orbits';
     },
@@ -100,11 +100,14 @@ class Planets extends Component {
   constructor(props) {
     super(props);
     this.updateFPS = this.updateFPS.bind(this);
-    this.state = {};
+  }
+
+  state = {
+    fps: null
   }
 
   handleFullScreenClick() {
-    document.getElementById('canvasWrapper').lastChild.scrollIntoView(true);
+    document.getElementById('canvasWrapper').scrollIntoView(true);
   }
 
   handleMoveToTopClick() {
@@ -121,12 +124,12 @@ class Planets extends Component {
       active = true; // Tells the render loop that it can start (rather clumsily)
       renderScene();
     }
-    this.fpsID = setInterval(this.updateFPS, 100);
+    this.fpsInterval = setInterval(this.updateFPS, 100);
   }
 
   componentWillUnmount() {
     active = false; // Kills the render loop (rather clumsily)
-    clearInterval(this.fpsID);
+    clearInterval(this.fpsInterval);
   }
 
   render() {
@@ -139,7 +142,7 @@ class Planets extends Component {
           <p>It is a unique solar system because the planets are earth-like in size and have much closer orbits than ours. The star, planets and their orbital paths have been kept to scale to help to visualise this.</p>
           <p>The simulation's speed has been increased by a factor of 8,640 so that 1 earth day equals 10 simulation seconds.</p>
           <p>For more information about Trappist-1, see the <a href="https://www.nasa.gov/press-release/nasa-telescope-reveals-largest-batch-of-earth-size-habitable-zone-planets-around">NASA Press Release</a> or the <a href="https://en.wikipedia.org/wiki/TRAPPIST-1">Wikipedia article</a>.</p>
-          <img className="Arrow Down" alt="Jump to simulation" src={arrow}onClick={this.handleFullScreenClick}/>
+          <img className="Arrow Down" alt="Jump to simulation" src={arrow} onClick={this.handleFullScreenClick}/>
         </div>
 
         {/* Draw area */}
@@ -172,7 +175,7 @@ class Planets extends Component {
 // x = r * cos(theta)
 // z = r * sin(theta)
 //
-// TODO: For the correct time-dependant solution, radial speed will need to be
+// TODO: For the correct time-dependent solution, radial speed will need to be
 // adjusted based on the bessel function:
 // http://matlab-monkey.com/astro/keplerEquation/KeplerEquationPub.html
 const _next = (body, delta_t, elements, period) => {
@@ -336,7 +339,6 @@ function renderScene() {
   resizeCanvas();
   renderer.autoClear = false;
 
-
   window.addEventListener('resize', resizeCanvas);
   window.addEventListener('orientationchange', resizeCanvas);
 
@@ -388,6 +390,7 @@ function renderScene() {
 
   //Functions
 
+  // Main render loop
   function render() {
     let delta = clock.getDelta();
 
@@ -429,17 +432,18 @@ function renderScene() {
       });
     }
 
+    // Update label positions
     bodies.forEach((body, index) => {
-    let objDef = trappist_1[String.fromCharCode(index + 97)]
-    objDef.label.updatePosition(camera);
-  });
+      let objDef = trappist_1[String.fromCharCode(index + 97)]
+      objDef.label.updatePosition(camera);
+    });
 
-
-
+    // Apply high DPI (low performance) rendering
     if (settings.dpiScaling.showHighDPIScaling && (renderer.getPixelRatio() !== window.devicePixelRatio)) {
       renderer.setPixelRatio( window.devicePixelRatio );
     }
 
+    // Apply low DPI (high performance) rendering
     if (!settings.dpiScaling.showHighDPIScaling && (renderer.getPixelRatio() !== 1)) {
       renderer.setPixelRatio( 1 );
     }
@@ -482,6 +486,7 @@ function renderScene() {
     camera.updateProjectionMatrix();
   }
 
+  // Super basic fps calculator
   function fpsCalc() {
     let now = performance.now();
     let fps = 1000 / (now - last);
