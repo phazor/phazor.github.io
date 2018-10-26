@@ -107,10 +107,7 @@ class Planets extends Component {
   }
 
   handleFullScreenClick() {
-    const canvas = document.getElementById('canvas');
-    console.log(canvas.clientHeight)
-    console.log(canvas);
-    canvas.scrollIntoView(true);
+    document.getElementById('canvas').scrollIntoView(true);
   }
 
   handleMoveToTopClick() {
