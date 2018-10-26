@@ -107,7 +107,10 @@ class Planets extends Component {
   }
 
   handleFullScreenClick() {
-    document.getElementById('canvasWrapper').scrollIntoView(true);
+    const canvas = document.getElementById('canvas');
+    console.log(canvas.clientHeight)
+    console.log(canvas);
+    canvas.scrollIntoView(true);
   }
 
   handleMoveToTopClick() {
@@ -335,6 +338,8 @@ function renderScene() {
 	// renderer.setPixelRatio( window.devicePixelRatio );
 
   wrapper.appendChild( renderer.domElement );
+  renderer.domElement.setAttribute('id', 'canvas');
+  // horrible hack to fix resize issues
   resizeCanvas();
   resizeCanvas();
   renderer.autoClear = false;
