@@ -19,11 +19,11 @@
   opacity: 0.8;
   /*padding: auto;*/
 }
+
 .CenteringDiv button {
   display: inline-block;
   opacity: 1;
   transform: translateY(-50%);
-  z-index: 100;
 }
 
 .CenteringDiv {
@@ -210,6 +210,15 @@ img.Arrow.Up:hover {
   z-index: 20;
 }
 
+.CenteringDiv button {
+  z-index: 100;
+}
+
 img.Arrow.Up {
   z-index: 20;
+}
+
+.text-label {
+  z-index: 5;
+  color: orange;
 }

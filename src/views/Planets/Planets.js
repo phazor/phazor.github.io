@@ -426,8 +426,11 @@ function renderScene() {
 
     if (!settings.pause.isPaused) {
       bodies.filter((e, i) => i !== 0).forEach((body, index) => {
+        const start = performance.now();
         let objDef = trappist_1[String.fromCharCode(index + 98)]
         let nextPos = _next(body, delta, objDef.elements, objDef.period);
+        const end = performance.now();
+        console.log('time taken: ', end - start);
         body.position.setFromSpherical(nextPos);
       });
     }
