@@ -1,4 +1,4 @@
-import * as actions from './index';
+import * as actions from './users';
 
 it('should create addUser actions', () => {
   const expected = {

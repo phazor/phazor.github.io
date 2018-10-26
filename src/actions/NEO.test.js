@@ -1,4 +1,4 @@
-import * as actions from './index';
+import * as actions from './NEO';
 
 it('should create NEO fetch actions', () => {
   const expected_fetchNEO_Request = {
